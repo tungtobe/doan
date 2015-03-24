@@ -1,0 +1,83 @@
+#socialLogin{
+	height: 40px;
+	line-height: 40px;
+}
+.hero-unit > center > h1{
+	font-size: 50px;
+	position: relative;
+}
+._bg-color-1{
+	background-color: #39af94;
+}
+._btn{
+	margin: 10px auto 0;
+	padding: 10px 80px;
+	text-align: center;
+	color: #fff;
+	font-size: 26px;
+	border-radius: 5px;
+	border: 0;
+	border-bottom: 3px solid #009b69;
+	background-color: #0db384;
+}
+a._btn:hover{
+	color: white;
+	text-decoration: none;
+}
+._btn:hover{
+	background-color: #009b69;
+}
+footer{
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	padding-bottom: 15px;
+}
+#form-upload{
+	padding: 20px 0;
+}
+#form-upload .row{
+	padding: 10px 0;
+}
+._form-text{
+	outline: none;
+	border: 5px solid #0db384 ;
+	padding: 10px 20px!important;
+	font-size: 26px !important;
+	height: 46px !important;
+	width: 292px !important;
+	line-height: 46px !important;
+}
+.custom-file-input{
+  height: auto !important;
+}
+input[disabled]{
+	background-color: #0db384 !important;
+	opacity: 0.3;
+}
+
+._title{
+	color: #009b69;
+}
+._share-fix{
+	position: absolute;
+	left: 30px;
+	top: 120px;
+}
+._cmt-textare{
+	width: 640px;
+}
+._cmt-username{
+	font-size: 15px;
+}
+._cmt-content{
+	font-size: 15px;
+	color: #606060;
+}
+._hello{
+	color: white;
+}
+._logout{
+	color: red;
+}
