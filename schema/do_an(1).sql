@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2015 at 09:27 AM
+-- Generation Time: Mar 24, 2015 at 06:50 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -365,15 +365,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `remember_token` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`, `updated_at`, `created_at`, `remember_token`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-24 08:24:20', '2015-03-24 08:07:43', 'XCklfFIpMmPcdqjy41ogqfPzMIBAcLvfd73jSAG25guL7bVzLkmZzCencKue'),
-(2, 'tungtobe', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 08:23:58', '2015-03-24 08:19:08', 'emliN7Q35iLqXrGWH6SsYnXkpMxGXbqvEdlZjAX3UKVd1DmXOJjVf6tpifCv');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-24 15:00:48', '2015-03-24 08:07:43', 'F8mPmk06GrQ3VcauOHKfZdbPVsGZ2sB85lyRu2ZZIxTLP2Uojdvgh3v2VH7g'),
+(2, 'tungtobe', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 15:00:57', '2015-03-24 08:19:08', '4rUm3GIVlAzwbsKGZbH2l1HnHq5C3BQ25Su3zkAWKd4GNfatgP0f7QRmJnwB'),
+(3, 'tungtobe1', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:11:54', '2015-03-24 17:11:54', ''),
+(4, 'tungtobe2', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:14:15', '2015-03-24 17:14:15', '');
 
 -- --------------------------------------------------------
 
@@ -2975,7 +2977,7 @@ ALTER TABLE `values`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `values`
 --

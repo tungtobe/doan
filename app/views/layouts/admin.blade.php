@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Tung Mobile</title>
+        <title>Admin Manage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -37,14 +37,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a href="{{URL::action('HomeController@showWelcome')}}">Home</a></li>
+                    <li class=""><a href="{{URL::action('HomeController@showWelcome')}}">Home</a></li>
                     @if(Auth::check())
                         @if(Auth::user()->role == 0)
-                        <li><a href="{{URL::action('AdminController@getShow')}}">Admin Manager</a></li>
+                        <li class="active"><a href="{{URL::action('AdminController@getShow')}}">Admin Manager</a></li>
                         @endif
-                        <li><a href="{{URL::action('UserController@getFavorite')}}">Favorite</a></li>
-                        <li><a href="{{URL::action('UserController@getBill')}}">Bill</a></li>
-                        <li><a href="{{URL::action('UserController@getFriends')}}">Friends</a></li>
                     @endif
                     
                 </ul>
@@ -54,20 +51,44 @@
                             <p><span class="_hello">Hello</span> <b>{{HTML::linkAction('UserController@getShow',Auth::user()->username,array(Auth::user()->id)) }}</b>    {{ HTML::linkAction('AuthenController@getLogout','Logout', null, array('class' => '_logout')) }}  </p>
                         </form>            
                         @else
-                        <li>{{ HTML::linkAction('AuthenController@getLogin','Login',array(), array('class' => 'navbar-btn _hello')) }} </li>                        
-                        <li>{{ HTML::linkAction('AuthenController@getSignup','Sign Up',array(), array('class' => 'navbar-btn _hello')) }} </li>
-                        @endif                    
+                        <li>{{ HTML::linkAction('AuthenController@getLogin','Login',array(), array('class' => 'navbar-btn ')) }} </li>
+                        
+                        <li>{{ HTML::linkAction('AuthenController@getSignup','Sign Up',array(), array('class' => 'navbar-btn ')) }} </li>
+                        @endif
+
+                    
                 </ul>
             </div>
           </div>
         </nav>
 
-     
-
-        <!-- /container -->
         <div class="container">
-            {{$content}}      
-        </div> 
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>User</a></li>
+                        <li>{{HTML::linkAction('AdminController@showUser','User Manager')}} <i class="fa fa-list-alt fa-fw"></i></li>
+                        <li>{{HTML::linkAction('AdminController@showDeactiveUser','Banned Users')}} <i class="fa fa-list-alt fa-fw"></i></li>
+                        <li>{{HTML::linkAction('AdminController@addUser','Add User')}} <i class="fa fa-file-o fa-fw"></i></li>
+                        <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>Item</a></li>
+                        <li>{{HTML::linkAction('AdminController@showItem','Item Manager')}}<i class="fa fa-file-o fa-fw"></i></li>
+                        <li>{{HTML::linkAction('AdminController@addItem','Add Item')}}<i class="fa fa-file-o fa-fw"></i></li>
+                        <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>Bill</a></li>
+                        <li>{{HTML::linkAction('AdminController@showBill','Bill Manager')}}<i class="fa fa-file-o fa-fw"></i></li>
+                        <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>System</a></li>
+                        <li>{{HTML::linkAction('AdminController@showSystemVar','System Manager')}}<i class="fa fa-file-o fa-fw"></i></li>
+                       
+                    </ul>
+                </div>
+                <div class="col-md-9 well">
+                    {{$content}}  
+                </div>
+            </div>
+        </div>
+
+       
+        <!-- /container -->
+        
 
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="http://code.jquery.com/jquery.js"></script>

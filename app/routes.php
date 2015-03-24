@@ -21,11 +21,21 @@ Route::post('/authen/signup', 'AuthenController@signup');
 
 
 Route::group(array('before' => 'app.auth'), function() {
-    // Route::post('/comment/postStore', 'CommentController@postStore');
-    // Route::post('/video/request/', 'VideoController@requestReborn');
-    // Route::get('/video/reborn/{id}', 'VideoController@reborn');
-    // Route::get('/video/deactive/{id}', 'VideoController@deactive');
-    // Route::get('/video/delete/{id}', 'VideoController@delete');
+  // Route for admin function
+  Route::get('/admin','AdminController@getShow');
+  Route::match(array('GET', 'POST'), '/admin/adduser', 'AdminController@addUser');
+  Route::get('/admin/showuser', 'AdminController@showUser');
+  Route::get('/admin/showdeactiveuser', 'AdminController@showDeactiveUser');
+  Route::get('/admin/additem', 'AdminController@addItem');
+  Route::get('/admin/showitem', 'AdminController@showItem');
+  Route::get('/admin/showbill', 'AdminController@showBill');
+  Route::get('/admin/showsysvar', 'AdminController@showSystemVar');
+
+  //Route for user function
+  Route::get('/user/favorite/{id}', 'UserController@getFavorite');
+  Route::get('/user/bill/{id}', 'UserController@getBill');
+  Route::get('/user/friends/{id}', 'UserController@getFriends');
+
     Route::get('/user/{id}', 'UserController@getShow');
     // Route::post('/video/upload', 'VideoController@upload');
 });
