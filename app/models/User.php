@@ -23,7 +23,25 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function comment() {
         return $this->hasMany('Comment', 'user_id');
     }
+
+    //Define relationship between User-Votes
+    public function comment() {
+        return $this->hasMany('Vote', 'user_id');
+    }
     
+
+    //Define relationship between User-Bill
+    public function comment() {
+        return $this->hasMany('Bill', 'user_id');
+    }
+
+
+    //Define relationship between User-Favorite
+    public function comment() {
+        return $this->hasMany('Favorite', 'user_id');
+    }
+
+
     public static function validate($input) {
         $rules = array(
             'username' => 'required',

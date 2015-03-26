@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2015 at 06:50 PM
+-- Generation Time: Mar 26, 2015 at 05:53 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -45,37 +45,38 @@ CREATE TABLE IF NOT EXISTS `attributes` (
   `parent_id` int(11) DEFAULT NULL,
   `attr_name` varchar(20) DEFAULT NULL,
   `attr_type` varchar(10) DEFAULT NULL,
-  `weight` int(255) NOT NULL
+  `weight` int(255) NOT NULL,
+  `status` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `attributes`
 --
 
-INSERT INTO `attributes` (`id`, `parent_id`, `attr_name`, `attr_type`, `weight`) VALUES
-(1, 0, 'Name', 'Varchar', 0),
-(5, 0, 'Manufacturer', 'Varchar', 0),
-(6, 0, 'IMG', 'Varchar', 0),
-(7, 0, 'OS', 'Varchar', 0),
-(8, 0, 'CPU', 'Varchar', 0),
-(9, 0, 'GPU', 'Varchar', 0),
-(10, 0, 'Screen type', 'Varchar', 0),
-(11, 0, 'Screen resolution', 'Varchar', 0),
-(12, 0, 'Sim', 'Integer', 0),
-(13, 0, 'Battery', 'Integer', 0),
-(14, 0, 'Screen size', 'Float', 0),
-(15, 0, 'CPU speed', 'Float', 0),
-(16, 0, 'Ram', 'Float', 0),
-(17, 0, 'NFC', 'Boolean', 0),
-(18, 0, 'ROM', 'Integer', 0),
-(19, 0, 'SD card', 'Integer', 0),
-(20, 0, 'Price', 'Integer', 0),
-(24, 0, 'Rear camera', 'Float', 0),
-(25, 0, 'Front camera', 'Float', 0),
-(26, 0, 'Length', 'Float', 0),
-(27, 0, 'Width', 'Float', 0),
-(28, 0, 'Thickness', 'Float', 0),
-(29, 0, 'Weight', 'Float', 0);
+INSERT INTO `attributes` (`id`, `parent_id`, `attr_name`, `attr_type`, `weight`, `status`) VALUES
+(1, 0, 'Name', 'Varchar', 0, 1),
+(5, 0, 'Manufacturer', 'Varchar', 0, 1),
+(6, 0, 'IMG', 'Varchar', 0, 1),
+(7, 0, 'OS', 'Varchar', 0, 1),
+(8, 0, 'CPU', 'Varchar', 0, 1),
+(9, 0, 'GPU', 'Varchar', 0, 1),
+(10, 0, 'Screen type', 'Varchar', 0, 1),
+(11, 0, 'Screen resolution', 'Varchar', 0, 1),
+(12, 0, 'Sim', 'Integer', 0, 1),
+(13, 0, 'Battery', 'Integer', 0, 1),
+(14, 0, 'Screen size', 'Float', 0, 1),
+(15, 0, 'CPU speed', 'Float', 0, 1),
+(16, 0, 'Ram', 'Float', 0, 1),
+(17, 0, 'NFC', 'Boolean', 0, 1),
+(18, 0, 'ROM', 'Integer', 0, 1),
+(19, 0, 'SD card', 'Integer', 0, 1),
+(20, 0, 'Price', 'Integer', 0, 1),
+(24, 0, 'Rear camera', 'Float', 0, 1),
+(25, 0, 'Front camera', 'Float', 0, 1),
+(26, 0, 'Length', 'Float', 0, 1),
+(27, 0, 'Width', 'Float', 0, 1),
+(28, 0, 'Thickness', 'Float', 0, 1),
+(29, 0, 'Weight', 'Float', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `favoriteitems` (
 --
 
 CREATE TABLE IF NOT EXISTS `favorites` (
-  `favorite_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL
@@ -150,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `favorites` (
 --
 
 CREATE TABLE IF NOT EXISTS `items` (
-  `item_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -159,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `name`, `status`) VALUES
+INSERT INTO `items` (`id`, `name`, `status`) VALUES
 (1, 'iPhone 6 Plus 128GB', 1),
 (2, 'iPhone 6 128GB', 1),
 (3, 'iPhone 6 Plus 64GB', 1),
@@ -372,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`, `updated_at`, `created_at`, `remember_token`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-24 15:00:48', '2015-03-24 08:07:43', 'F8mPmk06GrQ3VcauOHKfZdbPVsGZ2sB85lyRu2ZZIxTLP2Uojdvgh3v2VH7g'),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-24 18:05:04', '2015-03-24 08:07:43', 'dlQ1CditIdlRyEW49kleEaYqZIRCCljoLHaFahzLxzSdwrcEXL1LVWhP9tWH'),
 (2, 'tungtobe', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 15:00:57', '2015-03-24 08:19:08', '4rUm3GIVlAzwbsKGZbH2l1HnHq5C3BQ25Su3zkAWKd4GNfatgP0f7QRmJnwB'),
 (3, 'tungtobe1', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:11:54', '2015-03-24 17:11:54', ''),
 (4, 'tungtobe2', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:14:15', '2015-03-24 17:14:15', '');
@@ -2917,6 +2918,21 @@ INSERT INTO `values` (`id`, `item_id`, `attr_id`, `value`) VALUES
 (2519, 116, 24, '13.0'),
 (2520, 116, 25, '5.0');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `votes`
+--
+
+CREATE TABLE IF NOT EXISTS `votes` (
+`id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 --
 -- Indexes for dumped tables
 --
@@ -2946,10 +2962,16 @@ ALTER TABLE `favoriteitems`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `favorites`
+--
+ALTER TABLE `favorites`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
- ADD PRIMARY KEY (`item_id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `relationships`
@@ -2970,6 +2992,12 @@ ALTER TABLE `values`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `votes`
+--
+ALTER TABLE `votes`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -2983,6 +3011,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 ALTER TABLE `values`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2521;
+--
+-- AUTO_INCREMENT for table `votes`
+--
+ALTER TABLE `votes`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
