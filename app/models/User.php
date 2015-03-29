@@ -25,19 +25,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     //Define relationship between User-Votes
-    public function comment() {
+    public function vote() {
         return $this->hasMany('Vote', 'user_id');
     }
     
 
     //Define relationship between User-Bill
-    public function comment() {
+    public function bill() {
         return $this->hasMany('Bill', 'user_id');
     }
 
 
     //Define relationship between User-Favorite
-    public function comment() {
+    public function favorite() {
         return $this->hasMany('Favorite', 'user_id');
     }
 
