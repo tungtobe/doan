@@ -30,9 +30,9 @@ class UserController extends BaseController {
 
     }
 
-    public function addFriend($id){
+    public function addFriend(){
         $current_user = Auth::user()->id;
-        $added_user = $id;
+        $added_user = Input::get('id');
 
         $rel = new Relationship;
         $rel->user_id = $current_user;

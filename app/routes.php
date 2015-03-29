@@ -19,6 +19,9 @@ Route::get('/logout', 'AuthenController@getLogout');
 Route::post('/authen/login', 'AuthenController@login');
 Route::post('/authen/signup', 'AuthenController@signup');
 
+Route::get('/item/{id}', 'ItemController@getShow');
+
+
 
 Route::group(array('before' => 'app.auth'), function() {
   // Route for admin function
@@ -36,9 +39,9 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/user/bill/{id}', 'UserController@getBill');
   Route::get('/user/friends/{id}', 'UserController@getFriends');
 
-    Route::get('/user/{id}', 'UserController@getShow');
-    // Route::post('/video/upload', 'VideoController@upload');
-    Route::post('/user/addfriend', 'UserController@addFriend');
+  Route::get('/user/{id}', 'UserController@getShow');
+  Route::post('/user/addfriend', 'UserController@addFriend');
+
     
 });
 

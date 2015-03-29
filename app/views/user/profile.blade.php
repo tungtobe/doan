@@ -11,25 +11,24 @@
 
 <script type="text/javascript">
 $(function() {
-$.("#addfriend").on('click', function(e){
-  $.ajax({
-                url: '{{ URL::action('UserController@addFriend') }} ',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    id: {{ $user->id }}
-                },
-                error: function(err) {
-                    console.log(err);
-                },
-                success: function(res) {
-                    console.log(res);                    
-                }
-            });
-});
+
+    $("#addfriend").click(function(e){
+      $.ajax({
+                    url: '{{ URL::action('UserController@addFriend') }} ',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        id: {{ $user->id }}
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    },
+                    success: function(res) {
+                        console.log(res);                    
+                    }
+                });
+        });
 
 
-)};
-
- 
+ });
 </script>

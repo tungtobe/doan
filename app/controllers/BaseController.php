@@ -15,4 +15,16 @@ class BaseController extends Controller {
 		}
 	}
 
+	protected function getItemAttributes($items){
+		$items_attr  = array();
+		foreach ($items as $item) {
+			$values = Value::where('item_id', $item->id)->get();
+			foreach ($values as $value) {
+				$attr_name = Attribute::find($value->attr_id)->attr_name;
+				$items_attr[$item->id][$attr_name] = $value->value;
+			}
+		}
+		return $items_attr;
+	}
+
 }
