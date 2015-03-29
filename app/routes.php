@@ -38,6 +38,8 @@ Route::group(array('before' => 'app.auth'), function() {
 
     Route::get('/user/{id}', 'UserController@getShow');
     // Route::post('/video/upload', 'VideoController@upload');
+    Route::post('/user/addfriend', 'UserController@addFriend');
+    
 });
 
 Route::filter('app.auth', function() {

@@ -70,8 +70,7 @@
         </div> 
 
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>  
+        <script src="http://code.jquery.com/jquery-2.1.3.js"></script> 
         <script src="http://malsup.github.com/jquery.form.js"></script> 
         {{ HTML::script('js/bootstrap.js'); }} 
         {{ HTML::script('js/jquery-2.1.1.js'); }} 
