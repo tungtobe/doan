@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 31, 2015 at 05:52 AM
+-- Generation Time: Mar 30, 2015 at 09:18 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -134,13 +134,6 @@ CREATE TABLE IF NOT EXISTS `favoriteitems` (
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `favoriteitems`
---
-
-INSERT INTO `favoriteitems` (`id`, `user_id`, `item_id`, `updated_at`, `created_at`) VALUES
-(0, 1, 1, '2015-03-31 03:13:46', '2015-03-31 03:13:46');
 
 -- --------------------------------------------------------
 
@@ -291,15 +284,14 @@ CREATE TABLE IF NOT EXISTS `relationships` (
   `rel_type` int(2) NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `relationships`
 --
 
 INSERT INTO `relationships` (`id`, `user_id`, `rel_user_id`, `rel_type`, `updated_at`, `created_at`) VALUES
-(8, 2, 2, 1, '2015-03-29 04:07:16', '2015-03-29 04:07:16'),
-(9, 1, 1, 1, '2015-03-31 02:58:01', '2015-03-31 02:58:01');
+(8, 2, 2, 1, '2015-03-29 04:07:16', '2015-03-29 04:07:16');
 
 -- --------------------------------------------------------
 
@@ -323,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`, `updated_at`, `created_at`, `remember_token`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-31 03:14:51', '2015-03-24 08:07:43', 'QHGQmS0t36JkebUBoWnUdU9llDwAdoFmcM1w6PqHdSl0rnmtjuXgD0uZ8tbo'),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-29 02:13:56', '2015-03-24 08:07:43', 'VnRZZpOECeGMpU1DAq9vp3qsdvBGhFmFzbDV5wNmuC0Jba4VUxyxgLK5jqTu'),
 (2, 'tungtobe', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-29 02:15:28', '2015-03-24 08:19:08', '4bmc81WrXNJd4RFot3rh747gpVZ90TzbJ4Z2eBbpOMolihDHaKvcIHETej12'),
 (3, 'tungtobe1', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:11:54', '2015-03-24 17:11:54', ''),
 (4, 'tungtobe2', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:14:15', '2015-03-24 17:14:15', '');
@@ -2951,7 +2943,7 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `relationships`
 --
 ALTER TABLE `relationships`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
