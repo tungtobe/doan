@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 29, 2015 at 05:43 AM
+-- Generation Time: Mar 31, 2015 at 05:52 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -129,24 +129,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
 
 CREATE TABLE IF NOT EXISTS `favoriteitems` (
   `id` int(11) NOT NULL,
-  `favorite_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `favorites`
+-- Dumping data for table `favoriteitems`
 --
 
-CREATE TABLE IF NOT EXISTS `favorites` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `favoriteitems` (`id`, `user_id`, `item_id`, `updated_at`, `created_at`) VALUES
+(0, 1, 1, '2015-03-31 03:13:46', '2015-03-31 03:13:46');
 
 -- --------------------------------------------------------
 
@@ -282,67 +276,7 @@ INSERT INTO `items` (`id`, `name`, `status`, `updated_at`, `created_at`) VALUES
 (113, 'Nokia Lumia 930', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (114, 'Sony Xperia Z1 C6902', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (115, 'OPPO R5 Gilded', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(116, 'Samsung Galaxy A7', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(117, 'Samsung Galaxy Alpha', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(118, 'OPPO R5', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(119, 'OPPO Find 7a', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(120, 'Samsung Galaxy A5', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(121, 'Pantech Vega Iron 2 A910S', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(122, 'OPPO N1 Mini', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(123, 'Nokia Lumia 830', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(124, 'OPPO R1K R8001', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(125, 'Sony Xperia T2 Ultra', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(126, 'iPhone 4S 8GB', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(127, 'OPPO R1 R829', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(128, 'HTC Desire 816', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(129, 'Sony Xperia M2 Aqua', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(130, 'Samsung Galaxy A3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(131, 'Samsung Galaxy E7', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(132, 'HTC Desire 820Q', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(133, 'HTC Desire 816G', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(134, 'Sony Xperia C3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(135, 'OPPO Mirror 3', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(136, 'LG G3 Stylus', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(137, 'Pantech Vega Iron A870S', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(138, 'Samsung Galaxy E5', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(139, 'Lenovo P70', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(140, 'HTC Desire 620G', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(141, 'Nokia Lumia 1320', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(142, 'OPPO Find 5 Mini R827', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(143, 'Samsung Galaxy Grand Prime G530', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(144, 'Nokia Lumia 730 Dual SIM', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(145, 'OPPO YoYo R2001', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(146, 'HTC DESIRE 616', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(147, 'Asus Zenfone 5', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(148, 'LG L80 D380', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(149, 'LG L Fino (L70 Plus)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(150, 'Lenovo S580', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(151, 'HTC Desire 526G', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(152, 'Asus Zenfone 5 (CPU-1.2GHz)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(153, 'LG L70 Dual D325', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(154, 'Nokia XL', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(155, 'OPPO Neo 3 R831K', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(156, 'SONY XPERIA E4 DUAL', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(157, 'Lenovo A850', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(158, 'Microsoft Lumia 535', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(159, 'Samsung Galaxy Core Prime', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(160, 'HTC Desire 320', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(161, 'Lenovo A680', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(162, 'Lenovo S650', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(163, 'Samsung Galaxy Core 2 G355', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(164, 'Nokia X2', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(165, 'Nokia Lumia 630', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(166, 'Nokia Lumia 525', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(167, 'Asus Zenfone C', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(168, 'Lenovo A328', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(169, 'Microsoft Lumia 532', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(170, 'LG L60', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(171, 'Sony Xperia E1', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(172, 'OPPO Joy R1001', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(173, 'Samsung Galaxy V', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(174, 'Nokia Lumia 530', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(175, 'Microsoft Lumia 435', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(176, 'Lenovo A319', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(116, 'Samsung Galaxy A7', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -357,7 +291,15 @@ CREATE TABLE IF NOT EXISTS `relationships` (
   `rel_type` int(2) NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `relationships`
+--
+
+INSERT INTO `relationships` (`id`, `user_id`, `rel_user_id`, `rel_type`, `updated_at`, `created_at`) VALUES
+(8, 2, 2, 1, '2015-03-29 04:07:16', '2015-03-29 04:07:16'),
+(9, 1, 1, 1, '2015-03-31 02:58:01', '2015-03-31 02:58:01');
 
 -- --------------------------------------------------------
 
@@ -381,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `status`, `updated_at`, `created_at`, `remember_token`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-29 02:13:56', '2015-03-24 08:07:43', 'VnRZZpOECeGMpU1DAq9vp3qsdvBGhFmFzbDV5wNmuC0Jba4VUxyxgLK5jqTu'),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-03-31 03:14:51', '2015-03-24 08:07:43', 'QHGQmS0t36JkebUBoWnUdU9llDwAdoFmcM1w6PqHdSl0rnmtjuXgD0uZ8tbo'),
 (2, 'tungtobe', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-29 02:15:28', '2015-03-24 08:19:08', '4bmc81WrXNJd4RFot3rh747gpVZ90TzbJ4Z2eBbpOMolihDHaKvcIHETej12'),
 (3, 'tungtobe1', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:11:54', '2015-03-24 17:11:54', ''),
 (4, 'tungtobe2', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-03-24 17:14:15', '2015-03-24 17:14:15', '');
@@ -2972,12 +2914,6 @@ ALTER TABLE `favoriteitems`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `favorites`
---
-ALTER TABLE `favorites`
- ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -3015,7 +2951,7 @@ ALTER TABLE `votes`
 -- AUTO_INCREMENT for table `relationships`
 --
 ALTER TABLE `relationships`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --

@@ -23,7 +23,7 @@
 		            <div class="clearfix  product-price-info">
 		                <span class="product-price">
 		                	@if(isset($items_attr[$item->id]['Price']))
-							{{ $items_attr[$item->id]['Price'] }}
+							{{ number_format($items_attr[$item->id]['Price']) }}
 							@else
 							0
 							@endif

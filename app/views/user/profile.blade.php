@@ -11,7 +11,6 @@
 
 <script type="text/javascript">
 $(function() {
-
     $("#addfriend").click(function(e){
       $.ajax({
                     url: '{{ URL::action('UserController@addFriend') }} ',

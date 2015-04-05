@@ -41,6 +41,11 @@ Route::group(array('before' => 'app.auth'), function() {
 
   Route::get('/user/{id}', 'UserController@getShow');
   Route::post('/user/addfriend', 'UserController@addFriend');
+  Route::post('/user/removefavorite','UserController@removeFromFavorite');
+  Route::post('/user/makebill','UserController@makeBill');
+
+  // Route for Items
+  Route::post('/item/addfavorite', 'ItemController@addFavorite');
 
     
 });
