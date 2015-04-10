@@ -37,8 +37,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     //Define relationship between User-Favorite
-    public function favorite() {
-        return $this->hasMany('Favorite', 'user_id');
+    public function favoriteitems() {
+        return $this->hasMany('Favoriteitem', 'user_id');
     }
 
 

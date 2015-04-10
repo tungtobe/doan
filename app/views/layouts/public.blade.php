@@ -51,7 +51,7 @@
                         @if(Auth::user()->role == 0)
                         <li><a href="{{URL::action('AdminController@getShow')}}">Admin Manager</a></li>
                         @endif
-                        <li><a href="{{URL::action('UserController@getFavorite')}}">Favorite</a></li>
+                        <li>{{HTML::linkaction('UserController@getFavorite','Favorite',Auth::user()->id)}}</li>
                         <li><a href="{{URL::action('UserController@getBill')}}">Bill</a></li>
                         <li><a href="{{URL::action('UserController@getFriends')}}">Friends</a></li>
                     @endif
@@ -85,4 +85,6 @@
 
     </body>
 </html>
+
+
 

@@ -18,7 +18,7 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		$items = Item::simplePaginate(12);
+		$items = Item::Paginate(12);
 		$items_attr = $this->getItemAttributes($items);
 		$this->layout->content = View::make('hello')->with(array('items_attr' => $items_attr,
 																 'items' => $items
