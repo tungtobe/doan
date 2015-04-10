@@ -9,6 +9,9 @@ class ItemController extends BaseController {
 
     public function getShow($id){
     	$item = Item::find($id);
+        if($item == null) {
+            return Response::json(404);
+        }
     	$item_attr = $this->getOneItemAttributes($item);
     	$item_attr_type = $this->getAttributeType();
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
@@ -38,7 +41,4 @@ class ItemController extends BaseController {
         	));
         }
     }
-
-   
-
 }

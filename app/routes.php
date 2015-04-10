@@ -36,6 +36,9 @@ Route::group(array('before' => 'app.auth'), function() {
 
   Route::post('/admin/changeAdminPermission', 'AdminController@changeAdminPermission');
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
+  Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
+
+  Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
 
   //Route for user function
   Route::get('/user/favorite/{id}', 'UserController@getFavorite');

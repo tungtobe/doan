@@ -61,7 +61,9 @@ class AdminController extends BaseController {
     }
 
     public function showItem(){
-        $this->layout->content = View::make('admin.showitem');
+        $items = Item::orderBy('id', 'dsc')->paginate(10);
+        $this->layout->content = View::make('admin.showitem')
+                                    ->with('items', $items);
     }
 
     public function addItem(){
@@ -134,4 +136,39 @@ class AdminController extends BaseController {
         return Response::json("Success");
     }
 
+    /**
+     * delete an item from store
+     * softdelete only
+     */
+    public function postDeleteItem()
+    {
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("need admin right");
+
+        try {
+            $input = Input::all();
+            $id = $input['id'];
+
+            $item = Item::find($id);
+
+            $item->delete();
+        } catch(Exception $e) {
+            return Response::json("invalid");
+        }
+        
+        return Response::json("Success");
+    }
+
+    public function postEditItem($id)
+    {
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("need admin right");
+
+        $item = Item::find($id);
+        if($item == null) 
+            return Response::json(404);
+
+
+        $this->layout->content = View::make('item.edit');
+    }
 }
