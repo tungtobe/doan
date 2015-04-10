@@ -92,12 +92,13 @@
 
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="http://malsup.github.com/jquery.form.js"></script> 
         {{ HTML::script('js/bootstrap.js'); }} 
         {{ HTML::script('js/jquery-2.1.1.js'); }} 
         {{ HTML::script('js/bootstrap.min.js'); }}
         {{ HTML::script('js/jquery.runner-min.js'); }}
+        {{ HTML::script('js/jquery.confirm.min.js'); }}
 
         @section('javascript') 
         @show

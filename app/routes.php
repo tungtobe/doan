@@ -34,6 +34,9 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/admin/showbill', 'AdminController@showBill');
   Route::get('/admin/showsysvar', 'AdminController@showSystemVar');
 
+  Route::post('/admin/changeAdminPermission', 'AdminController@changeAdminPermission');
+  Route::post('/admin/postBanUser', 'AdminController@postBanUser');
+
   //Route for user function
   Route::get('/user/favorite/{id}', 'UserController@getFavorite');
   Route::get('/user/bill/{id}', 'UserController@getBill');

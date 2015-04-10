@@ -48,11 +48,16 @@ class AdminController extends BaseController {
     }
 
     public function showUser(){
-        $this->layout->content = View::make('admin.showuser');
+        $users = User::where('status', 1)->paginate(2);
+        //$users = User::Paginate(2);
+        $this->layout->content = View::make('admin.showuser')
+                                    ->with('users', $users);
     }
 
     public function showDeactiveUser(){
-        $this->layout->content = View::make('admin.showdeactiveuser');
+        $users = User::where('status', 0)->paginate(2);
+        $this->layout->content = View::make('admin.showdeactiveuser')
+                                    ->with('users', $users);
     }
 
     public function showItem(){
@@ -67,6 +72,66 @@ class AdminController extends BaseController {
     }
     public function showSystemVar(){
         $this->layout->content = View::make('admin.showsystemvar');
+    }
+
+    /**
+     * ban given user
+     */
+    public function postBanUser()
+    {
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("invalid");
+
+        try {
+            $input = Input::all();
+            $id = $input['id'];
+
+            if($id == Auth::id()) 
+                throw new Exception("same user id", 1);
+                  
+            $user = User::find($id);
+
+            if($user->status == 1)
+                $user->status = 0;
+            elseif($user->status == 0) 
+                $user->status = 1;
+            $user->save();
+
+        } catch(Exception $e) {
+            return Response::json("invalid");
+        }
+
+        return Response::json("Success");
+    }
+
+    /**
+     * grant or revoke admin permission of a user
+     */
+    public function changeAdminPermission()
+    {
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("need admin right");
+        try {
+            $input = Input::all();
+            $id = $input['id'];
+
+            if($id == Auth::id()) 
+                throw new Exception("same user id", 1);
+                  
+            $user = User::find($id);
+
+            if($user->role == 0)
+                $user->role = 1;
+            elseif($user->role == 1) 
+                $user->role = 0;
+
+            $user->save();
+
+        } catch(Exception $e) {
+            return Response::json("invalid");
+        }
+        
+        return Response::json("Success");
     }
 
 }
