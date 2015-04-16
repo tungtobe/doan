@@ -6,8 +6,8 @@ class CommentController extends BaseController {
         $input = Input::all();
         $comment = new Comment;
         $comment->content = $input['content'];
-        $comment->video_id = $input['video_id'];
-        $comment->created_by = Auth::user()->id;
+        $comment->item_id = $input['item_id'];
+        $comment->user_id = Auth::user()->id;
         $validation = Comment::validate($input);
 
         if ($validation->passes()) {

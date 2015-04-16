@@ -26,6 +26,8 @@ class HomeController extends BaseController {
 	}
 
 	public function showAdminMenu(){
+		// $items = Item::withTrashed()->get()->restore();
+
 		$this->layout->content = View::make('adminmenu');
 	}
 

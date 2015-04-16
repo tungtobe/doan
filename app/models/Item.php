@@ -17,4 +17,9 @@ class Item extends Eloquent {
         return Validator::make($input, $rules);
     }
 
+    //Define relationship between Item-Comments
+    public function comment() {
+        return $this->hasMany('Comment', 'item_id');
+    }
+
 }

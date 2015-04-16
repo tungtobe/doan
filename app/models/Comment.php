@@ -17,10 +17,16 @@ class Comment extends Eloquent {
     //     return $this->belongsTo('Video', 'video_id');
     // }
 
-    // //Define relationship between Comments-User
-    // public function user() {
-    //     return $this->belongsTo('User', 'created_by');
-    // }
+    //Define relationship between Comments-User
+    public function user() {
+        return $this->belongsTo('User', 'user_id');
+    }
+
+    public function item() {
+        return $this->belongsTo('Item', 'item_id');
+    }
+
+   
 
 }
 

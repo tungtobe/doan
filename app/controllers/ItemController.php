@@ -12,11 +12,19 @@ class ItemController extends BaseController {
         if($item == null) {
             return Response::json(404);
         }
+
+        // get item attribute
     	$item_attr = $this->getOneItemAttributes($item);
     	$item_attr_type = $this->getAttributeType();
+
+        //get item comment
+        $comments = $item->comment;
+        // var_dump($comments);die;
+
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
 																		'item_attr' => $item_attr,
-																		'item_attr_type' => $item_attr_type
+																		'item_attr_type' => $item_attr_type,
+                                                                        'comments'=> $comments
 																		));
     }
 

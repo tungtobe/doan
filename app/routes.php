@@ -20,7 +20,7 @@ Route::post('/authen/login', 'AuthenController@login');
 Route::post('/authen/signup', 'AuthenController@signup');
 
 Route::get('/item/{id}', 'ItemController@getShow');
-
+Route::get('/user/{id}', 'UserController@getShow');
 
 
 Route::group(array('before' => 'app.auth'), function() {
@@ -52,6 +52,7 @@ Route::group(array('before' => 'app.auth'), function() {
 
   // Route for Items
   Route::post('/item/addfavorite', 'ItemController@addFavorite');
+  Route::post('/item/comment','CommentController@postStore');
 
     
 });
