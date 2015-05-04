@@ -21,7 +21,7 @@ Route::post('/authen/signup', 'AuthenController@signup');
 
 Route::get('/item/{id}', 'ItemController@getShow');
 Route::get('/user/{id}', 'UserController@getShow');
-
+Route::get('/search','HomeController@search');
 
 Route::group(array('before' => 'app.auth'), function() {
   // Route for admin function
@@ -53,6 +53,8 @@ Route::group(array('before' => 'app.auth'), function() {
   // Route for Items
   Route::post('/item/addfavorite', 'ItemController@addFavorite');
   Route::post('/item/comment','CommentController@postStore');
+  Route::post('/item/vote','ItemController@vote');
+
 
     
 });

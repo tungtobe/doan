@@ -9,6 +9,28 @@
                      <div class="clear"></div>
                 </div>
             </div>
+            <center>
+              @if (Auth::check()) 
+                <br><a id='add_favorite'><button class='btn btn-primary'>Add to Favorite</button></a>
+            @endif
+
+            <div class="vote-div">
+              @if (Auth::check()) 
+              VOTE <br>
+              @if(is_null($vote_type))
+                <button id='vote_good' class='btn btn-info' style="opacity:0.2;" >GOOD</button>
+                <button id='vote_bad' class='btn btn-danger' style="opacity:0.2;">BAD</button>
+              @elseif($vote_type==1)
+                <button id='vote_good' class='btn btn-info' >GOOD</button>
+                <button id='vote_bad' class='btn btn-danger' style="opacity:0.2;">BAD</button>
+              @else
+                <button id='vote_good' class='btn btn-info' style="opacity:0.2;" >GOOD</button>
+                <button id='vote_bad' class='btn btn-danger'>BAD</button>
+              @endif  
+            @endif
+            </div>
+            </center>
+            
         </div>
         <div class="product-info-top-right">
             <div class="product-main-info">
@@ -17,12 +39,36 @@
             </div>
 
             <br>
-            @if (Auth::check()) 
-                <a id='add_favorite'><button class='btn btn-primary'>Add to Favorite</button></a>
-            @endif
+
+              
+
+            
             <div class="clearfix">
                 <div class="module-product-main-info pull-left fade-line-divide-before">
                     <div class="desc-main-attr">
+                        <table class="table">
+                          <tbody>
+                            <?php while ($value = current($item_attr)) { ?>
+                              @if(key($item_attr) != 'IMG')
+                                  <tr>
+                                    <td > {{key($item_attr)}} </td>
+                                    @if($item_attr_type[key($item_attr)]=="Boolean")
+                                      @if($value=1)
+                                      <td style="padding-left:100px; font-weight: bold;" > Yes </td>
+                                      @else
+                                      <td style="padding-left:100px; font-weight: bold;" > No </td>
+                                      @endif
+                                    @else
+                                    <td style="padding-left:100px; font-weight: bold;" > {{$value}} </td>
+                                    @endif
+                                    <td style="padding-left:100px;" > {{$item_attr_type[key($item_attr)]}} </td>  
+                                  </tr>
+                              @endif
+                            <?php next($item_attr);} ?>
+
+                          </tbody>
+                        </table>
+                      </div>
                             <ul class="option-product product-detail-options clearfix">
                                 <?php 
                                     while ($value = current($item_attr)) {
@@ -35,6 +81,8 @@
                 </div>
                 
             </div>
+
+            
         </div>
     </div>
 </div>
@@ -65,6 +113,56 @@
 
 <script type="text/javascript">
 $(function() {
+    $("#vote_good").click(function(e){
+        $.ajax({
+            url: '{{ URL::action('ItemController@vote') }} ',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: {{ $item->id }},
+                type: 1
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            success: function(res) {
+                if (res.mes == 'OK') {
+                   $("#vote_good").css('opacity','1');
+                   $("#vote_bad").css('opacity','0.2');
+                }
+                else{
+                  $("#vote_good").css('opacity','0.2');
+                }                   
+            }
+        });
+    });
+
+    $("#vote_bad").click(function(e){
+        $.ajax({
+            url: '{{ URL::action('ItemController@vote') }} ',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: {{ $item->id }},
+                type: 2
+            },
+            error: function(err) {
+                console.log(err);
+            },
+            success: function(res) {
+                // vote bad done
+                if (res.mes == 'OK') {
+                   $("#vote_bad").css('opacity','1');
+                   $("#vote_good").css('opacity','0.2');
+                }
+                // unvote bad
+                else{
+                  $("#vote_bad").css('opacity','0.2');
+                }                   
+            }
+        });
+    });
+
     $("#add_favorite").click(function(e){
         $.ajax({
             url: '{{ URL::action('ItemController@addFavorite') }} ',

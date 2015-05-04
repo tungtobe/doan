@@ -16,18 +16,32 @@ class HomeController extends BaseController {
 	*/
 
 
-	public function showWelcome()
-	{
-		$items = Item::Paginate(12);
+	public function showWelcome(){
+		$items = Item::orderByRaw("RAND()")->Paginate(12);
 		$items_attr = $this->getItemAttributes($items);
+		$items_vote_arr = $this->getItemsVote($items);
 		$this->layout->content = View::make('hello')->with(array('items_attr' => $items_attr,
-																 'items' => $items
+																 'items' => $items,
+																 'items_vote_arr' => $items_vote_arr
 																));
 	}
 
-	public function showAdminMenu(){
-		// $items = Item::withTrashed()->get()->restore();
+	public function search(){
+		$searchText = Input::get("search");
+		$items = Item::where('name', 'LIKE', '%'.$searchText.'%')->Paginate(12);
+		if ($items->isEmpty()) {
+			$this->layout->content = View::make('hello')->with(array('items' => null));
+		}else{
+			$items_attr = $this->getItemAttributes($items);
+			$items_vote_arr = $this->getItemsVote($items);
+			$this->layout->content = View::make('hello')->with(array('items_attr' => $items_attr,
+																	 'items' => $items->appends(Input::except('page')),
+																	 'items_vote_arr' => $items_vote_arr
+																	));
+		}
+	}
 
+	public function showAdminMenu(){
 		$this->layout->content = View::make('adminmenu');
 	}
 

@@ -58,4 +58,19 @@ class BaseController extends Controller {
 		
 	}
 
+	public function getItemsVote($items){
+		$item_vote_array = array();
+		foreach ($items as $item) {
+			$item_vote_array[$item->id]['good'] = Vote::where(array(
+																'item_id' => $item->id,
+																'type' => 1
+																))->count();
+			$item_vote_array[$item->id]['bad'] = Vote::where(array(
+																'item_id' => $item->id,
+																'type' => 2
+																))->count();
+		}
+		return $item_vote_array;
+	}
+
 }

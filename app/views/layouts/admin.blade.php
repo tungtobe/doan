@@ -45,6 +45,7 @@
                     @endif
                     
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">                    
                     @if (Auth::check())
                         <form id="socialLogin" class="navbar-form pull-right">
@@ -55,9 +56,20 @@
                         
                         <li>{{ HTML::linkAction('AuthenController@getSignup','Sign Up',array(), array('class' => 'navbar-btn ')) }} </li>
                         @endif
-
-                    
                 </ul>
+
+                
+                {{ Form::open(array('action' => 'HomeController@search', 'method' => 'get')) }}
+                <ul class="nav navbar-right">
+                    <div class="box">
+                      <div class="container-4">
+                        <input type="search" name="search" id="search" placeholder="Search..." />
+                        <button type="submit" id="submit" class="icon"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                </ul>
+
+                {{ Form::close() }}
             </div>
           </div>
         </nav>
@@ -100,6 +112,16 @@
         {{ HTML::script('js/jquery.runner-min.js'); }}
         {{ HTML::script('js/jquery.confirm.min.js'); }}
 
+
+        <script type="text/javascript">
+        $(function() {
+            $('#search').on('keyup', function(e) {
+                if (e.keyCode === 13) {
+                    $('#submit').click();
+                }
+            });
+        }
+        </script>
         @section('javascript') 
         @show
 

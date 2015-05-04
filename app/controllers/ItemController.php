@@ -19,12 +19,30 @@ class ItemController extends BaseController {
 
         //get item comment
         $comments = $item->comment;
-        // var_dump($comments);die;
+
+        //get item vote
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            $vote = Vote::where(array(
+                                'user_id'=> $user_id,
+                                'item_id'=> $id
+                                ))->first();
+            if (is_null($vote)) {
+                $vote_type = null;
+            }else{
+                $vote_type = $vote->type;
+            }
+
+        }else{
+            $vote_type=null;
+        }
+
 
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
 																		'item_attr' => $item_attr,
 																		'item_attr_type' => $item_attr_type,
-                                                                        'comments'=> $comments
+                                                                        'comments'=> $comments,
+                                                                        'vote_type'=> $vote_type
 																		));
     }
 
@@ -47,6 +65,40 @@ class ItemController extends BaseController {
         	return Response::json ( array (
                 'mes' => 'Item already in your favorite'
         	));
+        }
+    }
+
+    public function vote(){
+        $item_id = Input::get('id');
+        $user_id = Auth::user()->id;
+        $vote_type = Input::get('type');
+        $vote = Vote::where(array(
+                            'item_id' => $item_id,
+                            'user_id' => $user_id,
+                            ))->first();
+
+        if (is_null($vote)) {
+            $new_vote = new Vote;
+            $new_vote->item_id = $item_id;
+            $new_vote->user_id = $user_id;
+            $new_vote->type = $vote_type;
+            $new_vote->save();
+            return Response::json ( array (
+                'mes' => 'OK'
+            ) );
+        }else{
+            if ($vote->type == $vote_type) {
+                $vote->delete();
+                return Response::json ( array (
+                'mes' => 'unvote'
+                ) );
+            }else{
+                $vote->type = $vote_type;
+                $vote->save();
+                return Response::json ( array (
+                'mes' => 'OK'
+                ) );
+            }
         }
     }
 }

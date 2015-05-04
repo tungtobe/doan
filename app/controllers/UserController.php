@@ -76,6 +76,9 @@ class UserController extends BaseController {
     public function addFriend(){
         $current_user = Auth::user()->id;
         $added_user = Input::get('id');
+        
+        // TODO
+        //check xem người dùng có tồn tại ko
 
         $rel = new Relationship;
         $rel->user_id = $current_user;
