@@ -38,8 +38,13 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::post('/admin/changeAdminPermission', 'AdminController@changeAdminPermission');
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
   Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
+  Route::post('/admin/addItem', 'AdminController@postAddItem');
 
   Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
+  Route::post('/admin/editItem/{id}', 'AdminController@postEditItem');
+  Route::get('/admin/viewbill/{id}', 'AdminController@viewBill');
+  Route::post('/admin/deleteBill', 'AdminController@deleteBill');
+  Route::post('/admin/confirmBill', 'AdminController@confirmBill');
 
   //Route for user function
   Route::get('/user/favorite/{id}', 'UserController@getFavorite');
@@ -49,7 +54,10 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/user/{id}', 'UserController@getShow');
   Route::post('/user/addfriend', 'UserController@addFriend');
   Route::post('/user/removefavorite','UserController@removeFromFavorite');
-  Route::post('/user/makebill','UserController@makeBill');
+  Route::post('/user/makebill', 'UserController@makeBill');
+  Route::post('/user/savebill', 'UserController@saveBill');
+  Route::get('/user/editbill/{id}', 'UserController@editBill');
+  Route::post('/user/deletebill', 'UserController@deleteBill');
 
   // Route for Items
   Route::post('/item/addfavorite', 'ItemController@addFavorite');
