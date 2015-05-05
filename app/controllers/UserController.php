@@ -142,7 +142,7 @@ class UserController extends BaseController {
     public function deleteBill()
     {
         $id = Input::get('id');
-        /*try*/ {
+        try {
             $bill = Bill::findOrFail($id);
             if($bill->status == 1)
                 return Response::json(array("status" => "failed"));
@@ -152,9 +152,9 @@ class UserController extends BaseController {
             }
             $bill->delete();
 
-        }/*catch(Exception $e) {
+        }catch(Exception $e) {
             return Response::json(array("status" => "failed"));
-        }*/
+        }
 
         return Response::json(array("status" => "success"));
     }

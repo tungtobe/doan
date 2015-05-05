@@ -4,7 +4,6 @@
 				<th>Username</th>
 				<th>User Role </th>
 				<th>Unban</th>
-				<th>Ban</th>
 			</tr>
 		<tbody>
 			<?php foreach ($users as $user): ?>

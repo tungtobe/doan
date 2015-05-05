@@ -70,8 +70,57 @@ class AdminController extends BaseController {
         $this->layout->content = View::make('admin.additem');
     }
     public function showBill(){
-        $this->layout->content = View::make('admin.showbill');
+        $bills = Bill::Paginate(3);
+        foreach($bills as $bill)
+        {
+            $user = User::find($bill->user_id);
+            $bill['user'] = $user->username;
+        }
+
+
+        $this->layout->content = View::make('admin.showbill')->with(array('bills' => $bills));
     }
+
+    public function viewBill()
+    {
+        $this->layout->content = View::make('admin.showsystemvar');
+    }
+
+    public function confirmBill()
+    {
+        $id = Input::get('id');
+
+        try{
+            $bill = Bill::findOrFail($id);
+            if($bill->status == 1)
+                $bill->status = 0;
+            elseif($bill->status == 0)
+                $bill->status = 1;
+            $bill->save();
+        } catch(Exception $e) {
+            return Response::json('invalid');
+        }
+
+        return Response::json('Success');
+    }
+
+    public function deleteBill()
+    {
+        $id = Input::get('id');
+        try {
+            $bill = Bill::findOrFail($id);
+            $bill_items = BillItem::where('bill_id', $id)->get();
+            foreach ($bill_items as $item) {
+                $item->delete();
+            }
+            $bill->delete();
+        } catch(Exception $e) {
+            return Response::json('invalid');
+        }
+
+        return Response::json('Success');
+    }
+
     public function showSystemVar(){
         $this->layout->content = View::make('admin.showsystemvar');
     }
