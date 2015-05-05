@@ -3,7 +3,7 @@
          {{ Auth::user()->username}}          
     </div>
     <div class="col-md-9 well hero-unit">  
-
+    {{ Form::open(array('url' => 'user/makebill')) }}
     	<h1 > Favorite </h1>
 		<hr>
 		<table id='favoriteTable' class="table table-bordered">
@@ -30,7 +30,8 @@
 		  	
 		</table>   
 
-		<button id='makeBill' class='btn btn-primary' disabled>Make Bill</button>       
+		<button id='makeBill' class='btn btn-primary' disabled>Make Bill</button>  
+        {{ Form::close() }}
     </div>
 
 
@@ -101,27 +102,7 @@ $(function(){
 		}else{
 			$('#makeBill').attr('disabled','disabled');
 		}
-	});
-
-	$('#makeBill').click(function(){
-		var items_id_arr = new Array();
-		var checkboxs = $('#favoriteTable :checkbox');
-
-		$(checkboxs).each(function(key,value){
-			items_id_arr.push(value.value);
-			$.ajax({
-                    type: "POST",
-                    dataType: 'json',
-                    url: " {{ URL::action('UserController@makeBill' ) }} ",
-                    data: {items_id: items_id_arr}
-                }).done(function(data) {
-                    console.log(data);
-                }).fail(function(jqXHR, textStatus) {
-                    return false;
-                });
-		});
-	});
-	
+	});	
 });
 	
 </script>

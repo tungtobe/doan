@@ -35,7 +35,6 @@ class BaseController extends Controller {
 	// Output: array of one item attributes
     protected function getOneItemAttributes($item){
 		$items_attr  = array();
-		
 		$values = Value::where('item_id', $item->id)->get();
 		foreach ($values as $value) {
 			$attr = Attribute::find($value->attr_id);
