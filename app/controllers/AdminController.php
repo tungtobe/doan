@@ -67,8 +67,29 @@ class AdminController extends BaseController {
     }
 
     public function addItem(){
-        $this->layout->content = View::make('admin.additem');
+        $this->layout->content = View::make('item.add');
     }
+
+    public function postAddItem()
+    {
+        // validate
+        $rules = array(
+            'name' => 'required',
+            'manufacturer' => 'required'
+            );
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails())
+        {
+            return Redirect::to(URL::action('AdminController@addItem'))->withErrors($validator);
+        }
+        else {
+            $input = Input::all();
+
+            /// TODO: save item here
+        }
+        return Redirect::to(URL::action('AdminController@showItem'));
+    }
+
     public function showBill(){
         $bills = Bill::Paginate(3);
         foreach($bills as $bill)
@@ -212,12 +233,33 @@ class AdminController extends BaseController {
     {
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
-
+        
         $item = Item::find($id);
+        
+        if (Request::isMethod('post'))
+        {
+            // validate
+            $rules = array(
+                'name' => 'required',
+                'manufacturer' => 'required'
+                );
+            $validator = Validator::make(Input::all(), $rules);
+            if($validator->fails())
+            {
+                return Redirect::to(URL::action('AdminController@postEditItem', $id))->withErrors($validator);
+            }
+            else {
+                $input = Input::all();
+
+                /// TODO: save item here
+            }
+            return Redirect::to(URL::action('AdminController@showItem'));
+        }
+
+        $attr = $this->getOneItemAttributes($item);
         if($item == null) 
             return Response::json(404);
 
-
-        $this->layout->content = View::make('item.edit');
+        $this->layout->content = View::make('item.edit')->with(array('item_id' => $id, 'attr' => $attr));
     }
 }

@@ -37,8 +37,10 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::post('/admin/changeAdminPermission', 'AdminController@changeAdminPermission');
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
   Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
+  Route::post('/admin/addItem', 'AdminController@postAddItem');
 
   Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
+  Route::post('/admin/editItem/{id}', 'AdminController@postEditItem');
   Route::get('/admin/viewbill/{id}', 'AdminController@viewBill');
   Route::post('/admin/deleteBill', 'AdminController@deleteBill');
   Route::post('/admin/confirmBill', 'AdminController@confirmBill');
