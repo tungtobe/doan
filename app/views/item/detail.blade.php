@@ -3,8 +3,8 @@
         <div class="product-info-top-left">
             <div class="module-product-img-gallery">
                 <div class="widget-image-product">
-                    <a href="{{ $item_attr['IMG'] }}" id="link_main_thumb" onclick="return showGalleryPopup();" rel="nofollow">
-                        <img alt="{{ $item->name }}" id="img_main_thumb" itemprop="image" src="{{$item_attr['IMG'] }}" style="max-width: 350px;">
+                    <a href="{{ $item_attr['6'] }}" id="link_main_thumb" onclick="return showGalleryPopup();" rel="nofollow">
+                        <img alt="{{ $item->name }}" id="img_main_thumb" itemprop="image" src="{{$item_attr['6'] }}" style="max-width: 350px;">
                     </a>
                      <div class="clear"></div>
                 </div>
@@ -42,26 +42,35 @@
 
               
 
-            
+             {{ Form::open(array('action' => 'RecommendController@reciveCritique', 'id' => 'critique')) }}
+             <input type="hidden" name="current_item" value="{{$item->id}}">
             <div class="clearfix">
                 <div class="module-product-main-info pull-left fade-line-divide-before">
                     <div class="desc-main-attr">
                         <table class="table">
                           <tbody>
-                            <?php while ($value = current($item_attr)) { ?>
-                              @if(key($item_attr) != 'IMG')
+                            <?php while ($attr_id = key($item_attr)) { ?>
+                              <?php $attr = Attribute::find($attr_id); ?>
+                              @if($attr->attr_name != 'IMG')
                                   <tr>
-                                    <td > {{key($item_attr)}} </td>
-                                    @if($item_attr_type[key($item_attr)]=="Boolean")
-                                      @if($value=1)
+                                    <td > {{$attr->attr_name }} </td>
+                                    @if($item_attr_type[$attr->attr_name ]=="Boolean")
+                                      @if($item_attr[$attr_id]=1)
                                       <td style="padding-left:100px; font-weight: bold;" > Yes </td>
                                       @else
                                       <td style="padding-left:100px; font-weight: bold;" > No </td>
                                       @endif
                                     @else
-                                    <td style="padding-left:100px; font-weight: bold;" > {{$value}} </td>
+                                    <td style="padding-left:100px; font-weight: bold;" > {{$item_attr[$attr_id]}} </td>
                                     @endif
-                                    <td style="padding-left:100px;" > {{$item_attr_type[key($item_attr)]}} </td>  
+
+                                    <td style="padding-left:100px;" > <select name="attr[{{$attr_id}}]">
+                                                                        <option   value="999999">Select improve</option>
+                                                                        @foreach($item_attr_option[$attr_id] as $option)
+                                                                        <option  value="{{$option['value']}}">{{$option['value']}}</option>
+                                                                        @endforeach
+                                                                      </select>
+                                    </td>  
                                   </tr>
                               @endif
                             <?php next($item_attr);} ?>
@@ -69,17 +78,13 @@
                           </tbody>
                         </table>
                       </div>
-                            <ul class="option-product product-detail-options clearfix">
-                                <?php 
-                                    while ($value = current($item_attr)) {
-                                            echo key($item_attr).' :: '. $value .' :: '.$item_attr_type[key($item_attr)] .'</br>';
-                                        next($item_attr);
-                                    }
-                                ?>
-                            </ul>
+                      <center>
+                        <button type='submit' class="btn"> Find better item</button>
+                      </center>
+                      
                     </div>
                 </div>
-                
+                {{ Form::close() }}
             </div>
 
             
@@ -113,6 +118,23 @@
 
 <script type="text/javascript">
 $(function() {
+
+      // this is the id of the form
+      $("#critique").submit(function() {
+          var url = "{{URL::action('RecommendController@reciveCritique')}}"; 
+          $.ajax({
+                 type: "POST",
+                 url: url,
+                 data: $("#critique").serialize(), // serializes the form's elements.
+                 success: function(data)
+                 {
+                     console.log
+                     (data); // show response from the php script.
+                 }
+               });
+          return false; // avoid to execute the actual submit of the form.
+      });
+
     $("#vote_good").click(function(e){
         $.ajax({
             url: '{{ URL::action('ItemController@vote') }} ',

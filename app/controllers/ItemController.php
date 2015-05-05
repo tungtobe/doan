@@ -16,7 +16,7 @@ class ItemController extends BaseController {
         // get item attribute
     	$item_attr = $this->getOneItemAttributes($item);
     	$item_attr_type = $this->getAttributeType();
-
+        $item_attr_option = $this->getAttributeOption();
         //get item comment
         $comments = $item->comment;
 
@@ -41,6 +41,7 @@ class ItemController extends BaseController {
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
 																		'item_attr' => $item_attr,
 																		'item_attr_type' => $item_attr_type,
+                                                                        'item_attr_option' => $item_attr_option,
                                                                         'comments'=> $comments,
                                                                         'vote_type'=> $vote_type
 																		));

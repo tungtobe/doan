@@ -23,6 +23,7 @@ Route::get('/item/{id}', 'ItemController@getShow');
 Route::get('/user/{id}', 'UserController@getShow');
 Route::get('/search','HomeController@search');
 
+
 Route::group(array('before' => 'app.auth'), function() {
   // Route for admin function
   Route::get('/admin','AdminController@getShow');
@@ -55,7 +56,8 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::post('/item/comment','CommentController@postStore');
   Route::post('/item/vote','ItemController@vote');
 
-
+  // Route for recommend
+  Route::post('/recommend','RecommendController@reciveCritique');
     
 });
 

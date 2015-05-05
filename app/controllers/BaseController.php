@@ -34,18 +34,30 @@ class BaseController extends Controller {
 	// Input: item object
 	// Output: array of one item attributes
     protected function getOneItemAttributes($item){
-		$items_attr  = array();
-		
 		$values = Value::where('item_id', $item->id)->get();
 		foreach ($values as $value) {
-			$attr = Attribute::find($value->attr_id);
+			$attr_id = $value->attr_id;
+			$attr = Attribute::find($attr_id);
 			$attr_name = $attr->attr_name;
-			$item_attr[$attr_name] = $value->value;
+			$item_attr[$attr_id] = $value->value;
 			
 		}
 		return $item_attr;
 	}
 
+	public function getAttributeOption(){
+		$item_attr_option = array();
+		$attrs = Attribute::all();
+		foreach ($attrs as $attr) {
+			$attr_name = $attr->attr_name;
+			$attr_id = $attr->id;
+			$attr_option_array = Value::where('attr_id',$attr_id)->distinct()->get(array('value'))->toArray();
+			$item_attr_option[$attr_id] = $attr_option_array;
+		}
+
+		return $item_attr_option;
+
+	}
 	public function getAttributeType(){
 		$item_attr_type = array();
 		$attrs = Attribute::all();
