@@ -1,4 +1,7 @@
-<div class="container" style="display:table;" >
+
+	<center>
+		<div class="row"><h2>Item Manager</h2></div>
+	</center>
 	<table class="table table-bordered">
 			<tr>
 				<th>Id</th>
@@ -10,7 +13,7 @@
 			<?php foreach ($items as $item): ?>
         		<tr>
         			<td>{{ $item->id }}</td>
-        			<td><a class="" href="{{ URL::action('AdminController@postEditItem', [$item->id]) }}">
+        			<td><a class="" href="{{ URL::action('ItemController@getShow', [$item->id]) }}">
         				{{$item->name}}
         			</a></td>
         			<td>
@@ -23,7 +26,6 @@
     		<?php endforeach; ?>
 		</tbody>
 	</table>
-</div>
 <?php echo $items->links(); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
@@ -67,24 +69,3 @@ $(function() {
 
 });
 </script>
-<pre>
-Hiển thị thông tin của các sản phẩm theo thứ tự mới nhất (id lớn nhất) bằng bảng có phân trang.
-
-
-Id  |    Item             |    Edit    |      Delete  
--------------------------------------------------------
-1     Iphone 6                 edit             X
-2     Iphone 6 plus            edit             X
-
-
-
-<< < 1 2 3 > >>
-
-NOTE
-Các chức năng có trong mỗi cột
-- Edit sản phẩm : ấn vào edit sẽ hiện ra trang chi tiết sản phẩm có các thông số để edit
-- Delete sản phẩm (trước khi delete phải xác nhận lại bằng popup là có delete hay k ?). 
-Sản phẩm không bị delete hoàn toàn mà chỉ soft delete thôi
-
-
-</pre>

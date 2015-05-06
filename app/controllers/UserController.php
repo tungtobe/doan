@@ -74,7 +74,7 @@ class UserController extends BaseController {
                 {
                     $it = Item::findOrFail($item->item_id);
                     $items_attr = $this->getOneItemAttributes($it);
-                    $totalprice += $items_attr['Price'] * $item->number;
+                    $totalprice += $items_attr['20'] * $item->number;
                 }
                 $bill['totalprice'] = $totalprice;
             }
@@ -86,7 +86,7 @@ class UserController extends BaseController {
                 {
                     $it = Item::findOrFail($item->item_id);
                     $items_attr = $this->getOneItemAttributes($it);
-                    $totalprice += $items_attr['Price'] * $item->number;
+                    $totalprice += $items_attr['20'] * $item->number;
                 }
                 $bill['totalprice'] = $totalprice;
             }

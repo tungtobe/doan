@@ -36,14 +36,18 @@ class BaseController extends Controller {
     protected function getOneItemAttributes($item){
 		$items_attr  = array();
 		$values = Value::where('item_id', $item->id)->get();
-		foreach ($values as $value) {
-			$attr_id = $value->attr_id;
-			$attr = Attribute::find($attr_id);
-			$attr_name = $attr->attr_name;
-			$item_attr[$attr_id] = $value->value;
-			
+		if ($values->isEmpty()) {
+			return null;
+		}else{
+			foreach ($values as $value) {
+				$attr_id = $value->attr_id;
+				$attr = Attribute::find($attr_id);
+				$attr_name = $attr->attr_name;
+				$item_attr[$attr_id] = $value->value;
+			}
+			return $item_attr;
 		}
-		return $item_attr;
+		
 	}
 
 	public function getAttributeOption(){

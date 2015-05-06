@@ -1,4 +1,7 @@
-<div class="container" style="display:table;" >
+	<center>
+		<div class="row"><h2>Banned User Manager</h2></div>
+	</center>
+
 	<table class="table table-bordered">
 			<tr>
 				<th>Username</th>
@@ -21,7 +24,6 @@
     		<?php endforeach; ?>
 		</tbody>
 	</table>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -63,22 +65,3 @@ $(function(){
 });
 </script>
 
-<pre>
-Hiển thị thông tin của các user  DEACTIVE (active = 0) theo bảng có phân trang.
-
-
-Username   |    User Role    |    Unban  
--------------------------------------------------------
-user1            user               V
-user2            Admin              V
-
-
-
-<< < 1 2 3 > >>
-
-NOTE
-Các chức năng có trong mỗi cột
-- Unban một người dùng đã bị ban từ trước
-
-
-</pre>

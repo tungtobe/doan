@@ -75,7 +75,8 @@ class AdminController extends BaseController {
         // validate
         $rules = array(
             'name' => 'required',
-            'manufacturer' => 'required'
+            '20' => 'required',
+            '6' => 'required'
             );
         $validator = Validator::make(Input::all(), $rules);
         if($validator->fails())
@@ -83,15 +84,30 @@ class AdminController extends BaseController {
             return Redirect::to(URL::action('AdminController@addItem'))->withErrors($validator);
         }
         else {
-            $input = Input::all();
-
-            /// TODO: save item here
+            $inputs = Input::all();
+            $name = Input::get('name');
+            $new_item = new Item;
+            $new_item->name = $name;
+            $new_item->status = '1';
+            $new_item->save();
+            $new_item_id = $new_item->id;
+            foreach ($inputs as $key => $value) {
+                if (($key != '_token') && ($key != 'name')) {
+                    if ($value != "") {
+                        $new_value = new Value;
+                        $new_value->item_id = $new_item_id;
+                        $new_value->attr_id = $key;
+                        $new_value->value = $value;
+                        $new_value->save();
+                    }
+                }
+            }
         }
         return Redirect::to(URL::action('AdminController@showItem'));
     }
 
     public function showBill(){
-        $bills = Bill::Paginate(3);
+        $bills = Bill::Paginate(12);
         foreach($bills as $bill)
         {
             $user = User::find($bill->user_id);

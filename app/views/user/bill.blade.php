@@ -89,7 +89,7 @@ $(function() {
 	}
 
 	$('#saveBill').click(function() {
-
+		var user_id = {{Auth::user()->id}};
 		CalculateTotal();
 		var bill_items = {};
 		$('.itemid').each(function() {
@@ -105,7 +105,7 @@ $(function() {
 				"isEdit" : is_edit
 			}
 		}).done(function(data) {
-			window.location.href = '/user/bill/' + user_id;
+			window.location.href = " {{ URL::action('UserController@getBill', Auth::user()->id ) }} ";
 		}).fail(function(jqXHR, textStatus) {
 			return false;
 		});
