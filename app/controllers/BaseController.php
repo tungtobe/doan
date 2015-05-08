@@ -132,6 +132,7 @@ class BaseController extends Controller {
 			$recommend_list[$item->id] = $item_similar_point;
 			
 		}
+		var_dump($recommend_list);die;
 		return $recommend_list;
 	}
 
@@ -140,50 +141,36 @@ class BaseController extends Controller {
 	// Đẩu ra : Vector có key là attr_id, value là độ tương tự của attribute đó tính theo thang 1
 	public function compareSimilar($item, $example_vector){
 		$compared_vector = array();
-
-
-		$max_value_of_number_attr = array();
-		$number_attributes = Attribute::whereIn('attr_type',array('Integer','Float'))->get();
-		foreach ($number_attributes as $number_attribute) {
-			$attr_id = $number_attribute->id;
-			$values = Value::where('attr_id',$attr_id)->get();
-			$val_array = array();
-			foreach ($values as $value) {
-				$val_array[] = (float)$value->value;
-			}
-			$max_value_of_number_attr[$attr_id] = max($val_array);
-
-		}
-
 		foreach ($example_vector as $key => $value) {
 			$item_attr = Value::where(array('attr_id'=> $key, 'item_id' => $item->id))->first();
-			$attr = Attribute::find($key);
-
+			// var_dump($item_attr);die;
 			if ($item_attr) {
-				if ($attr->attr_type == "Varchar" || $attr->attr_type == "Boolean") {// tính độ tương đồng thuộc tính dạng text
-					$point = $this->compareAttribute($key, $value, $item_attr->value, null);
-				}else{
-					$point = $this->compareAttribute($key, $value, $item_attr->value, $max_value_of_number_attr[$key]);
-				}
+				$point = $this->compareAttribute($key, $value, $item_attr->value);
 			}else{
 				$point = 0;
 			}
 			$compared_vector[$key] = $point;
 		}
-
+		// var_dump($compared_vector);die;
 		return $compared_vector;
 	}
 
-	public function compareAttribute($attr_id, $example_attr, $item_attr, $max_value){
+	public function compareAttribute($attr_id, $example_attr, $item_attr){
 		$attr = Attribute::find($attr_id);
 		
-		if ($max_value == null) {// tính độ tương đồng thuộc tính dạng text
+		if ($attr->attr_type == "Varchar" || $attr->attr_type == "Boolean") {// tính độ tương đồng thuộc tính dạng text
 			if ($example_attr == $item_attr) {
 				return 1;
 			}else{
 				return 0;
 			}
 		}else{//tính độ tương đồng thuộc tính dạng số
+			$values = Value::where('attr_id',$attr_id)->get();
+			$val_array = array();
+			foreach ($values as $value) {
+				$val_array[] = (float)$value->value;
+			}
+			$max_value = max($val_array);
 			return $point = 1 - ( abs($example_attr - $item_attr) / $max_value);
 		}
 	}
