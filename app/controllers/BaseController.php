@@ -90,4 +90,102 @@ class BaseController extends Controller {
 		return $item_vote_array;
 	}
 
+	public function makeExampleVector($item_id, $critique_array){
+		$exampleVector = array();
+		if (is_null($critique_array)) {
+			$attr_values = Value::where('item_id',$item_id)->get()->toArray();
+			foreach ($attr_values as $attr_value) {
+				$exampleVector[$attr_value['attr_id']] = $attr_value['value'];
+			}
+		}else{
+			foreach ($critique_array as $key => $value) {
+				if ($value == "") {
+					$attr_value = Value::where(array('item_id'=>$item_id , 'attr_id'=>$key))->first();
+					$exampleVector[$key] = $attr_value->value;
+				}else{
+					$exampleVector[$key] = $value;
+				}
+			}
+		}
+		return $exampleVector;
+	}
+
+	public function getRecommendList($example_vector, $weight_vector){
+		$recommend_list = array();
+		$items = Item::all();
+		
+		foreach ($items as $item) {
+			// so sánh các thuộc tính mỗi sản phẩm vs sản phẩm mẫu
+			$compared_vector = $this->compareSimilar($item, $example_vector);
+
+
+			// tính điểm tương đồng của sản phẩm
+			$item_similar_point = 0;
+			foreach ($compared_vector as $key => $value) {
+				if(is_null($weight_vector )){// khi không có vector trọng số
+					$item_similar_point = $item_similar_point + $value;
+				}else{ // khi có vector trọng số
+					$item_similar_point = $item_similar_point + ($value * $weight_vector[$key]) ;
+				}
+			}
+			
+			$recommend_list[$item->id] = $item_similar_point;
+			
+		}
+		return $recommend_list;
+	}
+
+	// Tính độ tương tự của 1 sản phẩm với sản phẩm mẫu
+	// Đầu vào: Sản phẩm - Sản phẩm mẫu
+	// Đẩu ra : Vector có key là attr_id, value là độ tương tự của attribute đó tính theo thang 1
+	public function compareSimilar($item, $example_vector){
+		$compared_vector = array();
+
+
+		$max_value_of_number_attr = array();
+		$number_attributes = Attribute::whereIn('attr_type',array('Integer','Float'))->get();
+		foreach ($number_attributes as $number_attribute) {
+			$attr_id = $number_attribute->id;
+			$values = Value::where('attr_id',$attr_id)->get();
+			$val_array = array();
+			foreach ($values as $value) {
+				$val_array[] = (float)$value->value;
+			}
+			$max_value_of_number_attr[$attr_id] = max($val_array);
+
+		}
+
+		foreach ($example_vector as $key => $value) {
+			$item_attr = Value::where(array('attr_id'=> $key, 'item_id' => $item->id))->first();
+			$attr = Attribute::find($key);
+
+			if ($item_attr) {
+				if ($attr->attr_type == "Varchar" || $attr->attr_type == "Boolean") {// tính độ tương đồng thuộc tính dạng text
+					$point = $this->compareAttribute($key, $value, $item_attr->value, null);
+				}else{
+					$point = $this->compareAttribute($key, $value, $item_attr->value, $max_value_of_number_attr[$key]);
+				}
+			}else{
+				$point = 0;
+			}
+			$compared_vector[$key] = $point;
+		}
+
+		return $compared_vector;
+	}
+
+	public function compareAttribute($attr_id, $example_attr, $item_attr, $max_value){
+		$attr = Attribute::find($attr_id);
+		
+		if ($max_value == null) {// tính độ tương đồng thuộc tính dạng text
+			if ($example_attr == $item_attr) {
+				return 1;
+			}else{
+				return 0;
+			}
+		}else{//tính độ tương đồng thuộc tính dạng số
+			return $point = 1 - ( abs($example_attr - $item_attr) / $max_value);
+		}
+	}
+
 }

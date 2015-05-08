@@ -32,12 +32,16 @@ class ItemController extends BaseController {
             }else{
                 $vote_type = $vote->type;
             }
-
         }else{
             $vote_type=null;
+            $user_id = null;
         }
 
-
+        // get first recommend list
+        $example_vector = $this->makeExampleVector($id, null);
+        $recommend_list = $this->getRecommendList($example_vector, null);
+        arsort($recommend_list);
+var_dump($recommend_list);die;
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
 																		'item_attr' => $item_attr,
 																		'item_attr_type' => $item_attr_type,
