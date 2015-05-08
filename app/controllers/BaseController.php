@@ -132,7 +132,6 @@ class BaseController extends Controller {
 			$recommend_list[$item->id] = $item_similar_point;
 			
 		}
-		var_dump($recommend_list);die;
 		return $recommend_list;
 	}
 
@@ -165,12 +164,8 @@ class BaseController extends Controller {
 				return 0;
 			}
 		}else{//tính độ tương đồng thuộc tính dạng số
-			$values = Value::where('attr_id',$attr_id)->get();
-			$val_array = array();
-			foreach ($values as $value) {
-				$val_array[] = (float)$value->value;
-			}
-			$max_value = max($val_array);
+			$max_value = Value::orderBy(DB::raw(' Cast(value AS UNSIGNED) ') ,'DESC' )->where('attr_id',$attr_id)->first()->value;
+
 			return $point = 1 - ( abs($example_attr - $item_attr) / $max_value);
 		}
 	}
