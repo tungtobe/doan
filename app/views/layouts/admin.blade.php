@@ -120,7 +120,7 @@
                     $('#submit').click();
                 }
             });
-        }
+        })
         </script>
         @section('javascript') 
         @show

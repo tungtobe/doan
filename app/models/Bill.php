@@ -2,7 +2,7 @@
 class Bill extends Eloquent {
 
   
-    protected $table = 'bills';
+    protected $table = 'Bill';
 
     
 

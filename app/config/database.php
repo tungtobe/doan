@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'do_an',
+			'database'  => 'tot_nghiep',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

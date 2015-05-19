@@ -2,7 +2,7 @@
 class Relationship extends Eloquent {
 
   
-    protected $table = 'relationships';
+    protected $table = 'Relationship';
 
     
 

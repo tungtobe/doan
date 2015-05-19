@@ -2,7 +2,7 @@
 class Value extends Eloquent {
 
   
-    protected $table = 'values';
+    protected $table = 'Value';
     
     public static function validate($input) {
         $rules = array(

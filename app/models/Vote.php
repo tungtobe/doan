@@ -2,7 +2,7 @@
 
 class Vote extends Eloquent {
 
-    protected $table = 'votes';
+    protected $table = 'Vote';
 
 
 

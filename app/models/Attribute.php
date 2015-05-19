@@ -2,7 +2,7 @@
 class Attribute extends Eloquent {
 
   
-    protected $table = 'attributes';
+    protected $table = 'Attribute';
 
     
     public static function validate($input) {

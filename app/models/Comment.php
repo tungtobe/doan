@@ -2,7 +2,7 @@
 
 class Comment extends Eloquent {
 
-    protected $table = 'comments';
+    protected $table = 'Comment';
 
     public static function validate($input) {
         $rules = array(

@@ -48,25 +48,44 @@ class AdminController extends BaseController {
     }
 
     public function showUser(){
-        $users = User::where('status', 1)->paginate(2);
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+        $users = User::where('status', 1)->paginate(10);
         //$users = User::Paginate(2);
         $this->layout->content = View::make('admin.showuser')
                                     ->with('users', $users);
     }
 
     public function showDeactiveUser(){
-        $users = User::where('status', 0)->paginate(2);
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+
+        $users = User::where('status', 0)->paginate(10);
         $this->layout->content = View::make('admin.showdeactiveuser')
                                     ->with('users', $users);
     }
 
     public function showItem(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+
         $items = Item::orderBy('id', 'dsc')->paginate(10);
         $this->layout->content = View::make('admin.showitem')
                                     ->with('items', $items);
     }
 
     public function addItem(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+
         $this->layout->content = View::make('item.add');
     }
 
@@ -107,6 +126,11 @@ class AdminController extends BaseController {
     }
 
     public function showBill(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+
         $bills = Bill::Paginate(12);
         foreach($bills as $bill)
         {
@@ -118,13 +142,12 @@ class AdminController extends BaseController {
         $this->layout->content = View::make('admin.showbill')->with(array('bills' => $bills));
     }
 
-    public function viewBill()
-    {
-        $this->layout->content = View::make('admin.showsystemvar');
-    }
-
     public function confirmBill()
     {
+        if (Auth::user()->role != 0){ // not admin
+            return Response::json(404);
+        }
+
         $id = Input::get('id');
 
         try{
@@ -143,6 +166,10 @@ class AdminController extends BaseController {
 
     public function deleteBill()
     {
+        if (Auth::user()->role != 0){ // not admin
+            return Response::json(404);
+        }
+
         $id = Input::get('id');
         try {
             $bill = Bill::findOrFail($id);
@@ -158,8 +185,65 @@ class AdminController extends BaseController {
         return Response::json('Success');
     }
 
+    public function postSysVar(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+        // Xử lý dữ liệu gửi lên
+        $validator = Setting::validate(Input::all());  
+        if ($validator->fails()) {
+            return Redirect::to(URL::action('AdminController@showSystemVar'))->withInput()->withErrors($validator);     
+        }
+
+        $unchange = Input::get("unchange");
+        $changed = Input::get("changed");
+
+        $unchange_var = Setting::where('key','unchange')->first();
+        if ($unchange_var == null) {
+            $unchange_var = new Setting;
+            $unchange_var->key = "unchange";
+            $unchange_var->value = $unchange;
+            $unchange_var->save();
+        }else{
+            $unchange_var->value = $unchange;
+            $unchange_var->save();
+        }
+
+        $changed_var = Setting::where('key','changed')->first();
+        if ($changed_var == null) {
+            $changed_var = new Setting;
+            $changed_var->key = "changed";
+            $changed_var->value = $changed;
+            $changed_var->save();
+        }else{
+            $changed_var->value = $changed;
+            $changed_var->save();
+        }
+                
+        return Redirect::to(URL::action('AdminController@showSystemVar'));
+    }
+
     public function showSystemVar(){
-        $this->layout->content = View::make('admin.showsystemvar');
+        // show system var         
+        $unchange_var = Setting::where('key','unchange')->first();
+        if ($unchange_var == null) {
+            $unchange = 1;
+        }else{
+            $unchange = $unchange_var->value;
+        }
+
+        $changed_var = Setting::where('key','changed')->first();
+        if ($changed_var == null) {
+            $changed = 2;
+        }else{
+            $changed = $changed_var->value;
+        }
+
+        $this->layout->content = View::make('admin.showsystemvar')->with(array(
+                                                                        'unchange' => $unchange,
+                                                                        'changed' => $changed
+                                                                        ));
     }
 
     /**

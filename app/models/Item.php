@@ -7,7 +7,7 @@ class Item extends Eloquent {
 
     protected $dates = ['deleted_at'];
 
-    protected $table = 'items';
+    protected $table = 'Item';
 
     public static function validate($input) {
         $rules = array(

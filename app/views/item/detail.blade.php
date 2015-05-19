@@ -122,7 +122,17 @@
         </div>
     </div>
 
+<pre>
+Phần dưới sẽ trình bày 10 sản phẩm được gợi ý, về cấu trúc giống với giao diện sản phẩm ở trang chủ nhưng có thêm một số thứ: 
+- Thứ tự các sản phẩm : có những cái nhãn để thể hiện thứ tự 1,2,3,4,5 của sản phẩm 
+- Sẽ có những sản phẩm có trong favorite của người dùng, những sản phẩm này cần được trình bày khác đi 
+hoặc gán nhãn nào đó thể hiện là sản phẩm đã có trong favorite
+- Thêm 2 dòng trong mỗi sản phẩm với nội dung : 
+  + x of your friends vote GOOD for this item
+  + x of your expert vote GOOD for this item
 
+Chị để ý nó có thời gian loading ... , chị design cho e cả cái loading đấy luôn nhé
+</pre>
 <div id="recommend_list" class="hero-unit">
 
   
@@ -215,11 +225,11 @@ $(function() {
     });
 
     //Ajax for comment
-      $("#submitButton").click(function(e){
+    $("#submitButton").click(function(e){
       e.preventDefault();
       var commentContent = $("#content").val();
       var itemID = $("#item_id").val();
-      var myUrl = "{{URL::action('CommentController@postStore')}}";
+      var myUrl = "{{URL::action('ItemController@postStore')}}";
       $.ajax({
         url: myUrl,
         type: 'POST',
@@ -246,6 +256,29 @@ $(function() {
         error: function(data) {
           console.log(data);
         }
+        })
+      });
+
+
+      $( document ).ready(function() {
+        var myUrl = "{{ URL::action('RecommendController@getFirstRecommend') }}";
+        $.ajax({
+          url: myUrl,
+          type: 'POST',
+          data:{
+            id: {{ $item->id }}
+          },
+          dataType: 'html',
+          beforeSend: function(){
+            $("#recommend_list").append("Loading ... ");
+          },
+          success: function (e) {
+            $("#recommend_list").empty();
+            $("#recommend_list").html(e);
+          },
+          error: function(data) {
+            console.log(data);
+          }
         })
       });
 });

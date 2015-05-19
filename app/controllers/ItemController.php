@@ -37,11 +37,7 @@ class ItemController extends BaseController {
             $user_id = null;
         }
 
-        // get first recommend list
-        $example_vector = $this->makeExampleVector($id, null);
-        $recommend_list = $this->getRecommendList($example_vector, null);
-        arsort($recommend_list);
-var_dump($recommend_list);die;
+        
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
 																		'item_attr' => $item_attr,
 																		'item_attr_type' => $item_attr_type,
@@ -50,6 +46,8 @@ var_dump($recommend_list);die;
                                                                         'vote_type'=> $vote_type
 																		));
     }
+
+    
 
     public function addFavorite(){
     	
@@ -105,5 +103,25 @@ var_dump($recommend_list);die;
                 ) );
             }
         }
+    }
+
+    public function postStore() {
+        $input = Input::all();
+        $comment = new Comment;
+        $comment->content = $input['content'];
+        $comment->item_id = $input['item_id'];
+        $comment->user_id = Auth::user()->id;
+        $validation = Comment::validate($input);
+
+        if ($validation->passes()) {
+            $comment->save();
+            $data ['msg'] = 'SUCCESS';
+            $data ['content'] = $comment->content;
+        } else {
+            $data ['msg'] = 'FAIL';
+            $data ['content'] = $validation->messages()->toArray();
+        }
+
+        return Response::json($data);
     }
 }

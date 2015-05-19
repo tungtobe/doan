@@ -54,7 +54,7 @@
                         <li>{{HTML::linkaction('UserController@getFavorite','Favorite',Auth::user()->id)}}</li>
                         <li>{{HTML::linkaction('UserController@getBill','Bill',Auth::user()->id)}}</li>
                         <!-- <li><a href="{{URL::action('UserController@getBill')}}">Bill</a></li> -->
-                        <li><a href="{{URL::action('UserController@getFriends')}}">Friends</a></li>
+                        <!-- <li><a href="{{URL::action('UserController@getFriends')}}">Friends</a></li> -->
                        
                     @endif
                     
@@ -102,7 +102,7 @@
                     $('#submit').click();
                 }
             });
-        }
+        })
         </script>
         @section('javascript') 
         @show

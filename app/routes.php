@@ -23,6 +23,8 @@ Route::get('/item/{id}', 'ItemController@getShow');
 Route::get('/user/{id}', 'UserController@getShow');
 Route::get('/search','HomeController@search');
 
+Route::post('/recommend/firstrecommend','RecommendController@getFirstRecommend');
+
 
 Route::group(array('before' => 'app.auth'), function() {
   // Route for admin function
@@ -34,11 +36,13 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/admin/showitem', 'AdminController@showItem');
   Route::get('/admin/showbill', 'AdminController@showBill');
   Route::get('/admin/showsysvar', 'AdminController@showSystemVar');
+  Route::get('/admin/postSysVar', 'AdminController@postSysVar');
 
   Route::post('/admin/changeAdminPermission', 'AdminController@changeAdminPermission');
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
   Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
   Route::post('/admin/addItem', 'AdminController@postAddItem');
+  
 
   Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
   Route::post('/admin/editItem/{id}', 'AdminController@postEditItem');
@@ -61,7 +65,7 @@ Route::group(array('before' => 'app.auth'), function() {
 
   // Route for Items
   Route::post('/item/addfavorite', 'ItemController@addFavorite');
-  Route::post('/item/comment','CommentController@postStore');
+  Route::post('/item/comment','ItemController@postStore');
   Route::post('/item/vote','ItemController@vote');
 
   // Route for recommend
