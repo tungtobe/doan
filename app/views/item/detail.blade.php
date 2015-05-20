@@ -1,11 +1,10 @@
-<div class='hero-unit'>    
-    <div class="product-info-top clearfix">
+    <div class="col-md-9 hero-unit ">
 
-        <div class="product-info-top-left">
+        <div class="col-md-3">
             <div class="module-product-img-gallery">
                 <div class="widget-image-product">
                     <a href="{{ $item_attr['6'] }}" id="link_main_thumb" onclick="return showGalleryPopup();" rel="nofollow">
-                        <img alt="{{ $item->name }}" id="img_main_thumb" itemprop="image" src="{{$item_attr['6'] }}" style="max-width: 350px;">
+                        <img alt="{{ $item->name }}" id="img_main_thumb" itemprop="image" src="{{$item_attr['6'] }}" style="max-width: 150px;">
                     </a>
                      <div class="clear"></div>
                 </div>
@@ -30,42 +29,15 @@
                   @endif  
                 @endif
               </div>
-
-
-            <!-- Comment Part -->
-            @if(Auth::check())
-            <!-- add new comment -->
-              <input name="item_id" id="item_id" type="hidden" value="{{ $item->id}}">
-              <textarea class="_cmt-textare" row ="10"  name="content" id="content" placeholder="Comment" ></textarea><br>
-              <button class="btn btn-success" type="button" id="submitButton" name="Submit">Submit</button>
-            </center>
-
-            <div id="new-comment"></div>
-
-            @endif
-            <!-- show comment -->
-            <div>
-                @foreach ($comments->reverse() as $comment)
-                <p>
-                    {{ HTML::linkAction('UserController@getShow', $comment->user->username , array($comment->user->id), array('class' => '_cmt-username')) }}
-                    <span class="_cmt-content">{{$comment->content}}</span>          
-                </p>
-               @endforeach
-            </div>
             </center>
             
         </div>
 
-        <div class="product-info-top-right">
+        <div class="col-md-9">
             <div class="product-main-info">
-                <h1 class="product-detail-title">{{ $item->name }}</h1>
-                
+                <h2 class="product-detail-title">{{ $item->name }}</h2>
             </div>
-
             <br>
-
-              
-
              {{ Form::open(array('action' => 'RecommendController@reciveCritique', 'id' => 'critique')) }}
              <input type="hidden" name="current_item" value="{{$item->id}}">
             <div class="clearfix">
@@ -77,19 +49,19 @@
                               <?php $attr = Attribute::find($attr_id); ?>
                               @if($attr->attr_name != 'IMG')
                                   <tr>
-                                    <td > {{$attr->attr_name }} </td>
+                                    <td style="min-width:150px;"> {{$attr->attr_name }} </td>
                                     @if($item_attr_type[$attr->attr_name ]=="Boolean")
                                       @if($item_attr[$attr_id]=1)
-                                      <td style="padding-left:100px; font-weight: bold;" > Yes </td>
+                                      <td style="min-width:200px; padding-left:40px; font-weight: bold;" > Yes </td>
                                       @else
-                                      <td style="padding-left:100px; font-weight: bold;" > No </td>
+                                      <td style="min-width:200px; padding-left:40px; font-weight: bold;" > No </td>
                                       @endif
                                     @else
-                                    <td style="padding-left:100px; font-weight: bold;" > {{$item_attr[$attr_id]}} </td>
+                                    <td style="min-width:200px; padding-left:40px; font-weight: bold;" > {{$item_attr[$attr_id]}} </td>
                                     @endif
 
                                     @if(Auth::check())
-                                    <td style="padding-left:100px;" > <select name="attr[{{$attr_id}}]">
+                                    <td style="min-width:200px; padding-left:40px;" > <select name="attr[{{$attr_id}}]">
                                                                         <option   value="">Select improve</option>
                                                                         @foreach($item_attr_option[$attr_id] as $option)
                                                                         <option  value="{{$option['value']}}">{{$option['value']}}</option>
@@ -119,14 +91,38 @@
             </div>
 
             
-        </div>
     </div>
 
 
-<div id="recommend_list" class="hero-unit">
+<div  class="col-md-3 detail-left">
+  <div id="recommend_list" class="hero-unit">
+  </div>
+</div>
+
+<div class="col-md-9 hero-unit ">
+            <!-- Comment Part -->
+            @if(Auth::check())
+            <!-- add new comment -->
+            <center>
+              <input name="item_id" id="item_id" type="hidden" value="{{ $item->id}}">
+              <textarea class="_cmt-textare" row ="10"  name="content" id="content" placeholder="Comment" ></textarea><br>
+              <button class="btn btn-success" type="button" id="submitButton" name="Submit">Submit</button>
+            </center>
+
+            <div id="new-comment"></div>
+            @endif
+            <!-- show comment -->
+            <div>
+                @foreach ($comments->reverse() as $comment)
+                <p>
+                    {{ HTML::linkAction('UserController@getShow', $comment->user->username , array($comment->user->id), array('class' => '_cmt-username')) }}
+                    <span class="_cmt-content">{{$comment->content}}</span>          
+                </p>
+               @endforeach
+            </div>
+</div>
 
   
-</div>
 
 <script type="text/javascript">
 $(function() {

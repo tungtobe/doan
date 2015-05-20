@@ -1,38 +1,58 @@
-	<center>
-		<div class="row"><h2>User Manager</h2></div>
-	</center>	
+ {{ HTML::script('js/jquery.confirm.min.js'); }}
+ <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            User Manager <small>User List</small>
+                        </h1>
+                        
+                    </div>
+                </div>
+                <!-- /.row -->
 
-	<table class="table table-bordered">
-			<tr>
-				<th>Username</th>
-				<th>User Role </th>
-				<th>Admin</th>
-				<th>Ban</th>
-			</tr>
-		<tbody>
-			<?php foreach ($users as $user): ?>
-        		<tr>
-        			<td>{{$user->username}}</td>
-        			<td>
-        				@if($user->role == 0) {{"Admin"}}
-        				@else {{"User"}}
-        				@endif
-        			</td>
-        			<td>
-        				@if($user->role == 0) {{ Form::checkbox('name', $user->id, true, ['class' => 'cb_make_admin']); }}
-        				@else {{ Form::checkbox('name', $user->id, false, ['class' => 'cb_make_admin']); }}
-        				@endif
-        			</td>
-        			<td>
-        				{{ Form::checkbox('name', $user->id, false, ['class' => 'confirm']); }}
-        			</td>
-        		</tr>
-    		<?php endforeach; ?>
-		</tbody>
-	</table>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-user"></i> User List</h3>
+                            </div>
+                            <div class="panel-body">
+                            	<table class="table table-bordered table-hover table-striped">
+                            		<tr>
+										<th>Username</th>
+										<th>User Role </th>
+										<th>Admin</th>
+										<th>Ban</th>
+									</tr>
+								<tbody>
+									<?php foreach ($users as $user): ?>
+						        		<tr>
+						        			<td>{{$user->username}}</td>
+						        			<td>
+						        				@if($user->role == 0) {{"Admin"}}
+						        				@else {{"User"}}
+						        				@endif
+						        			</td>
+						        			<td>
+						        				@if($user->role == 0) {{ Form::checkbox('name', $user->id, true, ['class' => 'cb_make_admin']); }}
+						        				@else {{ Form::checkbox('name', $user->id, false, ['class' => 'cb_make_admin']); }}
+						        				@endif
+						        			</td>
+						        			<td>
+						        				{{ Form::checkbox('name', $user->id, false, ['class' => 'confirm']); }}
+						        			</td>
+						        		</tr>
+						    		<?php endforeach; ?>
+								</tbody>
+                            	</table>
+                            	<?php echo $users->links(); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
 
-<?php echo $users->links(); ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	$('.cb_make_admin').change(function() {

@@ -4,15 +4,16 @@
 	</center>
 	<table class="table table-bordered">
 			<tr>
-				<th>Id</th>
+				<th></th>
 				<th>Item</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
 		<tbody>
 			<?php foreach ($items as $item): ?>
+			<?php $img = Value::where(array('item_id'=>$item->id, 'attr_id' => '6'))->first()->value; ?>
         		<tr>
-        			<td>{{ $item->id }}</td>
+        			<td style="width:160px;"><img src="{{ $img }}" height='150' weight='150'></td>
         			<td><a class="" href="{{ URL::action('ItemController@getShow', [$item->id]) }}">
         				{{$item->name}}
         			</a></td>

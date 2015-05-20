@@ -1,7 +1,7 @@
 <?php
 
 class AdminController extends BaseController {
-    protected $layout = 'layouts.admin';
+    protected $layout = 'layouts.admin-test';
 
     public function getShow() {
         $this->layout->content = View::make('admin.usermanager');        
@@ -77,6 +77,7 @@ class AdminController extends BaseController {
 
 
         $items = Item::orderBy('id', 'dsc')->paginate(10);
+        
         $this->layout->content = View::make('admin.showitem')
                                     ->with('items', $items);
     }

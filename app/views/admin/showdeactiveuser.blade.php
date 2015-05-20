@@ -1,30 +1,51 @@
-	<center>
-		<div class="row"><h2>Banned User Manager</h2></div>
-	</center>
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            User Manager <small>Banned User List </small>
+        </h1>
+        
+    </div>
+</div>
 
-	<table class="table table-bordered">
-			<tr>
-				<th>Username</th>
-				<th>User Role </th>
-				<th>Unban</th>
-			</tr>
-		<tbody>
-			<?php foreach ($users as $user): ?>
-        		<tr>
-        			<td>{{$user->username}}</td>
-        			<td>
-        				@if($user->role == 0) {{"Admin"}}
-        				@else {{"User"}}
-        				@endif
-        			</td>
-        			<td>
-        				{{ Form::checkbox('name', $user->id, false, ['class' => 'confirm']); }}
-        			</td>
-        		</tr>
-    		<?php endforeach; ?>
-		</tbody>
-	</table>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-user"></i> Banned User Manager</h3>
+            </div>
+            <div class="panel-body">
+            	<table class="table table-bordered">
+					<tr>
+						<th>Username</th>
+						<th>User Role </th>
+						<th>Unban</th>
+					</tr>
+					<tbody>
+					<?php foreach ($users as $user): ?>
+		        		<tr>
+		        			<td>{{$user->username}}</td>
+		        			<td>
+		        				@if($user->role == 0) {{"Admin"}}
+		        				@else {{"User"}}
+		        				@endif
+		        			</td>
+		        			<td>
+		        				{{ Form::checkbox('name', $user->id, false, ['class' => 'confirm']); }}
+		        			</td>
+		        		</tr>
+		    		<?php endforeach; ?>
+					</tbody>
+				</table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+
+
+
 <script type="text/javascript">
 $(function(){
 	$(".confirm").confirm({

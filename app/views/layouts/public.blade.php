@@ -50,16 +50,15 @@
                     <li class="active"><a href="{{URL::action('HomeController@showWelcome')}}">Home</a></li>
                     @if(Auth::check())
                         @if(Auth::user()->role == 0)
-                        <li><a href="{{URL::action('AdminController@getShow')}}">Admin Manager</a></li>
+                        <li>{{HTML::linkAction('AdminController@showItem','Admin Manager')}}</li>
                         @endif
                         <li>{{HTML::linkaction('UserController@getFavorite','Favorite',Auth::user()->id)}}</li>
                         <li>{{HTML::linkaction('UserController@getBill','Bill',Auth::user()->id)}}</li>
-                        <!-- <li><a href="{{URL::action('UserController@getBill')}}">Bill</a></li> -->
-                        <!-- <li><a href="{{URL::action('UserController@getFriends')}}">Friends</a></li> -->
                        
                     @endif
                     
                 </ul>
+
 
                 <ul class="nav navbar-nav navbar-right">                    
                     @if (Auth::check())
