@@ -17,17 +17,17 @@
         				{{$item->name}}
         			</a></td>
         			<td>
-        				
+        				{{ HTML::linkAction('AdminController@postEditItem', 'Edit' , $item->id , array('class' => 'btn btn-primary')) }}
         			</td>
         			<td>
-        				{{ Form::checkbox('name', $item->id, false, ['class' => 'confirm']); }}
+        				<button class='confirm btn btn-danger' value='{{$item->id}}'>Delete</button>
         			</td>
         		</tr>
     		<?php endforeach; ?>
 		</tbody>
 	</table>
 <?php echo $items->links(); ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(function() {
 	$(".confirm").confirm({

@@ -3,36 +3,71 @@
 class RecommendController extends BaseController {
 
 	public function reciveCritique(){
-		$input = Input::all();
-		return $input;
-
-
-		$current_item = Input::get('current_item');
+		$current_item_id = Input::get('current_item');
 		$critique_attr = Input::get('attr');
-		
+
+		$example_vector = $this->makeExampleVector($current_item_id, $critique_attr);
+		$weight_vector = $this->makeWeightVector($critique_attr);
+		$recommend_list = $this->getRecommendList($current_item_id, $example_vector, $weight_vector);
+		$sort_list = $this->getSortRecommendList($recommend_list);
+
+        return $sort_list;
 	}
 
 	public function getFirstRecommend(){
         // get first recommend list
         $id = Input::get('id');
         $example_vector = $this->makeExampleVector($id, null);
-        $recommend_list = $this->getRecommendList($example_vector, null);
-        arsort($recommend_list);
-        return "abcd";
+        $recommend_list = $this->getRecommendList($id,$example_vector, null);
+        $sort_list = $this->getSortRecommendList($recommend_list);
+
+        return $sort_list;
+	}
+
+    public function getSortRecommendList($recommend_list){
+    	$number_of_item = 10;
+    	arsort($recommend_list);
+  		// return sorted array
+  		return $newArray = array_slice($recommend_list, 0, $number_of_item, true);
     }
 
+    public function makeWeightVector($critique_attr){
+    	$weight_array = array();
 
+    	$unchange_var = Setting::where('key','unchange')->first();
+        if ($unchange_var == null) {
+            $unchange = 1;
+        }else{
+            $unchange = $unchange_var->value;
+        }
 
+        $changed_var = Setting::where('key','changed')->first();
+        if ($changed_var == null) {
+            $changed = 2;
+        }else{
+            $changed = $changed_var->value;
+        }
 
-    public function makeExampleVector($item_id, $critique_array){
+    	foreach ($critique_attr as $key => $value) {
+			if ($value == "") {
+				$weight_array[$key] = $unchange;
+			}else{
+				$weight_array[$key] = $changed;
+			}
+		}
+
+		return $weight_array;
+    }
+
+    public function makeExampleVector($item_id, $critique_attr){
 		$exampleVector = array();
-		if (is_null($critique_array)) {
+		if (is_null($critique_attr)) {
 			$attr_values = Value::where('item_id',$item_id)->get()->toArray();
 			foreach ($attr_values as $attr_value) {
 				$exampleVector[$attr_value['attr_id']] = $attr_value['value'];
 			}
 		}else{
-			foreach ($critique_array as $key => $value) {
+			foreach ($critique_attr as $key => $value) {
 				if ($value == "") {
 					$attr_value = Value::where(array('item_id'=>$item_id , 'attr_id'=>$key))->first();
 					$exampleVector[$key] = $attr_value->value;
@@ -44,15 +79,10 @@ class RecommendController extends BaseController {
 		return $exampleVector;
 	}
 
-	public function getRecommendList($example_vector, $weight_vector){
+	public function getRecommendList($current_item_id,$example_vector, $weight_vector){
 		$recommend_list = array();
+		$items = Item::select('id')->where('id','!=', $current_item_id )->get()->toArray();
 
-		// $items = Item::all();
-		
-		$items = Item::select('id')->get()->toArray();
-
-		// var_dump($items);die;
-		
 		foreach ($items as $item) {
 			// so sánh các thuộc tính mỗi sản phẩm vs sản phẩm mẫu
 			$compared_vector = $this->compareSimilar($item, $example_vector);

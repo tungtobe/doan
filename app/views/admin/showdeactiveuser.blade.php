@@ -31,7 +31,6 @@ $(function(){
 			text: "Are you sure you want to unban this user?",
 			title: "Confirmation required",
 			confirm: function(button) {
-				console.log(this.button[0].value);
 				postBan(this.button[0].value);
 			},
 			cancel: function(button) {
@@ -42,7 +41,7 @@ $(function(){
 	    post: true,
 	    confirmButtonClass: "btn-danger",
 	    cancelButtonClass: "btn-default",
-	    dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
+	    dialogClass: "modal-dialog modal-md" 
 	});
 
 	function postBan(id) {

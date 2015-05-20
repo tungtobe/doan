@@ -6,7 +6,6 @@ class ItemController extends BaseController {
         
     }
 
-
     public function getShow($id){
     	$item = Item::find($id);
         if($item == null) {
@@ -46,8 +45,6 @@ class ItemController extends BaseController {
                                                                         'vote_type'=> $vote_type
 																		));
     }
-
-    
 
     public function addFavorite(){
     	

@@ -2,6 +2,7 @@
 
 class AdminController extends BaseController {
     protected $layout = 'layouts.admin';
+
     public function getShow() {
         $this->layout->content = View::make('admin.usermanager');        
     }
@@ -85,15 +86,14 @@ class AdminController extends BaseController {
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }
 
-
-        $this->layout->content = View::make('item.add');
+        $attributes = Attribute::all(); 
+        $this->layout->content = View::make('item.add')->with(array('attributes' => $attributes));
     }
 
-    public function postAddItem()
-    {
+    public function postAddItem(){
         // validate
         $rules = array(
-            'name' => 'required',
+            '1' => 'required',
             '20' => 'required',
             '6' => 'required'
             );
@@ -104,14 +104,14 @@ class AdminController extends BaseController {
         }
         else {
             $inputs = Input::all();
-            $name = Input::get('name');
+            $name = Input::get('1');
             $new_item = new Item;
             $new_item->name = $name;
             $new_item->status = '1';
             $new_item->save();
             $new_item_id = $new_item->id;
             foreach ($inputs as $key => $value) {
-                if (($key != '_token') && ($key != 'name')) {
+                if ($key != '_token')  {
                     if ($value != "") {
                         $new_value = new Value;
                         $new_value->item_id = $new_item_id;
@@ -142,8 +142,7 @@ class AdminController extends BaseController {
         $this->layout->content = View::make('admin.showbill')->with(array('bills' => $bills));
     }
 
-    public function confirmBill()
-    {
+    public function confirmBill(){
         if (Auth::user()->role != 0){ // not admin
             return Response::json(404);
         }
@@ -164,8 +163,7 @@ class AdminController extends BaseController {
         return Response::json('Success');
     }
 
-    public function deleteBill()
-    {
+    public function deleteBill(){
         if (Auth::user()->role != 0){ // not admin
             return Response::json(404);
         }
@@ -246,11 +244,7 @@ class AdminController extends BaseController {
                                                                         ));
     }
 
-    /**
-     * ban given user
-     */
-    public function postBanUser()
-    {
+    public function postBanUser(){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("invalid");
 
@@ -276,11 +270,8 @@ class AdminController extends BaseController {
         return Response::json("Success");
     }
 
-    /**
-     * grant or revoke admin permission of a user
-     */
-    public function changeAdminPermission()
-    {
+
+    public function changeAdminPermission(){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
         try {
@@ -310,8 +301,7 @@ class AdminController extends BaseController {
      * delete an item from store
      * softdelete only
      */
-    public function postDeleteItem()
-    {
+    public function postDeleteItem(){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
 
@@ -329,8 +319,7 @@ class AdminController extends BaseController {
         return Response::json("Success");
     }
 
-    public function postEditItem($id)
-    {
+    public function postEditItem($id){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
         
@@ -340,26 +329,33 @@ class AdminController extends BaseController {
         {
             // validate
             $rules = array(
-                'name' => 'required',
-                'manufacturer' => 'required'
+                '1' => 'required',
                 );
             $validator = Validator::make(Input::all(), $rules);
             if($validator->fails())
             {
-                return Redirect::to(URL::action('AdminController@postEditItem', $id))->withErrors($validator);
+                return Redirect::to(URL::action('AdminController@postEditItem', $id))->withErrors(array("Enter item name !!! "));
             }
             else {
-                $input = Input::all();
+                $item->name = Input::get('1');
+                $item->save();
 
-                /// TODO: save item here
+                $inputs = Input::all();
+                $old_values = Value::where('item_id', $id)->delete();
+                foreach ($inputs as $key => $value) {
+                    if ($key != '_token') {
+                        Value::insert(array('item_id' => $id, 'attr_id' => $key , 'value' => $value));
+                    }
+                    
+                }
             }
-            return Redirect::to(URL::action('AdminController@showItem'));
+            return Redirect::to(URL::action('ItemController@getShow', $id));
         }
 
         $attr = $this->getOneItemAttributes($item);
         if($item == null) 
             return Response::json(404);
-
-        $this->layout->content = View::make('item.edit')->with(array('item_id' => $id, 'attr' => $attr));
+        $attributes = Attribute::all(); 
+        $this->layout->content = View::make('item.edit')->with(array('item' => $item, 'attr' => $attr , 'attributes' => $attributes));
     }
 }

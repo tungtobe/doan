@@ -3,11 +3,43 @@
 class UserController extends BaseController {
 
     public function getShow($id) {
-        $user = User::find($id);
-        $this->layout->content = View::make('user.profile')->with('user' , $user);
-        // var_dump($user->username);die;
 
-        
+        $user = User::find($id);
+        if ($user == null) {
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+        $friends_number = Relationship::where(array('user_id'=> $id , 'rel_type' => '1'))->orWhere(array('rel_user_id'=> $id , 'rel_type' => '1'))->count();
+        $expert_number = Relationship::where(array('user_id'=> $id , 'rel_type' => '2'))->count();
+        $follow_number = Relationship::where(array('rel_user_id'=> $id , 'rel_type' => '2'))->count();
+
+        if (Auth::user()->id != $user->id) {
+            $friend_relationship = Relationship::where(array('user_id'=> $id , 'rel_user_id' => Auth::user()->id, 'rel_type' => '1'))->orWhere(array( 'user_id' => Auth::user()->id, 'rel_user_id'=> $id , 'rel_type' => '1'))->get();
+            if ($friend_relationship->count() == 0) {
+                 $rel_friend = null;
+            }else{
+                $rel_friend = "friend";
+            }
+
+            $expert_relationship = Relationship::where(array('user_id' => Auth::user()->id , 'rel_user_id' => $id , 'rel_type' => '2' ))->get();
+            if ($expert_relationship->count() == 0) {
+                $rel_expert = null;
+            }else{
+                $rel_expert = "expert";
+            }
+        }else{
+            $rel_friend = null;
+            $rel_expert = null;
+        }
+
+        $this->layout->content = View::make('user.profile')->with(array(
+                                                                    'user' => $user,
+                                                                    'friends_number' => $friends_number,
+                                                                    'expert_number' => $expert_number,
+                                                                    'follow_number' => $follow_number,
+                                                                    'rel_friend' => $rel_friend,
+                                                                    'rel_expert' => $rel_expert
+                                                                    ));
     }
 
     public function addUser(){
@@ -118,8 +150,7 @@ class UserController extends BaseController {
         }
     }
 
-    public function editBill($id)
-    {
+    public function editBill($id){
         if (!Auth::check()) {
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }else{
@@ -139,8 +170,7 @@ class UserController extends BaseController {
         }
     }
 
-    public function deleteBill()
-    {
+    public function deleteBill(){
         $id = Input::get('id');
         try {
             $bill = Bill::findOrFail($id);
@@ -159,8 +189,7 @@ class UserController extends BaseController {
         return Response::json(array("status" => "success"));
     }
 
-    public function saveBill()
-    {
+    public function saveBill(){
         $input = Input::get('bill');
         $isEdit = Input::get('isEdit');
 
@@ -197,21 +226,97 @@ class UserController extends BaseController {
 
     }
 
-    public function addFriend(){
-        $current_user = Auth::user()->id;
-        $added_user = Input::get('id');
+    public function friend(){
+        $current_user_id = Auth::user()->id;
+        $added_user_id = Input::get('id');
+        $mode = Input::get('mode');
         
-        // TODO
-        //check xem người dùng có tồn tại ko
+        $current_user = User::find($current_user_id);
+        $added_user = User::find($added_user_id);
+        if ($current_user == null || $added_user == null) {
+            return Response::json ( array (
+                'state' => 'error',
+                'mes' => 'User not exist'
+            ) );
 
-        $rel = new Relationship;
-        $rel->user_id = $current_user;
-        $rel->rel_user_id = $added_user;
-        $rel->rel_type = '1' ;
-        $rel->save();
+        }
 
-        return Response::json ( array (
-                'mes' => 'done'
-        ) );
+        if ($mode == 0 ) { // add friend action
+            $rel = new Relationship;
+            $rel->user_id = $current_user_id;
+            $rel->rel_user_id = $added_user_id;
+            $rel->rel_type = '1' ;
+            $rel->save();
+
+            $mes =  $added_user->name . ' has been added to your friendlist';
+            return Response::json ( array (
+                'state' => 'OK',
+                'change_mode' => 1,
+                'mes' => $mes
+            ) );      
+        }else{ // unfriend action
+            $affectedRows = Relationship::where(array('user_id'=> $current_user_id , 'rel_user_id' => $added_user_id, 'rel_type' => '1'))->delete();
+            if ($affectedRows == 0) {
+                return Response::json ( array (
+                    'state' => 'error',
+                    'mes' => 'Relationship not exist'
+                ));
+            }else{ 
+                $mes =  $added_user->name . ' has been  remove from your friendlist';
+                return Response::json ( array (
+                    'state' => 'OK',
+                    'change_mode' => 0,
+                    'mes' => $mes
+                ));
+            }
+        }
+        
+    }
+
+    public function expert(){
+        $current_user_id = Auth::user()->id;
+        $added_user_id = Input::get('id');
+        $mode = Input::get('mode');
+        
+        $current_user = User::find($current_user_id);
+        $added_user = User::find($added_user_id);
+        if ($current_user == null || $added_user == null) {
+            return Response::json ( array (
+                'state' => 'error',
+                'mes' => 'User not exist'
+            ) );
+
+        }
+
+        if ($mode == 0 ) { // add expert action
+            $rel = new Relationship;
+            $rel->user_id = $current_user_id;
+            $rel->rel_user_id = $added_user_id;
+            $rel->rel_type = '2' ;
+            $rel->save();
+
+            $mes =  $added_user->name . ' has been added to your friendlist';
+            return Response::json ( array (
+                'state' => 'OK',
+                'change_mode' => 1,
+                'mes' => $mes
+            ) );      
+        }else{ // unfriend action
+            $affectedRows = Relationship::where(array('user_id'=> $current_user_id , 'rel_user_id' => $added_user_id, 'rel_type' => '1'))->delete();
+            if ($affectedRows == 0) {
+                return Response::json ( array (
+                    'state' => 'error',
+                    'mes' => 'Relationship not exist'
+                ));
+            }else{ 
+                $mes =  $added_user->name . ' has been  remove from your friendlist';
+                return Response::json ( array (
+                    'state' => 'OK',
+                    'change_mode' => 0,
+                    'mes' => $mes
+                ));
+            }
+        }
+        
     }
 }

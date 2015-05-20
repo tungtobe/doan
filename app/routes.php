@@ -42,7 +42,7 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
   Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
   Route::post('/admin/addItem', 'AdminController@postAddItem');
-  
+
 
   Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
   Route::post('/admin/editItem/{id}', 'AdminController@postEditItem');
@@ -56,7 +56,8 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/user/friends/{id}', 'UserController@getFriends');
 
   Route::get('/user/{id}', 'UserController@getShow');
-  Route::post('/user/addfriend', 'UserController@addFriend');
+  Route::post('/user/friend', 'UserController@friend');
+  Route::post('/user/expert', 'UserController@expert');
   Route::post('/user/removefavorite','UserController@removeFromFavorite');
   Route::post('/user/makebill', 'UserController@makeBill');
   Route::post('/user/savebill', 'UserController@saveBill');

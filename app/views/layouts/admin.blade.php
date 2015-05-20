@@ -11,6 +11,20 @@
         {{ HTML::style('css/bootstrap.min.css'); }}
         {{ HTML::style('css/bootstrap-responsive.css'); }}
         {{ HTML::style('css/css.css'); }}
+
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        {{ HTML::script('js/jquery-1.9.1.js'); }}
+        {{ HTML::script('js/jquery.min.js'); }} 
+        {{ HTML::script('js/jquery.confirm.min.js'); }}
+
+        {{ HTML::script('js/jquery.form.js'); }} 
+        {{ HTML::script('js/bootstrap.js'); }} 
+        
+        {{ HTML::script('js/bootstrap.min.js'); }}
+        {{ HTML::script('js/jquery.runner-min.js'); }}
+        
+
         <style type="text/css">
             body {
                 padding-top: 60px;
@@ -89,7 +103,6 @@
                         <li>{{HTML::linkAction('AdminController@showBill','Bill Manager')}}<i class="fa fa-file-o fa-fw"></i></li>
                         <li class="active"><a href="#"><i class="fa fa-home fa-fw"></i>System</a></li>
                         <li>{{HTML::linkAction('AdminController@showSystemVar','System Manager')}}<i class="fa fa-file-o fa-fw"></i></li>
-                       
                     </ul>
                 </div>
                 <div class="col-md-9 well">
@@ -102,15 +115,7 @@
         <!-- /container -->
         
 
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="http://malsup.github.com/jquery.form.js"></script> 
-        {{ HTML::script('js/bootstrap.js'); }} 
-        {{ HTML::script('js/jquery-2.1.1.js'); }} 
-        {{ HTML::script('js/bootstrap.min.js'); }}
-        {{ HTML::script('js/jquery.runner-min.js'); }}
-        {{ HTML::script('js/jquery.confirm.min.js'); }}
+
 
 
         <script type="text/javascript">
