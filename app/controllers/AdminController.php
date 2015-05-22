@@ -7,6 +7,102 @@ class AdminController extends BaseController {
         $this->layout->content = View::make('admin.usermanager');        
     }
 
+    public function showAttribute(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+
+        $attributes = Attribute::paginate(10);
+        $this->layout->content = View::make('admin.showattr')->with(array('attributes' => $attributes));
+    }
+
+    public function addAttribute(){
+        if (Auth::check()) {
+            if (Auth::user()->role != 0){ // not admin
+                return Redirect::to(URL::action('HomeController@showWelcome'));
+            }
+
+            // xử lý dữ liệu gửi lên
+            if (Request::isMethod('post')){
+                $validator = Attribute::validate(Input::all());  
+                if ($validator->fails()) {
+                    return Redirect::to(URL::action('AdminController@addAttribute'))->withInput()->withErrors($validator);     
+                }
+
+                $attr_name = Input::get('attr_name');
+                $attr_type = Input::get('attr_type');
+                $new_attr = Attribute::where(array(
+                        "attr_name" => $attr_name
+                    ))->first();
+
+                if (is_null($new_attr)) {
+                    $attr = new Attribute;
+                    $attr->attr_name = $attr_name;
+                    $attr->attr_type = $attr_type;
+                    $attr->parent_id = '0';
+                    $attr->status = '1';
+                    $attr->save();
+                    return Redirect::to(URL::action('AdminController@postEditAttribute', $attr->id))->with('message', 'Success !!!');;
+                }else{
+                    return Redirect::to(URL::action('AdminController@addAttribute'))->withInput()->withErrors(array('attr_name'=>'Attribute existed !!!')); 
+                }
+            }
+
+            $this->layout->content = View::make('attribute.add');
+        }else {
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }  
+    }
+
+    public function postDeleteAttribute(){
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("need admin right");
+
+        try {
+            $input = Input::all();
+            $id = $input['id'];
+
+            $attr = Attribute::find($id);
+            $attr->delete();
+            $values = Value::where('attr_id', $id)->delete();
+        } catch(Exception $e) {
+            return Response::json("invalid");
+        }
+        
+        return Response::json("Success");
+    }
+
+ 
+    public function postEditAttribute($id){
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("need admin right");
+        
+        if (Request::isMethod('post')){
+            $validator = Attribute::validate(Input::all());
+            
+            if($validator->fails()){
+                return Redirect::to(URL::action('AdminController@postEditAttribute', $id))->withInput()->withErrors($validator);
+            }
+            else {
+                $id = Input::get('id');
+                $attribute = Attribute::find($id);
+                $attribute->attr_name = Input::get('attr_name');
+                $attribute->attr_type = Input::get('attr_type');
+                $attribute->save();
+                return Redirect::to(URL::action('AdminController@postEditAttribute', $id))->withInput()->with(array('message' => "Success !!! "));
+            }
+        }
+
+        $attribute = Attribute::find($id);
+        if($attribute == null) 
+            return Response::json(404);
+
+        $this->layout->content = View::make('attribute.edit')->with(array('id' => $attribute->id,
+                                                                            'attr_name' => $attribute->attr_name,
+                                                                            'attr_type' => $attribute->attr_type
+                                                                            ));
+    }
+
     public function addUser(){
         if (Auth::check()) {
             if (Auth::user()->role != 0){ // not admin
@@ -77,7 +173,7 @@ class AdminController extends BaseController {
 
 
         $items = Item::orderBy('id', 'dsc')->paginate(10);
-        
+
         $this->layout->content = View::make('admin.showitem')
                                     ->with('items', $items);
     }
@@ -353,9 +449,10 @@ class AdminController extends BaseController {
             return Redirect::to(URL::action('ItemController@getShow', $id));
         }
 
-        $attr = $this->getOneItemAttributes($item);
+        
         if($item == null) 
             return Response::json(404);
+        $attr = $this->getOneItemAttributes($item);
         $attributes = Attribute::all(); 
         $this->layout->content = View::make('item.edit')->with(array('item' => $item, 'attr' => $attr , 'attributes' => $attributes));
     }

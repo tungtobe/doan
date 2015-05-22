@@ -11,7 +11,7 @@ class RecommendController extends BaseController {
 		$recommend_list = $this->getRecommendList($current_item_id, $example_vector, $weight_vector);
 		$sort_list = $this->getSortRecommendList($recommend_list);
 
-        return $sort_list;
+        return View::make('item.recommend')->with(array('recommend_list'=>$sort_list, 'critique_attr' => $critique_attr));
 	}
 
 	public function getFirstRecommend(){
@@ -20,8 +20,7 @@ class RecommendController extends BaseController {
         $example_vector = $this->makeExampleVector($id, null);
         $recommend_list = $this->getRecommendList($id,$example_vector, null);
         $sort_list = $this->getSortRecommendList($recommend_list);
-
-        return $sort_list;
+		return View::make('item.recommend')->with('recommend_list',$sort_list);
 	}
 
     public function getSortRecommendList($recommend_list){

@@ -92,6 +92,15 @@
                     </li>
 
                     <li>
+                        <a ><i class="glyphicon glyphicon-phone-alt"></i> Attribute </a>
+                        <ul >
+                            <li>{{HTML::linkAction('AdminController@showAttribute','Attribute Manager')}}</li>
+                            <li>{{HTML::linkAction('AdminController@addAttribute','Add Attribute')}}</li>
+                            
+                        </ul>
+                    </li>
+
+                    <li>
                         <a ><i class="glyphicon glyphicon-user"></i> User Manager</a>
                         <ul >
                             <li>{{HTML::linkAction('AdminController@showUser','User Manager')}}</li>

@@ -1,6 +1,7 @@
-    <div class="col-md-9 hero-unit ">
+ <div class="col-md-9">
 
-        <div class="col-md-3">
+        <div class="col-md-2">
+          <center>
             <div class="module-product-img-gallery">
                 <div class="widget-image-product">
                     <a href="{{ $item_attr['6'] }}" id="link_main_thumb" onclick="return showGalleryPopup();" rel="nofollow">
@@ -9,47 +10,43 @@
                      <div class="clear"></div>
                 </div>
             </div>
-            <center>
-              @if (Auth::check()) 
-                <br><a id='add_favorite'><button class='btn btn-primary'>Add to Favorite</button></a>
-              @endif
-
-              <div class="vote-div">
+            
                 @if (Auth::check()) 
-                  VOTE <br>
-                  @if(is_null($vote_type))
-                    <button id='vote_good' class='btn btn-info' style="opacity:0.2;" >GOOD</button>
-                    <button id='vote_bad' class='btn btn-danger' style="opacity:0.2;">BAD</button>
-                  @elseif($vote_type==1)
-                    <button id='vote_good' class='btn btn-info' >GOOD</button>
-                    <button id='vote_bad' class='btn btn-danger' style="opacity:0.2;">BAD</button>
-                  @else
-                    <button id='vote_good' class='btn btn-info' style="opacity:0.2;" >GOOD</button>
-                    <button id='vote_bad' class='btn btn-danger'>BAD</button>
-                  @endif  
+                <br><a id='add_favorite'><button class='btn btn-primary'>Add to Favorite</button></a>
+                <div class="vote-div">
+                VOTE <br>
+                @if(is_null($vote_type))
+                    <button id='vote_good' class='btn btn-primary btn-sm' style="width: 60px; opacity:0.2;" >GOOD</button>
+                    <button id='vote_bad' class='btn btn-danger btn-sm' style="width: 60px; opacity:0.2;">BAD</button>
+                @elseif($vote_type==1)
+                    <button id='vote_good' class='btn btn-primary btn-sm' style="width: 60px;" >GOOD</button>
+                    <button id='vote_bad' class='btn btn-danger btn-sm' style="width: 60px; opacity:0.2;">BAD</button>
+                @else
+                    <button id='vote_good' class='btn btn-primary btn-sm' style="width: 60px; opacity:0.2;" >GOOD</button>
+                    <button id='vote_bad' class='btn btn-danger btn-sm' style="width: 60px;">BAD</button>
+                @endif  
+                </div>
                 @endif
-              </div>
             </center>
             
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="product-main-info">
                 <h2 class="product-detail-title">{{ $item->name }}</h2>
             </div>
-            <br>
-             {{ Form::open(array('action' => 'RecommendController@reciveCritique', 'id' => 'critique')) }}
-             <input type="hidden" name="current_item" value="{{$item->id}}">
+            {{ Form::open(array('action' => 'RecommendController@reciveCritique', 'id' => 'critique')) }}
+            <input type="hidden" name="current_item" value="{{$item->id}}">
             <div class="clearfix">
-                <div class="module-product-main-info pull-left fade-line-divide-before">
+                <div class="module-product-main-info pull-left fade-line-divide-before _width_100">
                     <div class="desc-main-attr">
-                        <table class="table">
+                        <table class="table _table">
                           <tbody>
                             <?php while ($attr_id = key($item_attr)) { ?>
                               <?php $attr = Attribute::find($attr_id); ?>
                               @if($attr->attr_name != 'IMG')
                                   <tr>
-                                    <td style="min-width:150px;"> {{$attr->attr_name }} </td>
+                                    <td style="min-width:150px;" class="_gray"> {{$attr->attr_name }} </td>
                                     @if($item_attr_type[$attr->attr_name ]=="Boolean")
                                       @if($item_attr[$attr_id]=1)
                                       <td style="min-width:200px; padding-left:40px; font-weight: bold;" > Yes </td>
@@ -61,7 +58,7 @@
                                     @endif
 
                                     @if(Auth::check())
-                                    <td style="min-width:200px; padding-left:40px;" > <select name="attr[{{$attr_id}}]">
+                                    <td style="min-width:200px; padding-left:40px;" > <select class="form-control input-sm" name="attr[{{$attr_id}}]">
                                                                         <option   value="">Select improve</option>
                                                                         @foreach($item_attr_option[$attr_id] as $option)
                                                                         <option  value="{{$option['value']}}">{{$option['value']}}</option>
@@ -73,33 +70,25 @@
                                   </tr>
                               @endif
                             <?php next($item_attr);} ?>
-
+                                                          
                           </tbody>
                         </table>
                       </div>
-                      <center>
+                    <center>
                         @if(Auth::check())
-                        <button type='submit' class="btn btn-primary"> Find better item</button>
+                        <button type='submit' id="find_button" class="btn btn-primary"> Find better item</button>
                         @else
                         {{ HTML::linkAction('AuthenController@getLogin','Login for recommendation',array(), array('class' => 'btn btn-primary')) }}
                         @endif
                       </center>
-                      
+
                     </div>
                 </div>
                 {{ Form::close() }}
             </div>
 
-            
-    </div>
-
-
-<div  class="col-md-3 detail-left">
-  <div id="recommend_list" class="hero-unit">
-  </div>
-</div>
-
-<div class="col-md-9 hero-unit ">
+            <div class="row _cmt">
+            <div class="col-md-10 col-md-offset-2">
             <!-- Comment Part -->
             @if(Auth::check())
             <!-- add new comment -->
@@ -121,6 +110,23 @@
                @endforeach
             </div>
 </div>
+ 
+            </div>
+    </div>
+
+
+<div  class="col-md-3 detail-left">
+<div class="_header">Gợi ý các sản phẩm liên quan</div>
+<div class="spinner" hidden>
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>
+
+  <div id="recommend_list">
+
+  </div>
+</div>
 
   
 
@@ -134,10 +140,20 @@ $(function() {
                  type: "POST",
                  url: url,
                  data: $("#critique").serialize(), // serializes the form's elements.
-                 success: function(data)
+                 error:function(err){
+                  console.log(err);
+                 },
+                 beforeSend:function(){
+                  $("#find_button").html('Finding ...');
+                  $('.spinner').show();
+                  $("#recommend_list").empty();
+                 },
+                 success: function(e)
                  {
-                     console.log
-                     (data); // show response from the php script.
+                    $("#find_button").html('Find better item');
+                    $('.spinner').hide();
+                    $("#recommend_list").empty();
+                    $("#recommend_list").html(e);
                  }
                });
           return false; // avoid to execute the actual submit of the form.
@@ -256,9 +272,11 @@ $(function() {
           },
           dataType: 'html',
           beforeSend: function(){
-            $("#recommend_list").append("Loading ... ");
+            $('.spinner').show();
+            $("#recommend_list").empty();
           },
           success: function (e) {
+            $('.spinner').hide();
             $("#recommend_list").empty();
             $("#recommend_list").html(e);
           },

@@ -1,101 +1,103 @@
 .hero-unit{
-  padding:60px;
-  margin-bottom:30px;
-  font-size:18px;
+  padding:1px 0 10px 0;
+  margin-top: -5px;
   font-weight:200;
-  line-height:30px;
   color:inherit;
   background-color:#eee;
-  -webkit-border-radius:6px;
-  -moz-border-radius:6px;
-  border-radius:6px
+  background: url(http://www.nhatcuong.com/content/images/header-pattern.gif);
+  border-bottom: 2px solid #16B97F;
 }
-	.hero-unit h1{margin-bottom:0;font-size:60px;line-height:1;letter-spacing:-1px;color:inherit}
-	.hero-unit li{line-height:30px}
+
+body{
+  background-color: #f4f4f4;
+}
+
+  .hero-unit h1{margin-bottom:0;font-size:60px;line-height:1;letter-spacing:-1px;color:inherit}
+  .hero-unit li{line-height:30px}
 .hero-unit > center > h1{
-	font-size: 50px;
-	position: relative;
+  font-size: 50px;
+  position: relative;
 }
 
 .detail-left{
-  padding-left: 20px;
+  padding-right: 0;
 }
 
 ._bg-color-1{
-	background-color: #39af94;
+  background-color: #39af94;
 }
 ._btn{
-	margin: 10px auto 0;
-	padding: 10px 80px;
-	text-align: center;
-	color: #fff;
-	font-size: 26px;
-	border-radius: 5px;
-	border: 0;
-	border-bottom: 3px solid #009b69;
-	background-color: #0db384;
+  margin: 10px auto 0;
+  padding: 10px 80px;
+  text-align: center;
+  color: #fff;
+  font-size: 26px;
+  border-radius: 5px;
+  border: 0;
+  border-bottom: 3px solid #009b69;
+  background-color: #0db384;
 }
 a._btn:hover{
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 ._btn:hover{
-	background-color: #009b69;
+  background-color: #009b69;
 }
 footer{
-	position: absolute;
-	bottom: 0;
-	height: 60px;
-	width: 100%;
-	padding-bottom: 15px;
+  position: absolute;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+  padding-bottom: 15px;
 }
 #form-upload{
-	padding: 20px 0;
+  padding: 20px 0;
 }
 #form-upload .row{
-	padding: 10px 0;
+  padding: 10px 0;
 }
 ._form-text{
-	outline: none;
-	border: 5px solid #0db384 ;
-	padding: 10px 20px!important;
-	font-size: 26px !important;
-	height: 46px !important;
-	width: 292px !important;
-	line-height: 46px !important;
+  outline: none;
+  border: 5px solid #0db384 ;
+  padding: 10px 20px!important;
+  font-size: 26px !important;
+  height: 46px !important;
+  width: 292px !important;
+  line-height: 46px !important;
 }
 .custom-file-input{
   height: auto !important;
 }
 input[disabled]{
-	background-color: #0db384 !important;
-	opacity: 0.3;
+  background-color: #0db384 !important;
+  opacity: 0.3;
 }
 
 ._title{
-	color: #009b69;
+  color: #009b69;
 }
 ._share-fix{
-	position: absolute;
-	left: 30px;
-	top: 120px;
+  position: absolute;
+  left: 30px;
+  top: 120px;
 }
 ._cmt-textare{
-	width: 100%;
+  width: 100%;
   margin-bottom: 10px;
 }
 ._cmt-username{
-	font-size: 15px;
+  font-size: 15px;
 }
 ._cmt-content{
-	font-size: 15px;
-	color: #606060;
+  font-size: 15px;
+  color: #606060;
 }
 ._hello{
-	color: white;
+  color: white;
 }
 ._logout{
-	color: red;
+  color: red;
 }
 
 
@@ -121,43 +123,42 @@ h1.page-header {
 
 
 /*Css for show product*/
-.module-product-list {
-    margin: 20px -6px 0;
-}
+
 .module-product-list .product-item {
     background-color: white;
     border-color: #ededed;
     border-style: solid;
     border-width: 1px;
-    height: 350px;
+    height: 320px;
     position: relative;
 }
 .product-item .pro-img {
     border: 0 none;
     bottom: 0;
-    height: 240px;
     overflow: hidden;
-    padding: 0;
+    padding: 20px 10px 10px 10px;
     position: relative;
     text-align: left;
     width: 100%;
 }
 .product-item .pro-img > a.pu-image {
     position: relative;
+    overflow: hidden;
 }
 .product-item .pro-img > a {
     display: block;
     font-size: 0;
-    height: 220px;
+    height: 200px;
     text-align: center;
 }
 .product-item .product-price-info {
     position: relative;
 }
 .product-item .product-price {
-    color: #ff4509;
+    color: #c70101;
     float: left;
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: bold;
     margin-left: 10px;
 }
 .product-item .product-tile, .product-item .product-service, .product-item .product-more-listing-option {
@@ -175,19 +176,26 @@ h1.page-header {
     overflow: hidden;
     text-align: left;
 }
+.product-tile a{
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+}
 
 .product-service .rate-good-product{
-	color: green;
-	margin-left: 0px;
+  color: #16B97F;
+  margin-left: 0px;
+  font-weight: bold;
 }
 
 .product-service .rate-bad-product{
-	color: black;
-	margin-left: 10px;
+  color: #444;
+  font-weight: bold;
+  margin-left: 10px;
 } 
 .product-image{
-	height: 240;
-	width: 265;
+  height: 240;
+  width: 265;
 }
 .product-info-top {
   padding-top: 10px;
@@ -246,7 +254,12 @@ h1.product-detail-title{
 }
 
 .vote-div{
-  padding-top: 50px;
+  padding-top: 20px;
+  color: #444;
+  font-weight: bold;
+}
+.vote-div button{
+  margin-top: 5px;
 }
 
 
@@ -309,4 +322,193 @@ h1.product-detail-title{
   -ms-transition: all .55s ease;
   -o-transition: all .55s ease;
   transition: all .55s ease;
+}
+
+._container{
+  width: 1240px;
+  margin-top: 10px;
+}
+._container .col-md-2{
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+}
+._container_1{
+  width: 100%;
+  margin-top: 10px;
+}
+._container_1 .col-md-9{
+  background-color: white;
+}
+.product-item .pro-img > a.pu-image img{
+  height: 100%;
+  width: 100%;
+  padding-bottom: 10px;
+    border-bottom: 2px solid #16B97F;
+}
+
+._hide{
+  display: none;
+}
+
+._nav li{
+  display: inline-block;
+}
+
+._nav li p{
+  margin-bottom: 5px;
+}
+._pagination{
+  margin: 0;
+}
+.widget-image-product a{
+  margin-top: 30px;
+  width: 100%;
+  display: block;
+  position: relative;
+  height: 150px;
+}
+.widget-image-product a > img{
+  height: 100%;
+  width: 100%;
+}
+._gray{
+  background-color: #f4f4f4;
+}
+._table{
+  border: 1px solid #f4f4f4;
+}
+._width_100{
+  width: 100%;
+}
+._cmt .col-md-10{
+  padding: 0 30px 0 35px;
+}
+._cmt ._textarea{
+  padding-top: 20px;
+  border-top: 2px solid #4cae4c;
+}
+._cmt textarea{
+  background-color: #f4f4f4;
+}
+._btn-submit{
+  width: 200px;
+  font-size: 16px;
+  float: right;
+  margin-bottom: 15px;
+}
+#recommend_list{
+  background-color: #fff;
+}
+._header{
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  background-color: #42D6A2;
+  border-bottom: 2px solid #16B97F;
+  width: 100%;
+  text-align: center;
+}
+._list-item{
+  list-style: none;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+}
+._list-item > li{
+  display: block;
+  padding: 5px;
+  position: relative;
+  border-bottom: 1px solid #f4f4f4;
+}
+._list-item > li ._stt{
+  position: absolute;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px 12px;
+  color: #fff;
+  background-color: #DD3030;
+  z-index: 999;
+
+}
+._list-item a{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100px;
+  height: 120px;
+  display: block;
+  overflow: hidden;
+}
+._list-item a img{
+  width: 100%;
+  height: 100%;
+}
+._list-item ._content{
+  margin-left: 100px;
+  position: relative;
+  display: inline-block;
+  min-height: 125px;
+}
+._list-item ._content span{
+  color: #c70101;
+  width: 100%;
+font-size: 14px;
+}
+._list-item ._content p{
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+._list-item ._content p + p{
+  font-size: 12px;
+  color: #29A7D8;
+}
+
+
+/*Loading */
+.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
 }

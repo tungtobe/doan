@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            User Manager <small>Add New User </small>
+            Attribute Manager <small>Add New Attribute </small>
         </h1>
         
     </div>
@@ -12,25 +12,26 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-user"></i> Add New User</h3>
+                <h3 class="panel-title"><i class="fa fa-user"></i> Add New Attribute</h3>
             </div>
             <div class="panel-body">
-                {{Form::open(array('action' => array('AdminController@addUser'))) }}
+            	{{Form::open(array('action' => array('AdminController@addAttribute'))) }}
             	<h2>{{ Session::get('message')}}</h2>
     			<center>
-	            Username: 
-				{{ Form::text('username') }} 
+	            Attribute Name: 
+				{{ Form::text('attr_name') }} 
 				<br>
-				{{$errors->first('username')}}
+				{{$errors->first('attr_name')}}
 				<br>
-				Password:
-				{{ Form::password('password') }}
+				Attribute Type:
+				{{ Form::select('attr_type', array('Varchar' => 'Varchar',
+													'Boolean' => 'Boolean',
+													'Integer' => 'Integer',
+													'Float' => 'Float'
+													), 'Varchar') }}
 				<br>
-				{{$errors->first('password')}}
+				{{$errors->first('attr_type')}}
 				<br>
-				Role:
-				{{ Form::select('role', array('1' => 'User', '0' => 'Admin'), '1') }}
-				<br><br>
 
 				<button type="submit" class="btn btn-primary">Add</button>
 				{{ Form::close() }}
@@ -40,5 +41,11 @@
     </div>
 </div>
 <!-- /.row -->
+
+
+
+
+
+	
 
 

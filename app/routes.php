@@ -30,11 +30,15 @@ Route::group(array('before' => 'app.auth'), function() {
   // Route for admin function
   Route::get('/admin','AdminController@getShow');
   Route::match(array('GET', 'POST'), '/admin/adduser', 'AdminController@addUser');
+  Route::match(array('GET', 'POST'), '/admin/addattr', 'AdminController@addAttribute');
+  // Route::match(array('GET', 'POST'),'/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
   Route::get('/admin/showuser', 'AdminController@showUser');
   Route::get('/admin/showdeactiveuser', 'AdminController@showDeactiveUser');
   Route::get('/admin/additem', 'AdminController@addItem');
+  Route::get('/admin/addattr', 'AdminController@addAttribute');
   Route::get('/admin/showitem', 'AdminController@showItem');
   Route::get('/admin/showbill', 'AdminController@showBill');
+  Route::get('/admin/showattr', 'AdminController@showAttribute');
   Route::get('/admin/showsysvar', 'AdminController@showSystemVar');
   Route::get('/admin/postSysVar', 'AdminController@postSysVar');
 
@@ -42,10 +46,16 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
   Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
   Route::post('/admin/addItem', 'AdminController@postAddItem');
+  Route::post('/admin/deleteAttr', 'AdminController@postDeleteAttribute');
 
 
   Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
   Route::post('/admin/editItem/{id}', 'AdminController@postEditItem');
+
+    Route::get('/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
+  Route::post('/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
+
+  
   Route::get('/admin/viewbill/{id}', 'AdminController@viewBill');
   Route::post('/admin/deleteBill', 'AdminController@deleteBill');
   Route::post('/admin/confirmBill', 'AdminController@confirmBill');

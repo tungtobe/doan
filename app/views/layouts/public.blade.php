@@ -38,59 +38,58 @@
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <a class="navbar-brand text-uppercase" href="{{URL::action('HomeController@showWelcome')}}">Tung Mobile </a>
-            </div>
-        
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="navigation">
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="active"><a href="{{URL::action('HomeController@showWelcome')}}">Home</a></li>
-                    @if(Auth::check())
-                        @if(Auth::user()->role == 0)
-                        <li>{{HTML::linkAction('AdminController@showItem','Admin Manager')}}</li>
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand text-uppercase" href="{{URL::action('HomeController@showWelcome')}}"><b>Tung Mobile</b></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navigation">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="{{URL::action('HomeController@showWelcome')}}">Home</a></li>
+                        @if(Auth::check())
+                            @if(Auth::user()->role == 0)
+                            <li>{{HTML::linkAction('AdminController@showItem','Admin Manager')}}</li>
+                            @endif
+                            <li>{{HTML::linkaction('UserController@getFavorite','Favorite',Auth::user()->id)}}</li>
+                            <li>{{HTML::linkaction('UserController@getBill','Bill',Auth::user()->id)}}</li>
+                           
                         @endif
-                        <li>{{HTML::linkaction('UserController@getFavorite','Favorite',Auth::user()->id)}}</li>
-                        <li>{{HTML::linkaction('UserController@getBill','Bill',Auth::user()->id)}}</li>
-                       
-                    @endif
-                    
-                </ul>
+                    </ul>
 
+                    <ul class="nav navbar-right _nav">
+                        <li>
+                            {{ Form::open(array('action' => 'HomeController@search', 'method' => 'get', 'class' => 'navbar-form navbar-right')) }}
+                                <div class="box">
+                                    <div class="form-group">
+                                        <input type="search" class="form-control" name="search" id="search" placeholder="Search..." />
+                                    </div>
+                                    <button type="submit" id="submit" class="_hide"><i class="fa fa-search"></i></button>
+                                </div>
+                            {{ Form::close() }}
+                        </li>
 
-                <ul class="nav navbar-nav navbar-right">                    
-                    @if (Auth::check())
-                        <form id="socialLogin" class="navbar-form pull-right">
-                            <p><span class="_hello">Hello</span> <b>{{HTML::linkAction('UserController@getShow',Auth::user()->username,array(Auth::user()->id)) }}</b>    {{ HTML::linkAction('AuthenController@getLogout','Logout', null, array('class' => '_logout')) }}  </p>
-                        </form>            
-                        @else
-                        <li>{{ HTML::linkAction('AuthenController@getLogin','Login',array(), array('class' => 'navbar-btn _hello')) }} </li>                        
-                        <li>{{ HTML::linkAction('AuthenController@getSignup','Sign Up',array(), array('class' => 'navbar-btn _hello')) }} </li>
-                        @endif                    
-                </ul>
+                        <li>
+                            @if (Auth::check())
+                            <form id="socialLogin" class="navbar-form navbar-right">
+                                <p><span class="_hello">Hello</span> <b>{{HTML::linkAction('UserController@getShow',Auth::user()->username,array(Auth::user()->id)) }}</b>    {{ HTML::linkAction('AuthenController@getLogout','Logout', null, array('class' => '_logout')) }}  </p>
+                            </form>            
+                            @else
+                            <li>{{ HTML::linkAction('AuthenController@getLogin','Login',array(), array('class' => 'navbar-btn _hello navbar-right _nav')) }} </li>
+                            <li>{{ HTML::linkAction('AuthenController@getSignup','Sign Up',array(), array('class' => 'navbar-btn _hello navbar-right _nav')) }} </li>
+                            @endif     
+                        </li>  
+                    </ul>
 
-                {{ Form::open(array('action' => 'HomeController@search', 'method' => 'get')) }}
-                <ul class="nav navbar-right">
-                    <div class="box">
-                      <div class="container-4">
-                        <input type="search" name="search" id="search" placeholder="Search..." />
-                        <button type="submit" id="submit" class="icon"><i class="fa fa-search"></i></button>
-                      </div>
-                    </div>
-                </ul>
-
-                {{ Form::close() }}
-               
+                </div>
             </div>
-          </div>
         </nav>
 
      
 
         <!-- /container -->
-        <div class="container">
+        <div class="container-fluid _container_1">
             {{$content}}      
         </div> 
 
