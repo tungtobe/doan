@@ -1,11 +1,6 @@
 <?php
 
 class ItemController extends BaseController {
-
-    public function showItem(){
-        
-    }
-
     public function getShow($id){
     	$item = Item::find($id);
         if($item == null) {
@@ -36,7 +31,6 @@ class ItemController extends BaseController {
             $user_id = null;
         }
 
-        
 		$this->layout->content = View::make('item.detail')->with(array('item'=> $item,
 																		'item_attr' => $item_attr,
 																		'item_attr_type' => $item_attr_type,
@@ -47,7 +41,6 @@ class ItemController extends BaseController {
     }
 
     public function addFavorite(){
-    	
         $item_id = Input::get('id');
         $user_id = Auth::user()->id;
         $favorite_item = Favoriteitem::where(array('user_id' => $user_id,

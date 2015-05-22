@@ -3,17 +3,18 @@
 class AdminController extends BaseController {
     protected $layout = 'layouts.admin-test';
 
-    public function getShow() {
-        $this->layout->content = View::make('admin.usermanager');        
-    }
-
+    // Admin function about Attribute
     public function showAttribute(){
-        if (Auth::user()->role != 0){ // not admin
-            return Redirect::to(URL::action('HomeController@showWelcome'));
-        }
+        if (Auth::check()) {
+            if (Auth::user()->role != 0){ // not admin
+                return Redirect::to(URL::action('HomeController@showWelcome'));
+            }
 
-        $attributes = Attribute::paginate(10);
-        $this->layout->content = View::make('admin.showattr')->with(array('attributes' => $attributes));
+            $attributes = Attribute::paginate(10);
+            $this->layout->content = View::make('admin.showattr')->with(array('attributes' => $attributes));
+        }else {
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        } 
     }
 
     public function addAttribute(){
@@ -57,7 +58,6 @@ class AdminController extends BaseController {
     public function postDeleteAttribute(){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
-
         try {
             $input = Input::all();
             $id = $input['id'];
@@ -71,8 +71,7 @@ class AdminController extends BaseController {
         
         return Response::json("Success");
     }
-
- 
+    
     public function postEditAttribute($id){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
@@ -102,7 +101,10 @@ class AdminController extends BaseController {
                                                                             'attr_type' => $attribute->attr_type
                                                                             ));
     }
+    // END Admin function about Attribute
 
+
+    // Admin function about User
     public function addUser(){
         if (Auth::check()) {
             if (Auth::user()->role != 0){ // not admin
@@ -150,22 +152,71 @@ class AdminController extends BaseController {
         }
 
         $users = User::where('status', 1)->paginate(10);
-        //$users = User::Paginate(2);
-        $this->layout->content = View::make('admin.showuser')
-                                    ->with('users', $users);
+        $this->layout->content = View::make('admin.showuser')->with('users', $users);
     }
 
     public function showDeactiveUser(){
-        if (Auth::user()->role != 0){ // not admin
+        if (Auth::check()) {
+            if (Auth::user()->role != 0){ // not admin
+                return Redirect::to(URL::action('HomeController@showWelcome'));
+            }
+            $users = User::where('status', 0)->paginate(10);
+            $this->layout->content = View::make('admin.showdeactiveuser')->with('users', $users);
+        }else {
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }
-
-
-        $users = User::where('status', 0)->paginate(10);
-        $this->layout->content = View::make('admin.showdeactiveuser')
-                                    ->with('users', $users);
     }
 
+    public function changeAdminPermission(){
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("need admin right");
+        try {
+            $input = Input::all();
+            $id = $input['id'];
+
+            if($id == Auth::id()) 
+                throw new Exception("same user id", 1);
+                  
+            $user = User::find($id);
+
+            if($user->role == 0)
+                $user->role = 1;
+            elseif($user->role == 1) 
+                $user->role = 0;
+
+            $user->save();
+
+        } catch(Exception $e) {
+            return Response::json("invalid");
+        }
+        
+        return Response::json("Success");
+    }
+
+    public function postBanUser(){
+        if (!Auth::check() || Auth::user()->role != 0) 
+            return Response::json("invalid");
+
+        try {
+            $input = Input::all();
+            $id = $input['id'];
+            if($id == Auth::id()) 
+                throw new Exception("same user id", 1);
+            $user = User::find($id);
+            if($user->status == 1)
+                $user->status = 0;
+            elseif($user->status == 0) 
+                $user->status = 1;
+            $user->save();
+        } catch(Exception $e) {
+            return Response::json("invalid");
+        }
+        return Response::json("Success");
+    }
+    // END Admin function about User
+
+
+    // Admin function about Item
     public function showItem(){
         if (Auth::user()->role != 0){ // not admin
             return Redirect::to(URL::action('HomeController@showWelcome'));
@@ -226,16 +277,12 @@ class AdminController extends BaseController {
         if (Auth::user()->role != 0){ // not admin
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }
-
-
         $bills = Bill::Paginate(12);
         foreach($bills as $bill)
         {
             $user = User::find($bill->user_id);
             $bill['user'] = $user->username;
         }
-
-
         $this->layout->content = View::make('admin.showbill')->with(array('bills' => $bills));
     }
 
@@ -243,9 +290,7 @@ class AdminController extends BaseController {
         if (Auth::user()->role != 0){ // not admin
             return Response::json(404);
         }
-
         $id = Input::get('id');
-
         try{
             $bill = Bill::findOrFail($id);
             if($bill->status == 1)
@@ -256,7 +301,6 @@ class AdminController extends BaseController {
         } catch(Exception $e) {
             return Response::json('invalid');
         }
-
         return Response::json('Success');
     }
 
@@ -264,7 +308,6 @@ class AdminController extends BaseController {
         if (Auth::user()->role != 0){ // not admin
             return Response::json(404);
         }
-
         $id = Input::get('id');
         try {
             $bill = Bill::findOrFail($id);
@@ -276,132 +319,12 @@ class AdminController extends BaseController {
         } catch(Exception $e) {
             return Response::json('invalid');
         }
-
         return Response::json('Success');
     }
 
-    public function postSysVar(){
-        if (Auth::user()->role != 0){ // not admin
-            return Redirect::to(URL::action('HomeController@showWelcome'));
-        }
-
-        // Xử lý dữ liệu gửi lên
-        $validator = Setting::validate(Input::all());  
-        if ($validator->fails()) {
-            return Redirect::to(URL::action('AdminController@showSystemVar'))->withInput()->withErrors($validator);     
-        }
-
-        $unchange = Input::get("unchange");
-        $changed = Input::get("changed");
-
-        $unchange_var = Setting::where('key','unchange')->first();
-        if ($unchange_var == null) {
-            $unchange_var = new Setting;
-            $unchange_var->key = "unchange";
-            $unchange_var->value = $unchange;
-            $unchange_var->save();
-        }else{
-            $unchange_var->value = $unchange;
-            $unchange_var->save();
-        }
-
-        $changed_var = Setting::where('key','changed')->first();
-        if ($changed_var == null) {
-            $changed_var = new Setting;
-            $changed_var->key = "changed";
-            $changed_var->value = $changed;
-            $changed_var->save();
-        }else{
-            $changed_var->value = $changed;
-            $changed_var->save();
-        }
-                
-        return Redirect::to(URL::action('AdminController@showSystemVar'));
-    }
-
-    public function showSystemVar(){
-        // show system var         
-        $unchange_var = Setting::where('key','unchange')->first();
-        if ($unchange_var == null) {
-            $unchange = 1;
-        }else{
-            $unchange = $unchange_var->value;
-        }
-
-        $changed_var = Setting::where('key','changed')->first();
-        if ($changed_var == null) {
-            $changed = 2;
-        }else{
-            $changed = $changed_var->value;
-        }
-
-        $this->layout->content = View::make('admin.showsystemvar')->with(array(
-                                                                        'unchange' => $unchange,
-                                                                        'changed' => $changed
-                                                                        ));
-    }
-
-    public function postBanUser(){
-        if (!Auth::check() || Auth::user()->role != 0) 
-            return Response::json("invalid");
-
-        try {
-            $input = Input::all();
-            $id = $input['id'];
-
-            if($id == Auth::id()) 
-                throw new Exception("same user id", 1);
-                  
-            $user = User::find($id);
-
-            if($user->status == 1)
-                $user->status = 0;
-            elseif($user->status == 0) 
-                $user->status = 1;
-            $user->save();
-
-        } catch(Exception $e) {
-            return Response::json("invalid");
-        }
-
-        return Response::json("Success");
-    }
-
-
-    public function changeAdminPermission(){
-        if (!Auth::check() || Auth::user()->role != 0) 
-            return Response::json("need admin right");
-        try {
-            $input = Input::all();
-            $id = $input['id'];
-
-            if($id == Auth::id()) 
-                throw new Exception("same user id", 1);
-                  
-            $user = User::find($id);
-
-            if($user->role == 0)
-                $user->role = 1;
-            elseif($user->role == 1) 
-                $user->role = 0;
-
-            $user->save();
-
-        } catch(Exception $e) {
-            return Response::json("invalid");
-        }
-        
-        return Response::json("Success");
-    }
-
-    /**
-     * delete an item from store
-     * softdelete only
-     */
     public function postDeleteItem(){
         if (!Auth::check() || Auth::user()->role != 0) 
             return Response::json("need admin right");
-
         try {
             $input = Input::all();
             $id = $input['id'];
@@ -412,7 +335,6 @@ class AdminController extends BaseController {
         } catch(Exception $e) {
             return Response::json("invalid");
         }
-        
         return Response::json("Success");
     }
 
@@ -456,4 +378,70 @@ class AdminController extends BaseController {
         $attributes = Attribute::all(); 
         $this->layout->content = View::make('item.edit')->with(array('item' => $item, 'attr' => $attr , 'attributes' => $attributes));
     }
+    // END Admin function about Item
+
+    // Admin function about System Setting
+    public function postSysVar(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+        // Xử lý dữ liệu gửi lên
+        $validator = Setting::validate(Input::all());  
+        if ($validator->fails()) {
+            return Redirect::to(URL::action('AdminController@showSystemVar'))->withInput()->withErrors($validator);     
+        }
+        $unchange = Input::get("unchange");
+        $changed = Input::get("changed");
+        $unchange_var = Setting::where('key','unchange')->first();
+        if ($unchange_var == null) {
+            $unchange_var = new Setting;
+            $unchange_var->key = "unchange";
+            $unchange_var->value = $unchange;
+            $unchange_var->save();
+        }else{
+            $unchange_var->value = $unchange;
+            $unchange_var->save();
+        }
+        $changed_var = Setting::where('key','changed')->first();
+        if ($changed_var == null) {
+            $changed_var = new Setting;
+            $changed_var->key = "changed";
+            $changed_var->value = $changed;
+            $changed_var->save();
+        }else{
+            $changed_var->value = $changed;
+            $changed_var->save();
+        }
+        return Redirect::to(URL::action('AdminController@showSystemVar'));
+    }
+
+    public function showSystemVar(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+        // show system var         
+        $unchange_var = Setting::where('key','unchange')->first();
+        if ($unchange_var == null) {
+            $unchange = 1;
+        }else{
+            $unchange = $unchange_var->value;
+        }
+        $changed_var = Setting::where('key','changed')->first();
+        if ($changed_var == null) {
+            $changed = 2;
+        }else{
+            $changed = $changed_var->value;
+        }
+        $this->layout->content = View::make('admin.showsystemvar')->with(array(
+                                                                        'unchange' => $unchange,
+                                                                        'changed' => $changed
+                                                                        ));
+    }
+    // END Admin function about System Setting
+
+
+
+ 
+
+
 }

@@ -76,7 +76,6 @@ class AuthenController extends BaseController {
         }else{
             return Redirect::to(URL::action('AuthenController@getLogin'))->withInput()->withErrors(array('username'=>'username existed !!!')); 
         }
-        
     }
 
     public function getLogout() {

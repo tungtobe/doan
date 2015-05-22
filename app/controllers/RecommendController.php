@@ -32,7 +32,6 @@ class RecommendController extends BaseController {
 
     public function makeWeightVector($critique_attr){
     	$weight_array = array();
-
     	$unchange_var = Setting::where('key','unchange')->first();
         if ($unchange_var == null) {
             $unchange = 1;
@@ -54,7 +53,6 @@ class RecommendController extends BaseController {
 				$weight_array[$key] = $changed;
 			}
 		}
-
 		return $weight_array;
     }
 

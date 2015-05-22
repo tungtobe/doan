@@ -28,12 +28,14 @@ Route::post('/recommend/firstrecommend','RecommendController@getFirstRecommend')
 
 Route::group(array('before' => 'app.auth'), function() {
   // Route for admin function
-  Route::get('/admin','AdminController@getShow');
   Route::match(array('GET', 'POST'), '/admin/adduser', 'AdminController@addUser');
   Route::match(array('GET', 'POST'), '/admin/addattr', 'AdminController@addAttribute');
-  // Route::match(array('GET', 'POST'),'/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
+  Route::match(array('GET', 'POST'),'/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
+  Route::match(array('GET', 'POST'),'/admin/editItem/{id}', 'AdminController@postEditItem');
+  Route::get('/admin','AdminController@getShow');
   Route::get('/admin/showuser', 'AdminController@showUser');
   Route::get('/admin/showdeactiveuser', 'AdminController@showDeactiveUser');
+  Route::get('/admin/viewbill/{id}', 'AdminController@viewBill');
   Route::get('/admin/additem', 'AdminController@addItem');
   Route::get('/admin/addattr', 'AdminController@addAttribute');
   Route::get('/admin/showitem', 'AdminController@showItem');
@@ -41,22 +43,11 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/admin/showattr', 'AdminController@showAttribute');
   Route::get('/admin/showsysvar', 'AdminController@showSystemVar');
   Route::get('/admin/postSysVar', 'AdminController@postSysVar');
-
   Route::post('/admin/changeAdminPermission', 'AdminController@changeAdminPermission');
   Route::post('/admin/postBanUser', 'AdminController@postBanUser');
   Route::post('/admin/deleteItem', 'AdminController@postDeleteItem');
   Route::post('/admin/addItem', 'AdminController@postAddItem');
   Route::post('/admin/deleteAttr', 'AdminController@postDeleteAttribute');
-
-
-  Route::get('/admin/editItem/{id}', 'AdminController@postEditItem');
-  Route::post('/admin/editItem/{id}', 'AdminController@postEditItem');
-
-    Route::get('/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
-  Route::post('/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
-
-  
-  Route::get('/admin/viewbill/{id}', 'AdminController@viewBill');
   Route::post('/admin/deleteBill', 'AdminController@deleteBill');
   Route::post('/admin/confirmBill', 'AdminController@confirmBill');
 
@@ -64,14 +55,13 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/user/favorite/{id}', 'UserController@getFavorite');
   Route::get('/user/bill/{id}', 'UserController@getBill');
   Route::get('/user/friends/{id}', 'UserController@getFriends');
-
+  Route::get('/user/editbill/{id}', 'UserController@editBill');
   Route::get('/user/{id}', 'UserController@getShow');
   Route::post('/user/friend', 'UserController@friend');
   Route::post('/user/expert', 'UserController@expert');
   Route::post('/user/removefavorite','UserController@removeFromFavorite');
   Route::post('/user/makebill', 'UserController@makeBill');
   Route::post('/user/savebill', 'UserController@saveBill');
-  Route::get('/user/editbill/{id}', 'UserController@editBill');
   Route::post('/user/deletebill', 'UserController@deleteBill');
 
   // Route for Items

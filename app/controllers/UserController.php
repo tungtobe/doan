@@ -1,9 +1,7 @@
 <?php
 
 class UserController extends BaseController {
-
     public function getShow($id) {
-
         $user = User::find($id);
         if ($user == null) {
             return Redirect::to(URL::action('HomeController@showWelcome'));
@@ -40,14 +38,6 @@ class UserController extends BaseController {
                                                                     'rel_friend' => $rel_friend,
                                                                     'rel_expert' => $rel_expert
                                                                     ));
-    }
-
-    public function addUser(){
-        if (Auth::check()) {
-            return Redirect::to(URL::action('HomeController@showWelcome'));
-        }elseif (Auth::user()->role != 0) {
-            return Redirect::to(URL::action('HomeController@showWelcome'));
-        }
     }
 
     public function getFavorite($user_id){
@@ -93,7 +83,6 @@ class UserController extends BaseController {
     }
 
     public function getBill($user_id){
-        
         try {
             $user = User::findOrFail($user_id);
             $unconfirmed_bill = Bill::where('status', 0)->get();
@@ -133,7 +122,6 @@ class UserController extends BaseController {
 
     public function makeBill(){
         $items_id = Input::get('chk');
-
         if (!Auth::check()) {
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }else{
@@ -220,10 +208,6 @@ class UserController extends BaseController {
             }
             return Response::json(200);
         }
-    }
-
-    public function getFriends($user_id){
-
     }
 
     public function friend(){

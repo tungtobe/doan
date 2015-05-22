@@ -47,7 +47,6 @@ class BaseController extends Controller {
 			}
 			return $item_attr;
 		}
-		
 	}
 
 	public function getAttributeOption(){
@@ -59,10 +58,9 @@ class BaseController extends Controller {
 			$attr_option_array = Value::where('attr_id',$attr_id)->distinct()->get(array('value'))->toArray();
 			$item_attr_option[$attr_id] = $attr_option_array;
 		}
-
 		return $item_attr_option;
-
 	}
+
 	public function getAttributeType(){
 		$item_attr_type = array();
 		$attrs = Attribute::all();
@@ -72,7 +70,6 @@ class BaseController extends Controller {
 			$item_attr_type[$attr_name] = $attr_type;
 		}
 		return $item_attr_type;
-		
 	}
 
 	public function getItemsVote($items){
@@ -89,7 +86,4 @@ class BaseController extends Controller {
 		}
 		return $item_vote_array;
 	}
-
-	
-
 }

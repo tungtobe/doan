@@ -41,9 +41,4 @@ class HomeController extends BaseController {
 																	));
 		}
 	}
-
-	public function showAdminMenu(){
-		$this->layout->content = View::make('adminmenu');
-	}
-
 }

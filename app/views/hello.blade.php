@@ -8,7 +8,7 @@
 @else
 			<div class="hero-unit">
 
-			    <center><h1>Welcome to Recommend System</h1></center>
+			    <center><h1>Welcome to Recommendation System</h1></center>
 
 			</div>
 			<div class="container-fluid _container">
