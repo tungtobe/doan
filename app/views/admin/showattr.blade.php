@@ -1,30 +1,49 @@
 
-	<center>
-		<div class="row"><h2>Attribute Manager</h2></div>
-	</center>
-	<table class="table table-bordered">
-			<tr>
-				<th>Attribute</th>
-				<th>Type</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-		<tbody>
-			<?php foreach ($attributes as $attribute): ?>
-        		<tr>
-        			<td style="width:160px;">{{$attribute->attr_name}}</td>
-        			<td> {{$attribute->attr_type}}</td>
-        			<td>
-        				{{ HTML::linkAction('AdminController@postEditAttribute', 'Edit' , $attribute->id , array('class' => 'btn btn-primary')) }}
-        			</td>
-        			<td>
-        				<button class='confirm btn btn-danger' value='{{$attribute->id}}'>Delete</button>
-        			</td>
-        		</tr>
-    		<?php endforeach; ?>
-		</tbody>
-	</table>
-<?php echo $attributes->links(); ?>
+ <!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Attribute Manager 
+        </h1>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-user"></i> Attribute Manager  </h3>
+            </div>
+            <div class="panel-body">
+			<table class="table table-bordered">
+					<tr>
+						<th style="width:50%;">Attribute</th>
+						<th>Type</th>
+						<th style="width:10%;">Edit</th>
+						<th style="width:10%;">Delete</th>
+					</tr>
+				<tbody>
+					<?php foreach ($attributes as $attribute): ?>
+		        		<tr>
+		        			<td style="width:160px;">{{$attribute->attr_name}}</td>
+		        			<td> {{$attribute->attr_type}}</td>
+		        			<td>
+		        				{{ HTML::linkAction('AdminController@postEditAttribute', 'Edit' , $attribute->id , array('class' => 'btn btn-primary')) }}
+		        			</td>
+		        			<td>
+		        				<button class='confirm btn btn-danger' value='{{$attribute->id}}'>Delete</button>
+		        			</td>
+		        		</tr>
+		    		<?php endforeach; ?>
+				</tbody>
+			</table>
+			<?php echo $attributes->links(); ?>
+			</div>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
 
 <script type="text/javascript">
 $(function() {

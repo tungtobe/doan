@@ -31,7 +31,7 @@
 		        				@endif
 		        			</td>
 		        			<td>
-		        				{{ Form::checkbox('name', $user->id, false, ['class' => 'confirm']); }}
+		        				<button class="confirm btn btn-success" value="{{$user->id}}">Unban</button>
 		        			</td>
 		        		</tr>
 		    		<?php endforeach; ?>

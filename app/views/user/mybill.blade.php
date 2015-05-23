@@ -1,4 +1,5 @@
-<div class="col-md-3">
+<div class="container _container">
+<div class="col-md-3 _ava">
     <center>
     <img src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/p720x720/10429261_10203664826198277_3549355919811911397_n.jpg?oh=df78cbab872601999cdde967bbbb5b53&oe=5608BB1F&__gda__=1439119590_b7833ff461a5dcdff613e84486e6bedd" height="230" weight="230">     
     <hr>
@@ -6,10 +7,10 @@
     </center>
 </div>
 
-<div class="col-md-9 well hero-unit">  
+<div class="col-md-9 well _well">  
 
-	<h1 > Manager Bill </h1>
-	<hr>
+	<h3> Manager Bill </h3>
+	<div class="_wrap-table">
 	<table id='favoriteTable' class="table table-bordered">
 		<tr>
 			<th>ID </th> 
@@ -31,11 +32,12 @@
 		<?php endforeach; ?>
 	</table>   
 </div>
+</div>
 <div class="col-md-3"></div>
-<div class="col-md-9 well hero-unit">  
+<div class="col-md-9 well _well">  
 
-	<h1 > Confirmed Bill </h1>
-	<hr>
+	<h3> Confirmed Bill </h3>
+	<div class="_wrap-table">
 	<table id='favoriteTable' class="table table-bordered">
 		<tr>
 			<th>ID</th> 
@@ -51,7 +53,8 @@
 		<?php endforeach; ?>
 	</table>   
 </div>
-
+</div>
+</div>
 <script type="text/javascript">
 $(function(){
 	$('button[name=delete]').on('click', function() {

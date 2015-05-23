@@ -1,19 +1,20 @@
 
 
 {{   Session::get('message')   }}
-<div class="col-md-3">
+<div class="col-md-3 _ava">
     <center>
     <img src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/p720x720/10429261_10203664826198277_3549355919811911397_n.jpg?oh=df78cbab872601999cdde967bbbb5b53&oe=5608BB1F&__gda__=1439119590_b7833ff461a5dcdff613e84486e6bedd" height="230" weight="230">     
     <hr>
     <h3>{{ $user->username}}    </h3>
     </center>
 </div>
-<div class="col-md-9 well hero-unit">  
+<div class="col-md-9 well _well">  
 
-
-<b>{{ $user->username}} </b> has <b>{{ $friends_number}} </b> friend(s) <br>
-<b>{{ $user->username}} </b> chose <b>{{ $expert_number}}</b> user(s) as Expert <br>
-<b>{{ $user->username}}</b> has been chosen by <b>{{ $follow_number}}</b> user(s) as their Expert<br>
+<h3> User Profile </h3>
+<div class="_wrap-table">
+<div class="_info"><b>{{ $user->username}} </b> has <b>{{ $friends_number}} </b> friend(s) <br></div>
+<div class="_info"><b>{{ $user->username}} </b> chose <b>{{ $expert_number}}</b> user(s) as Expert <br></div>
+<div class="_info"><b>{{ $user->username}}</b> has been chosen by <b>{{ $follow_number}}</b> user(s) as their Expert<br></div>
 
 @if(Auth::user()->id != $user->id)
     @if($rel_friend == null)
@@ -29,7 +30,7 @@
     @endif
 @endif
 
-
+</div>
 
 <script type="text/javascript">
 $(function() {

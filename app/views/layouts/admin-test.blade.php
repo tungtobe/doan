@@ -83,7 +83,7 @@
                 <ul class="nav navbar-nav side-nav">
                     
                     <li>
-                        <a ><i class="glyphicon glyphicon-phone-alt"></i> Item </a>
+                        <a ><i class="glyphicon glyphicon-phone"></i> ITEM </a>
                         <ul >
                             <li>{{HTML::linkAction('AdminController@showItem','Item Manager')}}</li>
                             <li>{{HTML::linkAction('AdminController@addItem','Add Item')}}</li>
@@ -92,7 +92,7 @@
                     </li>
 
                     <li>
-                        <a ><i class="glyphicon glyphicon-phone-alt"></i> Attribute </a>
+                        <a ><i class="glyphicon glyphicon-text-background"></i> ATTRIBUTE </a>
                         <ul >
                             <li>{{HTML::linkAction('AdminController@showAttribute','Attribute Manager')}}</li>
                             <li>{{HTML::linkAction('AdminController@addAttribute','Add Attribute')}}</li>
@@ -101,7 +101,7 @@
                     </li>
 
                     <li>
-                        <a ><i class="glyphicon glyphicon-user"></i> User Manager</a>
+                        <a ><i class="glyphicon glyphicon-user"></i> USER</a>
                         <ul >
                             <li>{{HTML::linkAction('AdminController@showUser','User Manager')}}</li>
                             <li>{{HTML::linkAction('AdminController@showDeactiveUser','Banned Users')}}</li>
@@ -111,11 +111,15 @@
                     </li>
 
                     <li>
-                        <a href="{{URL::action('AdminController@showBill')}}"><i class='glyphicon glyphicon-usd'></i> Bill Manager</a>
+                        <a ><i class="glyphicon glyphicon-usd"></i> BILL </a>
+                        <ul >
+                            <li>{{HTML::linkAction('AdminController@showBill','Bill Manager')}}</li>
+                            <li>{{HTML::linkAction('AdminController@showConfirmBill','Confirmed Bill')}}</li>
+                        </ul>
                     </li>
 
                     <li>
-                        <a href="{{URL::action('AdminController@showSystemVar')}}"><i class='glyphicon glyphicon-wrench'></i> System Manager</a>
+                        <a href="{{URL::action('AdminController@showSystemVar')}}"><i class='glyphicon glyphicon-wrench'></i> SYSTEM SETTING</a>
                     </li>
 
                 </ul>

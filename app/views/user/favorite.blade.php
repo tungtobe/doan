@@ -1,41 +1,41 @@
-
-<div class="col-md-3">
-    <center>
-    <img src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/p720x720/10429261_10203664826198277_3549355919811911397_n.jpg?oh=df78cbab872601999cdde967bbbb5b53&oe=5608BB1F&__gda__=1439119590_b7833ff461a5dcdff613e84486e6bedd" height="230" weight="230">     
-    <hr>
-    <h3>{{ Auth::user()->username}}    </h3>
+<div class="container _container">
+    <div class="col-md-3 _ava">
+        <center>
+        <img src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/p720x720/10429261_10203664826198277_3549355919811911397_n.jpg?oh=df78cbab872601999cdde967bbbb5b53&oe=5608BB1F&__gda__=1439119590_b7833ff461a5dcdff613e84486e6bedd" height="230" weight="230">     
+        <hr>
+        <h3>{{ Auth::user()->username}}</h3>
     </center>
-</div>
+    </div>
 
-    <div class="col-md-9 well hero-unit">  
-    {{ Form::open(array('url' => 'user/makebill')) }}
-    	<h1 > Favorite </h1>
-		<hr>
-		<table id='favoriteTable' class="table table-bordered">
-			<tr>
-		    	<th>#</th>
-		    	<th>Item </th> 
-		    	<th>Price</th>
-		    	<th>Remove</th>
-		  	</tr>
-		  	 <?php foreach ($favorite_items as $item): ?>
-		  	 	<tr id="row{{$item->id}}">
-		   			<td><input type="checkbox" name="chk[]" value="{{$item->id}}"></td>
-		    		<td><a href="{{ URL::action('ItemController@getShow', $item->id ) }}" title="{{ $item->name }}">{{ $item->name }}</a></td> 
-		    		<td>
-		    			@if(isset($favorite_items_attr[$item->id]['Price']))
-							{{ number_format($favorite_items_attr[$item->id]['Price']) }}
-							@else
-							0
-							@endif
-					</td>
-					<td><button class='btn btn-danger btn-del' data-item='{{$item->id}}' >Remove</button></td>
-		  		</tr>
-		  	<?php endforeach; ?>
-		  	
-		</table>   
+    <div class="col-md-9 well _well">  
+        {{ Form::open(array('action' => array('UserController@makeBill'))) }}
+        <h3> Favorite </h3>
+        <div class="_wrap-table">
+        <table id='favoriteTable' class="table table-bordered">
+            <tr>
+                <th>#</th>
+                <th>Item </th> 
+                <th>Price</th>
+                <th>Remove</th>
+            </tr>
+            <?php foreach ($favorite_items as $item): ?>
+                <tr id="row{{$item->id}}">
+                    <td><input type="checkbox" name="chk[]" value="{{$item->id}}"></td>
+                    <td><a href="{{ URL::action('ItemController@getShow', $item->id ) }}" title="{{ $item->name }}">{{ $item->name }}</a></td> 
+                    <td>
+                        @if(isset($favorite_items_attr[$item->id]['Price']))
+                            {{ number_format($favorite_items_attr[$item->id]['Price']) }}
+                            @else
+                            0
+                            @endif
+                    </td>
+                    <td><button class='btn btn-danger btn-del' data-item='{{$item->id}}' >Remove</button></td>
+                </tr>
+            <?php endforeach ?>     
+        </table>   
+        </div>
 
-		<button id='makeBill' class='btn btn-primary' disabled>Make Bill</button>  
+        <button id='makeBill' class='btn btn-primary' disabled>Make Bill</button>  
         {{ Form::close() }}
     </div>
 
@@ -59,7 +59,7 @@
     </div>
 </div>
 
-
+</div>
 
 <script type="text/javascript">
 $(function(){

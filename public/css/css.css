@@ -467,6 +467,58 @@ font-size: 14px;
 }
 
 
+._ava > center{
+  background-color: white;
+  padding-top: 20px;
+  border: 1px solid #e3e3e3;
+}
+
+._ava h3{
+  background-color: #16B97F;
+  font-weight: bold;
+  color: white;
+  padding: 10px 0;
+  margin: 0;
+  margin-top: 20px;
+}
+
+._well{
+  border-radius: 0;
+  background-color: white;
+  padding: 0;
+}
+
+._well h3{
+  font-weight: bold;
+  background-color: #16B97F;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+._wrap-table{
+  display: block;
+  width: 100%;
+  padding: 0 20px;
+}
+
+._wrap-table tr, ._wrap-table th{
+  text-align: center;
+}
+._wrap-table ._info{
+  font-size: 30px;
+  margin: 10px 10px ;
+}
+
+._well .btn-primary{
+  margin-left: 20px;
+  font-weight: bold;
+  width: 160px;
+  margin-bottom: 15px;
+}
 /*Loading */
 .spinner {
   margin: 100px auto 0;

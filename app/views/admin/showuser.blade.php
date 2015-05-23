@@ -19,10 +19,10 @@
                             <div class="panel-body">
                             	<table class="table table-bordered table-hover table-striped">
                             		<tr>
-										<th>Username</th>
-										<th>User Role </th>
-										<th>Admin</th>
-										<th>Ban</th>
+										<th style="width:40%;">Username</th>
+										<th style="width:30%;">User Role </th>
+										<th style="width:15%;">Admin</th>
+										<th style="width:15%;">Ban</th>
 									</tr>
 								<tbody>
 									<?php foreach ($users as $user): ?>
@@ -34,12 +34,16 @@
 						        				@endif
 						        			</td>
 						        			<td>
-						        				@if($user->role == 0) {{ Form::checkbox('name', $user->id, true, ['class' => 'cb_make_admin']); }}
-						        				@else {{ Form::checkbox('name', $user->id, false, ['class' => 'cb_make_admin']); }}
-						        				@endif
+						        				@if($user->id != Auth::user()->id)
+							        				@if($user->role == 0) 
+							        				<button class="cb_make_admin btn btn-primary" value="{{$user->id}}">Remove Admin</button>
+							        				@else 
+							        				<button class="cb_make_admin btn btn-primary" value="{{$user->id}}">Make Admin</button>
+							        				@endif
+							        			@endif
 						        			</td>
 						        			<td>
-						        				{{ Form::checkbox('name', $user->id, false, ['class' => 'confirm']); }}
+						        				<button class="confirm btn btn-warning" value="{{$user->id}}">Ban</button>
 						        			</td>
 						        		</tr>
 						    		<?php endforeach; ?>
@@ -55,7 +59,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.cb_make_admin').change(function() {
+	$('.cb_make_admin').click(function() {
 		var a = this;
 		$.ajax({
 			type: "POST",
@@ -66,9 +70,7 @@ $(function(){
 			dataType: "json",
 			success: function(data) {
 				console.log(data);
-				if(data != "Success") {
-					a.checked = !a.checked;
-				} else {
+				if(data == "Success") {
 					location.reload();
 				}
 			}

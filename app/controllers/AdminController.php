@@ -277,13 +277,48 @@ class AdminController extends BaseController {
         if (Auth::user()->role != 0){ // not admin
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }
-        $bills = Bill::Paginate(12);
+        $bills = Bill::where(array('status' => 0))->Paginate(12);
+
         foreach($bills as $bill)
         {
+            $amount = 0;
             $user = User::find($bill->user_id);
             $bill['user'] = $user->username;
+
+            $bill_items = BillItem::where(array('bill_id' => $bill->id))->get();
+            foreach ($bill_items as $item) {
+                $item_price = Value::where(array('item_id' => $item->id, 'attr_id' => '20'))->first();
+                if ($item_price != null) {
+                    $amount += $item_price->value * $item->number;
+                }
+            }
+            $bill['amount'] = $amount;
         }
+
         $this->layout->content = View::make('admin.showbill')->with(array('bills' => $bills));
+    }
+
+    public function showConfirmBill(){
+        if (Auth::user()->role != 0){ // not admin
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }
+        $bills = Bill::where(array('status' => 1))->Paginate(12);
+        foreach($bills as $bill)
+        {
+            $amount = 0;
+            $user = User::find($bill->user_id);
+            $bill['user'] = $user->username;
+
+            $bill_items = BillItem::where(array('bill_id' => $bill->id))->get();
+            foreach ($bill_items as $item) {
+                $item_price = Value::where(array('item_id' => $item->id, 'attr_id' => '20'))->first();
+                if ($item_price != null) {
+                    $amount += $item_price->value * $item->number;
+                }
+            }
+            $bill['amount'] = $amount;
+        }
+        $this->layout->content = View::make('admin.showconfirmbill')->with(array('bills' => $bills));
     }
 
     public function confirmBill(){

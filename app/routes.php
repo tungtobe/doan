@@ -40,6 +40,7 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/admin/addattr', 'AdminController@addAttribute');
   Route::get('/admin/showitem', 'AdminController@showItem');
   Route::get('/admin/showbill', 'AdminController@showBill');
+  Route::get('/admin/showconfirmbill', 'AdminController@showConfirmBill');
   Route::get('/admin/showattr', 'AdminController@showAttribute');
   Route::get('/admin/showsysvar', 'AdminController@showSystemVar');
   Route::get('/admin/postSysVar', 'AdminController@postSysVar');
