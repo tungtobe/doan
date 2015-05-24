@@ -31,9 +31,9 @@
 							</label>
 						</td>
 						@if(isset($item['quantity']))
-						<td><input name="amount" class="quantity" value="{{$item->quantity}}"></td>
+						<td><input type="number" min="1" name="amount" class="quantity" value="{{$item->quantity}}"></td>
 						@else
-						<td><input name="amount" class="quantity" value="0"></td>
+						<td><input type="number" min="1" name="amount" class="quantity" value="1"></td>
 						@endif
 						<td><label name="subtotal" class="subtotal">
 							@if(isset($items_attr[$item->id]['Price']))
@@ -98,7 +98,13 @@ $(function() {
 		CalculateTotal();
 		var bill_items = {};
 		$('.itemid').each(function() {
-			bill_items[$(this).val()] = $(this).parent().find('.quantity').val();
+			var quantity = $(this).parent().find('.quantity').val();
+			if (quantity <= 0 || !$.isNumeric(quantity)) {
+				alert ('Invalid Amount Format Number (MIN 1) ');
+				// window.location.href = " {{ URL::action('UserController@getBill', Auth::user()->id ) }} ";
+				return false;
+			};
+			bill_items[$(this).val()] = quantity;
 		});
 
 		$.ajax({

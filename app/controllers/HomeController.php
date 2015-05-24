@@ -17,8 +17,8 @@ class HomeController extends BaseController {
 
 
 	public function showWelcome(){
-		// $items = Item::orderByRaw("RAND()")->Paginate(12);
-		$items = Item::Paginate(12);
+		$items = Item::orderByRaw("RAND()")->Paginate(12);
+		// $items = Item::Paginate(12);/
 		$items_attr = $this->getItemAttributes($items);
 		$items_vote_arr = $this->getItemsVote($items);
 		$this->layout->content = View::make('hello')->with(array('items_attr' => $items_attr,

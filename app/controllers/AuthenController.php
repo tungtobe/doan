@@ -38,10 +38,11 @@ class AuthenController extends BaseController {
         $password = Input::get('password');
         $user = User::where(array(
                 "username" => $username,
-                "password" => md5($password)
+                "password" => md5($password),
+                "status" => 1
             ))->first();
         if(is_null($user)){
-            return Redirect::to(URL::action('AuthenController@getLogin'))->withInput()->withErrors(array('password'=>'wrong username or password !!!')); 
+            return Redirect::to(URL::action('AuthenController@getLogin'))->withInput()->withErrors(array('password'=>'Invalid username or password !!!')); 
         }else{
             Auth::login($user);
             return Redirect::to(URL::action('HomeController@showWelcome'));
@@ -55,7 +56,7 @@ class AuthenController extends BaseController {
 
         $validator = User::validate(Input::all());  
         if ($validator->fails()) {
-            return Redirect::to(URL::action('AuthenController@getLogin'))->withInput()->withErrors($validator);     
+            return Redirect::to(URL::action('AuthenController@getSignup'))->withInput()->withErrors($validator);     
         }
 
         $username = Input::get('username');
@@ -74,7 +75,7 @@ class AuthenController extends BaseController {
             Auth::login($user);
             return Redirect::to(URL::action('HomeController@showWelcome'));
         }else{
-            return Redirect::to(URL::action('AuthenController@getLogin'))->withInput()->withErrors(array('username'=>'username existed !!!')); 
+            return Redirect::to(URL::action('AuthenController@getSignup'))->withInput()->withErrors(array('username'=>'username existed !!!')); 
         }
     }
 

@@ -116,7 +116,7 @@
 
 
 <div  class="col-md-3 detail-left">
-<div class="_header">Gợi ý các sản phẩm liên quan</div>
+<div class="_header">Recommended Item</div>
 <div class="spinner" hidden>
   <div class="bounce1"></div>
   <div class="bounce2"></div>

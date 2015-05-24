@@ -2,6 +2,29 @@
 
 class AdminController extends BaseController {
     protected $layout = 'layouts.admin-test';
+    public function fix(){
+        if (Auth::check()) {
+            if (Auth::user()->role != 0){ // not admin
+                return Redirect::to(URL::action('HomeController@showWelcome'));
+            }else{
+                $items = Item::all();
+                foreach ($items as $item) {
+                    $value = Value::where(array('item_id' => $item->id , 'attr_id' => 1))->first();
+                    if ($value == null) {
+                        $new_value = new Value();
+                        $new_value->item_id = $item->id;
+                        $new_value->attr_id = 1;
+                        $new_value->value = $item->name;
+                        $new_value->save();
+                    }
+                }
+                return "abcd";
+            }
+        }else {
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        } 
+        
+    }
 
     // Admin function about Attribute
     public function showAttribute(){
@@ -240,12 +263,18 @@ class AdminController extends BaseController {
 
     public function postAddItem(){
         // validate
+        $messages = array(
+            '1.required' => 'Name field is required.',
+            '20.required' => 'Price field is required.',
+            '20.numeric' => 'Price field must be number format.',
+            '6.required' => 'IMG field is required.',
+        );
         $rules = array(
             '1' => 'required',
-            '20' => 'required',
+            '20' => 'required | numeric',
             '6' => 'required'
             );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules, $messages);
         if($validator->fails())
         {
             return Redirect::to(URL::action('AdminController@addItem'))->withErrors($validator);
@@ -281,18 +310,17 @@ class AdminController extends BaseController {
 
         foreach($bills as $bill)
         {
-            $amount = 0;
+            $totalprice = 0;
             $user = User::find($bill->user_id);
             $bill['user'] = $user->username;
 
             $bill_items = BillItem::where(array('bill_id' => $bill->id))->get();
             foreach ($bill_items as $item) {
-                $item_price = Value::where(array('item_id' => $item->id, 'attr_id' => '20'))->first();
-                if ($item_price != null) {
-                    $amount += $item_price->value * $item->number;
-                }
+                $it = Item::findOrFail($item->item_id);
+                $items_attr = $this->getOneItemAttributes($it);
+                $totalprice += $items_attr['20'] * $item->number;            
             }
-            $bill['amount'] = $amount;
+            $bill['amount'] = $totalprice;
         }
 
         $this->layout->content = View::make('admin.showbill')->with(array('bills' => $bills));
@@ -382,13 +410,21 @@ class AdminController extends BaseController {
         if (Request::isMethod('post'))
         {
             // validate
+            $messages = array(
+            '1.required' => 'Name field is required.',
+            '20.required' => 'Price field is required.',
+            '20.numeric' => 'Price field must be number format.',
+            '6.required' => 'IMG field is required.',
+            );
             $rules = array(
                 '1' => 'required',
+                '20' => 'required | numeric',
+                '6' => 'required'
                 );
             $validator = Validator::make(Input::all(), $rules);
             if($validator->fails())
             {
-                return Redirect::to(URL::action('AdminController@postEditItem', $id))->withErrors(array("Enter item name !!! "));
+                return Redirect::to(URL::action('AdminController@postEditItem', $id))->withErrors($validator);
             }
             else {
                 $item->name = Input::get('1');
@@ -398,7 +434,10 @@ class AdminController extends BaseController {
                 $old_values = Value::where('item_id', $id)->delete();
                 foreach ($inputs as $key => $value) {
                     if ($key != '_token') {
-                        Value::insert(array('item_id' => $id, 'attr_id' => $key , 'value' => $value));
+                         if ($value != "") {
+                            Value::insert(array('item_id' => $id, 'attr_id' => $key , 'value' => $value));    
+                         }
+                        
                     }
                     
                 }

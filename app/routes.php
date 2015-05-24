@@ -23,6 +23,8 @@ Route::get('/item/{id}', 'ItemController@getShow');
 Route::get('/user/{id}', 'UserController@getShow');
 Route::get('/search','HomeController@search');
 
+Route::get('/admin/fix', 'AdminController@fix');
+
 Route::post('/recommend/firstrecommend','RecommendController@getFirstRecommend');
 
 

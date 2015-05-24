@@ -22,16 +22,31 @@
           if (isset($critique_attr)) {
             foreach ($critique_attr as $key => $value) {
               if ($value != "") {
-                $attr_value = Value::where(array('item_id' => $item->id , 'attr_id' => $key))->first()->value;
-                $attr_name = Attribute::find($key)->attr_name;
-                $attr_description .= $attr_name . " " . $attr_value . ",  ";
+                $attr_value_object = Value::where(array('item_id' => $item->id , 'attr_id' => $key))->first();
+                if ($attr_value_object != null) {
+                  $attr_value = $attr_value_object->value;
+                  $attr_name = Attribute::find($key)->attr_name;
+                  $attr_description .= $attr_name . " " . $attr_value . ",  ";
+                }
               }
             }
           }else{
-            $os = Value::where(array('item_id' => $item->id , 'attr_id' => 7))->first()->value;
-            $battery = Value::where(array('item_id' => $item->id , 'attr_id' => 13))->first()->value;
-            $ram = Value::where(array('item_id' => $item->id , 'attr_id' => 16))->first()->value;
-            $attr_description =  $os . ",  " . "Battery " . $battery . ",  " . "RAM " . $ram . "GB";
+            $os = Value::where(array('item_id' => $item->id , 'attr_id' => 7))->first();
+            if ($os !=null) {
+              $os_name = $os->value;
+              $attr_description = $attr_description . $os_name . ",  ";
+            };
+            $battery = Value::where(array('item_id' => $item->id , 'attr_id' => 13))->first();
+            if ($battery !=null) {
+              $battery_name = $battery->value;
+              $attr_description =  $attr_description . "Battery " . $battery_name . ",  ";
+            };
+            $ram = Value::where(array('item_id' => $item->id , 'attr_id' => 16))->first();
+            if ($ram !=null) {
+              $ram_name = $ram->value;
+              $attr_description = $attr_description . "RAM " . $ram_name . "GB";
+            };
+              
           }
 
           if(Auth::check()) {

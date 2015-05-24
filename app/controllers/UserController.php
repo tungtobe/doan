@@ -85,8 +85,8 @@ class UserController extends BaseController {
     public function getBill($user_id){
         try {
             $user = User::findOrFail($user_id);
-            $unconfirmed_bill = Bill::where('status', 0)->get();
-            $confirmed_bill = Bill::where('status', 1)->get();
+            $unconfirmed_bill = Bill::where(array('status'=> 0, 'user_id' => $user_id))->get();
+            $confirmed_bill =  Bill::where(array('status'=> 1, 'user_id' => $user_id))->get();
 
             foreach ($unconfirmed_bill as $bill) {
                 $bill_items = BillItem::where('bill_id', $bill->id)->get();

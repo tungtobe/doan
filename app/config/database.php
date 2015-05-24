@@ -51,13 +51,24 @@ return array(
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
 		),
+		
+		// 'mysql' => array(
+		// 	'driver'    => 'mysql',
+		// 	'host'      => 'localhost',
+		// 	'database'  => 'tot_nghiep',
+		// 	'username'  => 'root',
+		// 	'password'  => '',
+		// 	'charset'   => 'utf8',
+		// 	'collation' => 'utf8_unicode_ci',
+		// 	'prefix'    => '',
+		// ),
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'tot_nghiep',
-			'username'  => 'root',
-			'password'  => '',
+			'host'      => 'sql208.byethost7.com',
+			'database'  => 'b7_16238010_totnghiep',
+			'username'  => 'b7_16238010',
+			'password'  => 'thanhtung23192',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
