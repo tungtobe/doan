@@ -2,9 +2,9 @@
 
 ###Step1: Setup database
 
-Create database name `do_an`
+Create database name `tot_nghiep`
 
-Import sql file in `schema/do_an(1).sql`
+Import sql file in `schema/tot_nghiep.sql`
 
 if you want to use your own database, edit config in `app/config/database`
 
@@ -12,13 +12,12 @@ if you want to use your own database, edit config in `app/config/database`
 
 ###Step2: Clone source code
 
-Clone vào thư mục htdocs của XAMPP hoặc www 
+Clone into htdocs folder in XAMPP or www folder
 
 
 
-Truy cập `http://localhost/doan/public` để vào trang chủ
+Access `http://localhost/doan/public` for homepage
 
-
-Thông tin đăng nhập của admin
+To use admin function, login by below account
 
 admin / admin
