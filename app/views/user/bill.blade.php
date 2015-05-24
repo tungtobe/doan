@@ -95,18 +95,25 @@ $(function() {
 
 	$('#saveBill').click(function() {
 		var user_id = {{Auth::user()->id}};
+		var flag = true;
 		CalculateTotal();
 		var bill_items = {};
 		$('.itemid').each(function() {
 			var quantity = $(this).parent().find('.quantity').val();
 			if (quantity <= 0 || !$.isNumeric(quantity)) {
 				alert ('Invalid Amount Format Number (MIN 1) ');
-				// window.location.href = " {{ URL::action('UserController@getBill', Auth::user()->id ) }} ";
+				flag = false;
 				return false;
-			};
-			bill_items[$(this).val()] = quantity;
+			}else{
+				bill_items[$(this).val()] = quantity;
+			}
 		});
+		if (flag) {
+			saveBill(bill_items);
+		};
+	});
 
+	function saveBill(bill_items){
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
@@ -120,7 +127,7 @@ $(function() {
 		}).fail(function(jqXHR, textStatus) {
 			return false;
 		});
-	});
+	}
 
 });
 
