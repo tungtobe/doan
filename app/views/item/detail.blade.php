@@ -44,7 +44,7 @@
                           <tbody>
                             <?php while ($attr_id = key($item_attr)) { ?>
                               <?php $attr = Attribute::find($attr_id); ?>
-                              @if($attr->attr_name != 'IMG')
+                              @if($attr->attr_name != 'IMG' && $attr->attr_name != 'Name')
                                   <tr>
                                     <td style="min-width:150px;" class="_gray"> {{$attr->attr_name }} </td>
                                     @if($item_attr_type[$attr->attr_name ]=="Boolean")
@@ -58,13 +58,28 @@
                                     @endif
 
                                     @if(Auth::check())
-                                    <td style="min-width:200px; padding-left:40px;" > <select class="form-control input-sm" name="attr[{{$attr_id}}]">
+                                      @if ($attr->attr_type == "Integer" || $attr->attr_type == "Float")
+                                      <?php 
+                                      $ranges = Valuerange::where('attr_id',$attr->id)->get();
+                                       ?>
+                                      <td style="min-width:200px; padding-left:40px;" > <select class="form-control input-sm" name="attr[{{$attr_id}}]">
+                                                                        <option   value="">Select improve</option>
+                                                                        @if($ranges->count() > 0)
+                                                                        @foreach($ranges as $range)
+                                                                        <option  value="{{$option['value']}}">{{$range->value_range}}</option>
+                                                                        @endforeach
+                                                                        @endif
+                                                                      </select>
+                                      </td> 
+                                      @else
+                                      <td style="min-width:200px; padding-left:40px;" > <select class="form-control input-sm" name="attr[{{$attr_id}}]">
                                                                         <option   value="">Select improve</option>
                                                                         @foreach($item_attr_option[$attr_id] as $option)
                                                                         <option  value="{{$option['value']}}">{{$option['value']}}</option>
                                                                         @endforeach
                                                                       </select>
-                                    </td>  
+                                      </td> 
+                                      @endif 
                                     @endif
 
                                   </tr>

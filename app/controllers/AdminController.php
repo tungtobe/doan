@@ -124,6 +124,42 @@ class AdminController extends BaseController {
                                                                             'attr_type' => $attribute->attr_type
                                                                             ));
     }
+
+    public function editAttrRange($id){
+        if (Auth::check()) {
+            if (Auth::user()->role != 0){ // not admin
+                return Redirect::to(URL::action('HomeController@showWelcome'));
+            }
+            
+            // xử lý dữ liệu gửi lên
+            if (Request::isMethod('post')){
+                $ranges = Input::get('range');
+                $id = Input::get('id');
+
+                $delete = Valuerange::where("attr_id", $id)->delete();
+                foreach ($ranges as $range) {
+                    if ($range != "") {
+                        $new_value_range = new Valuerange();
+                        $new_value_range->attr_id = $id;
+                        $new_value_range->value_range = $range;
+                        $new_value_range->save();
+                    }
+                    
+                }
+                return Redirect::to(URL::action('AdminController@editAttrRange', $id))->with('message', 'Success !!!');;
+            }
+        
+
+            $attribute = Attribute::find($id);
+            $attr_ranges = Valuerange::where("attr_id",$id)->get();
+            $this->layout->content = View::make("admin.showattrrange")->with(array("id"=>$id, "attribute" => $attribute , "attr_ranges" => $attr_ranges));
+
+        }else {
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }        
+
+        
+    }
     // END Admin function about Attribute
 
 

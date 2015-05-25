@@ -18,9 +18,10 @@
             <div class="panel-body">
 			<table class="table table-bordered">
 					<tr>
-						<th style="width:50%;">Attribute</th>
+						<th style="width:40%;">Attribute</th>
 						<th>Type</th>
 						<th style="width:10%;">Edit</th>
+						<th style="width:10%;">Recommend Value Ranger</th>
 						<th style="width:10%;">Delete</th>
 					</tr>
 				<tbody>
@@ -30,6 +31,11 @@
 		        			<td> {{$attribute->attr_type}}</td>
 		        			<td>
 		        				{{ HTML::linkAction('AdminController@postEditAttribute', 'Edit' , $attribute->id , array('class' => 'btn btn-primary')) }}
+		        			</td>
+		        			<td>
+		        				@if ($attribute->attr_type == "Integer" || $attribute->attr_type == "Float")
+		        				{{ HTML::linkAction('AdminController@editAttrRange', 'Change' , $attribute->id , array('class' => 'btn btn-primary')) }}
+		        				@endif
 		        			</td>
 		        			<td>
 		        				<button class='confirm btn btn-danger' value='{{$attribute->id}}'>Delete</button>

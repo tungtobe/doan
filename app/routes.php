@@ -33,6 +33,7 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::match(array('GET', 'POST'), '/admin/adduser', 'AdminController@addUser');
   Route::match(array('GET', 'POST'), '/admin/addattr', 'AdminController@addAttribute');
   Route::match(array('GET', 'POST'),'/admin/postEditAttr/{id}', 'AdminController@postEditAttribute');
+  Route::match(array('GET', 'POST'),'/admin/editAttrRange/{id}', 'AdminController@editAttrRange');
   Route::match(array('GET', 'POST'),'/admin/editItem/{id}', 'AdminController@postEditItem');
   Route::get('/admin','AdminController@getShow');
   Route::get('/admin/showuser', 'AdminController@showUser');
