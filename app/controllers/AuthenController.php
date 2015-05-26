@@ -84,6 +84,8 @@ class AuthenController extends BaseController {
         return Redirect::to(URL::action('HomeController@showWelcome'));
     }
 
+  
+
 }
 
 ?>

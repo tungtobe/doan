@@ -35,7 +35,7 @@ class BaseController extends Controller {
 	// Output: array of one item attributes
     protected function getOneItemAttributes($item){
 		$items_attr  = array();
-		$values = Value::where('item_id', $item->id)->get();
+		$values = Value::where('item_id', $item->id)->orderBy('attr_id')->get();
 		if ($values->isEmpty()) {
 			return null;
 		}else{
