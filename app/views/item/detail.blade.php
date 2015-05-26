@@ -65,9 +65,9 @@
                                       <td style="min-width:200px; padding-left:40px;" > <select class="form-control input-sm" name="attr[{{$attr_id}}]">
                                                                         <option   value="">Select improve</option>
                                                                         @if($ranges->count() > 0)
-                                                                        @foreach($ranges as $range)
-                                                                        <option  value="{{$option['value']}}">{{$range->value_range}}</option>
-                                                                        @endforeach
+                                                                          @foreach($ranges as $range)
+                                                                          <option  value="{{$range->value_range}}">{{$range->value_range}}</option>
+                                                                          @endforeach
                                                                         @endif
                                                                       </select>
                                       </td> 

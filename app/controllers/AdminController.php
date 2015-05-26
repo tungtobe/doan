@@ -428,7 +428,7 @@ class AdminController extends BaseController {
             $id = $input['id'];
 
             $item = Item::find($id);
-
+            $old_values = Value::where('item_id', $id)->delete();
             $item->delete();
         } catch(Exception $e) {
             return Response::json("invalid");
@@ -457,16 +457,15 @@ class AdminController extends BaseController {
                 '6' => 'required'
                 );
             $validator = Validator::make(Input::all(), $rules);
-            if($validator->fails())
-            {
+            if($validator->fails()){
                 return Redirect::to(URL::action('AdminController@postEditItem', $id))->withErrors($validator);
-            }
-            else {
+            }else {
                 $item->name = Input::get('1');
                 $item->save();
 
                 $inputs = Input::all();
                 $old_values = Value::where('item_id', $id)->delete();
+                // var_dump($old_values);die;
                 foreach ($inputs as $key => $value) {
                     if ($key != '_token') {
                          if ($value != "") {
