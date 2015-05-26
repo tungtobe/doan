@@ -22,6 +22,8 @@ Route::post('/authen/signup', 'AuthenController@signup');
 Route::get('/item/{id}', 'ItemController@getShow');
 Route::get('/user/{id}', 'UserController@getShow');
 Route::get('/search','HomeController@search');
+Route::get('/advancesearch','HomeController@advanceSearch');
+Route::post('/postadvancesearch','HomeController@postAdvanceSearch');
 
 Route::get('/admin/fix', 'AdminController@fix');
 
@@ -60,6 +62,7 @@ Route::group(array('before' => 'app.auth'), function() {
   Route::get('/user/bill/{id}', 'UserController@getBill');
   Route::get('/user/friends/{id}', 'UserController@getFriends');
   Route::get('/user/editbill/{id}', 'UserController@editBill');
+  Route::get('/user/showbill/{id}', 'UserController@showBill');
   Route::get('/user/{id}', 'UserController@getShow');
   Route::post('/user/friend', 'UserController@friend');
   Route::post('/user/expert', 'UserController@expert');
@@ -75,6 +78,7 @@ Route::group(array('before' => 'app.auth'), function() {
 
   // Route for recommend
   Route::post('/recommend','RecommendController@reciveCritique');
+  Route::post('/recommend/critique', 'RecommendController@critique');
     
 });
 

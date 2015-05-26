@@ -9,7 +9,7 @@
 
 <div class="col-md-9 well _well">  
 
-	<h3> Manager Bill </h3>
+	<h3> Manager Order </h3>
 	<div class="_wrap-table">
 	<table id='favoriteTable' class="table table-bordered">
 		<tr>
@@ -22,12 +22,12 @@
 		</tr>
 		<?php foreach ($manager_bills as $bill): ?>
 		<tr>
-			<td>{{ $bill->id }}</td>
+			<td>{{HTML::linkAction('UserController@showBill','Detail ',$bill->id) }}</td>
 			<td>{{ $bill->created_at }}</td>
 			<td>{{ $bill->updated_at }}</td>
 			<td>{{ number_format($bill->totalprice) }}</td>
 			<td><button name="delete" value="{{ $bill->id }}" class="btn btn-danger" >Delete</button></td>
-			<td><button name="edit" onclick="window.location='{{ url('user/editbill', $bill->id); }}'" class="btn btn-info">Edit</button></td>
+			<td><a name="edit" href="{{ URL::action('UserController@editBill', $bill->id) }}" class="btn btn-info">Edit</a></td>
 		</tr>
 		<?php endforeach; ?>
 	</table>   
@@ -36,7 +36,7 @@
 <div class="col-md-3"></div>
 <div class="col-md-9 well _well">  
 
-	<h3> Confirmed Bill </h3>
+	<h3> Confirmed Order </h3>
 	<div class="_wrap-table">
 	<table id='favoriteTable' class="table table-bordered">
 		<tr>

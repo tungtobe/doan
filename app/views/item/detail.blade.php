@@ -35,7 +35,7 @@
             <div class="product-main-info">
                 <h2 class="product-detail-title">{{ $item->name }}</h2>
             </div>
-            {{ Form::open(array('action' => 'RecommendController@reciveCritique', 'id' => 'critique')) }}
+            {{ Form::open(array('action' => 'RecommendController@critique', 'id' => 'critique')) }}
             <input type="hidden" name="current_item" value="{{$item->id}}">
             <div class="clearfix">
                 <div class="module-product-main-info pull-left fade-line-divide-before _width_100">
@@ -149,30 +149,30 @@
 $(function() {
 
       // this is the id of the form
-      $("#critique").submit(function() {
-          var url = "{{URL::action('RecommendController@reciveCritique')}}"; 
-          $.ajax({
-                 type: "POST",
-                 url: url,
-                 data: $("#critique").serialize(), // serializes the form's elements.
-                 error:function(err){
-                  console.log(err);
-                 },
-                 beforeSend:function(){
-                  $("#find_button").html('Finding ...');
-                  $('.spinner').show();
-                  $("#recommend_list").empty();
-                 },
-                 success: function(e)
-                 {
-                    $("#find_button").html('Find better item');
-                    $('.spinner').hide();
-                    $("#recommend_list").empty();
-                    $("#recommend_list").html(e);
-                 }
-               });
-          return false; // avoid to execute the actual submit of the form.
-      });
+      // $("#critique").submit(function() {
+      //     var url = "{{URL::action('RecommendController@reciveCritique')}}"; 
+      //     $.ajax({
+      //            type: "POST",
+      //            url: url,
+      //            data: $("#critique").serialize(), // serializes the form's elements.
+      //            error:function(err){
+      //             console.log(err);
+      //            },
+      //            beforeSend:function(){
+      //             $("#find_button").html('Finding ...');
+      //             $('.spinner').show();
+      //             $("#recommend_list").empty();
+      //            },
+      //            success: function(e)
+      //            {
+      //               $("#find_button").html('Find better item');
+      //               $('.spinner').hide();
+      //               $("#recommend_list").empty();
+      //               $("#recommend_list").html(e);
+      //            }
+      //          });
+      //     return false; // avoid to execute the actual submit of the form.
+      // });
 
     $("#vote_good").click(function(e){
         $.ajax({

@@ -35,7 +35,7 @@
         </table>   
         </div>
 
-        <button id='makeBill' class='btn btn-primary' disabled>Make Bill</button>  
+        <button id='makeBill' class='btn btn-primary' disabled> Order</button>  
         {{ Form::close() }}
     </div>
 

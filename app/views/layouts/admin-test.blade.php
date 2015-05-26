@@ -111,10 +111,10 @@
                     </li>
 
                     <li>
-                        <a ><i class="glyphicon glyphicon-usd"></i> BILL </a>
+                        <a ><i class="glyphicon glyphicon-usd"></i> ORDER </a>
                         <ul >
-                            <li>{{HTML::linkAction('AdminController@showBill','Bill Manager')}}</li>
-                            <li>{{HTML::linkAction('AdminController@showConfirmBill','Confirmed Bill')}}</li>
+                            <li>{{HTML::linkAction('AdminController@showBill','Order Manager')}}</li>
+                            <li>{{HTML::linkAction('AdminController@showConfirmBill','Confirmed Order')}}</li>
                         </ul>
                     </li>
 

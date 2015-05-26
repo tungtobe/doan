@@ -61,6 +61,11 @@ class BaseController extends Controller {
 		return $item_attr_option;
 	}
 
+	public function getOneAttributeOption($attr_id){
+		$attr_option = Value::where('attr_id',$attr_id)->distinct()->get(array('value'))->toArray();
+		return $attr_option;
+	}
+
 	public function getAttributeType(){
 		$item_attr_type = array();
 		$attrs = Attribute::all();

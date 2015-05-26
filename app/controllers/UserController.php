@@ -120,6 +120,34 @@ class UserController extends BaseController {
                                                                         'confirmed_bills' => $confirmed_bill));
     }
 
+    public function showBill($id){
+        if (!Auth::check()) {
+            return Redirect::to(URL::action('HomeController@showWelcome'));
+        }else{
+            $bill_items = BillItem::where('bill_id', $id)->get();
+            $totalprice = 0;
+            $items = array();
+
+            foreach ($bill_items as $it) {
+                $item = Item::find($it->item_id);
+                $item['quantity'] = $it->number;
+                $item_price = Value::where(array('item_id' => $it->item_id, 'attr_id' => 20))->first();
+                if (is_null($item_price)) {
+                    $item['price'] = 0;
+                }else{
+                    $item['price'] = $item_price->value * $it->number;
+                    $totalprice += $item['price'];
+                }
+                array_push($items, $item);
+            }
+            $items_attr = $this->getItemAttributes($items);
+            $this->layout->content = View::make('user.showBill')->with(array('items' => $items ,
+                                                                            'items_attr' => $items_attr,
+                                                                            'totalprice' => $totalprice,
+                                                                            'id' => $id
+                                                                                ));
+        }
+    }
     public function makeBill(){
         $items_id = Input::get('chk');
         if (!Auth::check()) {

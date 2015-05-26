@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 24, 2015 at 05:56 PM
+-- Generation Time: May 26, 2015 at 10:33 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -69,10 +69,9 @@ INSERT INTO `Attribute` (`id`, `parent_id`, `attr_name`, `attr_type`, `status`, 
 (15, 0, 'CPU speed', 'Float', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (16, 0, 'Ram', 'Float', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (17, 0, 'NFC', 'Boolean', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(18, 0, 'ROM', 'Integer', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (19, 0, 'SD card', 'Integer', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (20, 0, 'Price', 'Integer', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(24, 0, 'Rear camera', 'Float', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(24, 0, 'Real camera', 'Float', 1, '0000-00-00 00:00:00', '2015-05-25 03:58:51'),
 (25, 0, 'Front camera', 'Float', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (26, 0, 'Length', 'Float', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (27, 0, 'Width', 'Float', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -91,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `Bill` (
   `status` int(1) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `Bill`
@@ -99,8 +98,10 @@ CREATE TABLE IF NOT EXISTS `Bill` (
 
 INSERT INTO `Bill` (`id`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
 (18, 1, 1, '2015-05-20 13:45:55', '2015-05-20 16:21:07'),
-(19, 1, 0, '2015-05-20 17:54:10', '2015-05-20 17:54:10'),
-(20, 7, 0, '2015-05-23 16:41:00', '2015-05-23 16:41:00');
+(20, 7, 0, '2015-05-23 16:41:00', '2015-05-23 16:41:00'),
+(23, 1, 0, '2015-05-24 16:20:32', '2015-05-24 16:20:32'),
+(24, 8, 0, '2015-05-25 01:31:44', '2015-05-25 01:31:44'),
+(25, 1, 0, '2015-05-26 07:34:02', '2015-05-26 07:34:02');
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `BillItem` (
   `updated_at` datetime NOT NULL,
   `number` int(255) NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `BillItem`
@@ -128,7 +129,12 @@ INSERT INTO `BillItem` (`id`, `bill_id`, `item_id`, `updated_at`, `number`, `cre
 (27, 20, 25, '2015-05-23 16:41:00', 6, '2015-05-23 16:41:00'),
 (28, 20, 83, '2015-05-23 16:41:00', 9, '2015-05-23 16:41:00'),
 (29, 20, 111, '2015-05-23 16:41:00', 7, '2015-05-23 16:41:00'),
-(46, 19, 1, '2015-05-24 15:45:22', 5, '2015-05-24 15:45:22');
+(51, 23, 1, '2015-05-24 16:20:32', 1, '2015-05-24 16:20:32'),
+(52, 23, 13, '2015-05-24 16:20:32', 5, '2015-05-24 16:20:32'),
+(53, 24, 37, '2015-05-25 01:31:44', 1, '2015-05-25 01:31:44'),
+(54, 24, 46, '2015-05-25 01:31:44', 1, '2015-05-25 01:31:44'),
+(55, 25, 15, '2015-05-26 07:34:02', 1, '2015-05-26 07:34:02'),
+(56, 25, 59, '2015-05-26 07:34:02', 1, '2015-05-26 07:34:02');
 
 -- --------------------------------------------------------
 
@@ -143,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `Comment`
@@ -152,7 +158,8 @@ CREATE TABLE IF NOT EXISTS `Comment` (
 INSERT INTO `Comment` (`id`, `user_id`, `item_id`, `content`, `created_at`, `updated_at`) VALUES
 (7, 2, 1, 'sản phẩm dùng tốt', '2015-05-20 13:41:23', '2015-05-20 13:41:23'),
 (8, 2, 1, 'Lấy được thiện cảm người dùng', '2015-05-20 13:42:34', '2015-05-20 13:42:34'),
-(9, 1, 4, 'Test comment', '2015-05-21 16:11:25', '2015-05-21 16:11:25');
+(9, 1, 4, 'Test comment', '2015-05-21 16:11:25', '2015-05-21 16:11:25'),
+(10, 8, 37, 'test', '2015-05-25 01:05:58', '2015-05-25 01:05:58');
 
 -- --------------------------------------------------------
 
@@ -166,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `FavoriteItem` (
   `item_id` int(11) NOT NULL,
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `FavoriteItem`
@@ -182,7 +189,15 @@ INSERT INTO `FavoriteItem` (`id`, `user_id`, `item_id`, `updated_at`, `created_a
 (17, 7, 4, '2015-05-23 16:40:24', '2015-05-23 16:40:24'),
 (18, 7, 25, '2015-05-23 16:40:29', '2015-05-23 16:40:29'),
 (19, 7, 111, '2015-05-23 16:40:35', '2015-05-23 16:40:35'),
-(20, 7, 83, '2015-05-23 16:40:40', '2015-05-23 16:40:40');
+(20, 7, 83, '2015-05-23 16:40:40', '2015-05-23 16:40:40'),
+(21, 8, 37, '2015-05-25 01:05:44', '2015-05-25 01:05:44'),
+(22, 8, 46, '2015-05-25 01:23:48', '2015-05-25 01:23:48'),
+(23, 1, 56, '2015-05-25 16:53:29', '2015-05-25 16:53:29'),
+(24, 1, 59, '2015-05-25 16:54:14', '2015-05-25 16:54:14'),
+(25, 1, 28, '2015-05-25 17:00:52', '2015-05-25 17:00:52'),
+(26, 1, 49, '2015-05-25 17:02:09', '2015-05-25 17:02:09'),
+(27, 1, 17, '2015-05-25 17:04:35', '2015-05-25 17:04:35'),
+(28, 1, 20, '2015-05-25 17:07:07', '2015-05-25 17:07:07');
 
 -- --------------------------------------------------------
 
@@ -249,7 +264,7 @@ INSERT INTO `Item` (`id`, `name`, `status`, `updated_at`, `created_at`, `deleted
 (57, 'HTC DESIRE 616', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (58, 'Asus Zenfone 5', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (59, 'LG L80 D380', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
-(60, 'LG L Fino (L70 Plus)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
+(60, 'LG L Fino (L70 Plus)', 1, '2015-05-25 17:00:34', '0000-00-00 00:00:00', '2015-05-25 10:00:34'),
 (83, 'Sony Xperia Z3 Compact', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (110, 'HTC Desire Eye.', 1, '2015-05-22 16:32:14', '0000-00-00 00:00:00', NULL),
 (111, 'Sony Xperia Z2 .', 1, '2015-05-22 16:30:25', '0000-00-00 00:00:00', NULL),
@@ -316,18 +331,19 @@ CREATE TABLE IF NOT EXISTS `User` (
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `remember_token` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `User`
 --
 
 INSERT INTO `User` (`id`, `username`, `password`, `role`, `status`, `updated_at`, `created_at`, `remember_token`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-05-23 16:39:45', '2015-03-24 08:07:43', '2jMh8v5NHhBCNYZkKQiAVoqhJBbVqCg6qRUxVLdFp41Zx2zTi5rJ3VVfWqZ4'),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 1, '2015-05-25 04:12:35', '2015-03-24 08:07:43', 'hDs9Ys4nrFImg3gEO8b3b9uzJ54yczwgZQpifUMMkHOsQPW7vxnCtgItXDtf'),
 (2, 'tungtobe', 'e02c85c710255a33bafb6c29c661d8c0', 1, 1, '2015-05-23 02:49:24', '2015-03-24 08:19:08', 'Xx32fEuohQgMvAC5rnWHUn6DFJKreus0o31VGIE11FckHbBWdEeCX0uhBYf0'),
 (5, 'tungtobe3', '1599c7ddba4fe65da7436d31945be51f', 0, 0, '2015-05-23 02:51:29', '2015-05-05 17:00:48', 'OYRDLOE44KYzRKKHinmILJ5mERkNLctfigX9JYo0qCfXvSA5GGDydmZmIrOO'),
 (6, 'tungtobe5', '21232f297a57a5a743894a0e4a801fc3', 1, 1, '2015-05-23 02:49:26', '2015-05-22 15:30:19', ''),
-(7, 'tungtobe10', '1599c7ddba4fe65da7436d31945be51f', 1, 1, '2015-05-23 16:40:08', '2015-05-23 14:36:18', 'HCIyhqJee7RIFnOdi82Nhny7qBi8Fk1HRI97bPFR2MQVq6FziY7ZrbwY9TfX');
+(7, 'tungtobe10', '1599c7ddba4fe65da7436d31945be51f', 1, 1, '2015-05-23 16:40:08', '2015-05-23 14:36:18', 'HCIyhqJee7RIFnOdi82Nhny7qBi8Fk1HRI97bPFR2MQVq6FziY7ZrbwY9TfX'),
+(8, 'tungtobe11', '21232f297a57a5a743894a0e4a801fc3', 1, 1, '2015-05-25 02:53:03', '2015-05-25 00:58:45', 'VaiHoXwADl9Vm5YpglMAYlvydQ3UW8A6eV9LQ6IPAe2XcRTnQrObtYz6O68T');
 
 -- --------------------------------------------------------
 
@@ -362,7 +378,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (11, 1, 15, '1.4', NULL, NULL),
 (12, 1, 16, '1.0', NULL, NULL),
 (13, 1, 17, '1', NULL, NULL),
-(14, 1, 18, '128', NULL, NULL),
 (15, 1, 19, '0', NULL, NULL),
 (16, 1, 20, '25590000', NULL, NULL),
 (17, 1, 24, '8.0', NULL, NULL),
@@ -384,7 +399,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (77, 4, 15, '2.7', NULL, NULL),
 (78, 4, 16, '3.0', NULL, NULL),
 (79, 4, 17, '1', NULL, NULL),
-(80, 4, 18, '32', NULL, NULL),
 (81, 4, 19, '128', NULL, NULL),
 (82, 4, 20, '20990000', NULL, NULL),
 (83, 4, 24, '16.0', NULL, NULL),
@@ -406,7 +420,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (157, 8, 15, '1.4', NULL, NULL),
 (158, 8, 16, '1.0', NULL, NULL),
 (159, 8, 17, '1', NULL, NULL),
-(160, 8, 18, '128', NULL, NULL),
 (161, 8, 19, '0', NULL, NULL),
 (162, 8, 20, '22990000', NULL, NULL),
 (163, 8, 24, '8.0', NULL, NULL),
@@ -428,7 +441,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (258, 13, 15, '1.4', NULL, NULL),
 (259, 13, 16, '1.0', NULL, NULL),
 (260, 13, 17, '1', NULL, NULL),
-(261, 13, 18, '64', NULL, NULL),
 (262, 13, 19, '0', NULL, NULL),
 (263, 13, 20, '22990000', NULL, NULL),
 (264, 13, 24, '8.0', NULL, NULL),
@@ -450,7 +462,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (302, 15, 15, '1.4', NULL, NULL),
 (303, 15, 16, '1.0', NULL, NULL),
 (304, 15, 17, '1', NULL, NULL),
-(305, 15, 18, '16', NULL, NULL),
 (306, 15, 19, '0', NULL, NULL),
 (307, 15, 20, '20390000', NULL, NULL),
 (308, 15, 24, '8.0', NULL, NULL),
@@ -472,7 +483,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (324, 16, 15, '1.4', NULL, NULL),
 (325, 16, 16, '1.0', NULL, NULL),
 (326, 16, 17, '1', NULL, NULL),
-(327, 16, 18, '64', NULL, NULL),
 (328, 16, 19, '0', NULL, NULL),
 (329, 16, 20, '20390000', NULL, NULL),
 (330, 16, 24, '8.0', NULL, NULL),
@@ -494,7 +504,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (346, 17, 15, '1.3', NULL, NULL),
 (347, 17, 16, '3.0', NULL, NULL),
 (348, 17, 17, '1', NULL, NULL),
-(349, 17, 18, '32', NULL, NULL),
 (350, 17, 19, '128', NULL, NULL),
 (351, 17, 20, '17990000', NULL, NULL),
 (352, 17, 24, '16.0', NULL, NULL),
@@ -516,7 +525,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (368, 18, 15, '1.4', NULL, NULL),
 (369, 18, 16, '1.0', NULL, NULL),
 (370, 18, 17, '1', NULL, NULL),
-(371, 18, 18, '16', NULL, NULL),
 (372, 18, 19, '0', NULL, NULL),
 (373, 18, 20, '17790000', NULL, NULL),
 (374, 18, 24, '8.0', NULL, NULL),
@@ -538,7 +546,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (412, 20, 15, '1.3', NULL, NULL),
 (413, 20, 16, '1.0', NULL, NULL),
 (414, 20, 17, '0', NULL, NULL),
-(415, 20, 18, '16', NULL, NULL),
 (416, 20, 19, '0', NULL, NULL),
 (417, 20, 20, '13990000', NULL, NULL),
 (418, 20, 24, '8.0', NULL, NULL),
@@ -560,7 +567,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (500, 24, 15, '2.2', NULL, NULL),
 (501, 24, 16, '2.0', NULL, NULL),
 (502, 24, 17, '1', NULL, NULL),
-(503, 24, 18, '32', NULL, NULL),
 (504, 24, 19, '0', NULL, NULL),
 (505, 24, 20, '10990000', NULL, NULL),
 (506, 24, 24, '20.0', NULL, NULL),
@@ -582,7 +588,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (522, 25, 15, '2.2', NULL, NULL),
 (523, 25, 16, '2.0', NULL, NULL),
 (524, 25, 17, '1', NULL, NULL),
-(525, 25, 18, '16', NULL, NULL),
 (526, 25, 19, '64', NULL, NULL),
 (527, 25, 20, '10490000', NULL, NULL),
 (528, 25, 24, '20.7', NULL, NULL),
@@ -604,7 +609,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (544, 26, 15, '1.5', NULL, NULL),
 (545, 26, 16, '2.0', NULL, NULL),
 (546, 26, 17, '0', NULL, NULL),
-(547, 26, 18, '16', NULL, NULL),
 (548, 26, 19, '0', NULL, NULL),
 (549, 26, 20, '10490000', NULL, NULL),
 (550, 26, 24, '13.0', NULL, NULL),
@@ -626,7 +630,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (566, 27, 15, '0.0', NULL, NULL),
 (567, 27, 16, '2.0', NULL, NULL),
 (568, 27, 17, '0', NULL, NULL),
-(569, 27, 18, '16', NULL, NULL),
 (570, 27, 19, '64', NULL, NULL),
 (571, 27, 20, '9990000', NULL, NULL),
 (572, 27, 24, '13.0', NULL, NULL),
@@ -648,7 +651,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (588, 28, 15, '1.8', NULL, NULL),
 (589, 28, 16, '2.0', NULL, NULL),
 (590, 28, 17, '1', NULL, NULL),
-(591, 28, 18, '32', NULL, NULL),
 (592, 28, 19, '0', NULL, NULL),
 (593, 28, 20, '9490000', NULL, NULL),
 (594, 28, 24, '12.0', NULL, NULL),
@@ -670,7 +672,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (610, 29, 15, '1.5', NULL, NULL),
 (611, 29, 16, '2.0', NULL, NULL),
 (612, 29, 17, '0', NULL, NULL),
-(613, 29, 18, '16', NULL, NULL),
 (614, 29, 19, '0', NULL, NULL),
 (615, 29, 20, '10000000', NULL, NULL),
 (616, 29, 24, '13.0', NULL, NULL),
@@ -692,7 +693,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (632, 30, 15, '2.3', NULL, NULL),
 (633, 30, 16, '2.0', NULL, NULL),
 (634, 30, 17, '1', NULL, NULL),
-(635, 30, 18, '16', NULL, NULL),
 (636, 30, 19, '128', NULL, NULL),
 (637, 30, 20, '8990000', NULL, NULL),
 (638, 30, 24, '13.0', NULL, NULL),
@@ -714,7 +714,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (654, 31, 15, '1.2', NULL, NULL),
 (655, 31, 16, '2.0', NULL, NULL),
 (656, 31, 17, '0', NULL, NULL),
-(657, 31, 18, '16', NULL, NULL),
 (658, 31, 19, '64', NULL, NULL),
 (659, 31, 20, '8990000', NULL, NULL),
 (660, 31, 24, '13.0', NULL, NULL),
@@ -736,7 +735,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (676, 32, 15, '2.26', NULL, NULL),
 (677, 32, 16, '3.0', NULL, NULL),
 (678, 32, 17, '1', NULL, NULL),
-(679, 32, 18, '32', NULL, NULL),
 (680, 32, 19, '2', NULL, NULL),
 (681, 32, 20, '8990000', NULL, NULL),
 (682, 32, 24, '13.0', NULL, NULL),
@@ -758,7 +756,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (698, 33, 15, '1.6', NULL, NULL),
 (699, 33, 16, '2.0', NULL, NULL),
 (700, 33, 17, '1', NULL, NULL),
-(701, 33, 18, '16', NULL, NULL),
 (702, 33, 19, '0', NULL, NULL),
 (703, 33, 20, '8490000', NULL, NULL),
 (704, 33, 24, '13.0', NULL, NULL),
@@ -780,7 +777,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (720, 34, 15, '1.2', NULL, NULL),
 (721, 34, 16, '1.0', NULL, NULL),
 (722, 34, 17, '1', NULL, NULL),
-(723, 34, 18, '16', NULL, NULL),
 (724, 34, 19, '128', NULL, NULL),
 (725, 34, 20, '7990000', NULL, NULL),
 (726, 34, 24, '10.0', NULL, NULL),
@@ -802,7 +798,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (742, 35, 15, '1.6', NULL, NULL),
 (743, 35, 16, '1.0', NULL, NULL),
 (744, 35, 17, '0', NULL, NULL),
-(745, 35, 18, '16', NULL, NULL),
 (746, 35, 19, '0', NULL, NULL),
 (747, 35, 20, '7990000', NULL, NULL),
 (748, 35, 24, '13.0', NULL, NULL),
@@ -824,7 +819,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (764, 36, 15, '1.4', NULL, NULL),
 (765, 36, 16, '1.0', NULL, NULL),
 (766, 36, 17, '1', NULL, NULL),
-(767, 36, 18, '8', NULL, NULL),
 (768, 36, 19, '32', NULL, NULL),
 (769, 36, 20, '7490000', NULL, NULL),
 (770, 36, 24, '13.0', NULL, NULL),
@@ -844,9 +838,8 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (784, 37, 13, '1420', NULL, NULL),
 (785, 37, 14, '3.5', NULL, NULL),
 (786, 37, 15, '1.0', NULL, NULL),
-(787, 37, 16, '512.0', NULL, NULL),
+(787, 37, 16, '0.5', NULL, NULL),
 (788, 37, 17, '0', NULL, NULL),
-(789, 37, 18, '8', NULL, NULL),
 (790, 37, 19, '0', NULL, NULL),
 (791, 37, 20, '6990000', NULL, NULL),
 (792, 37, 24, '8.0', NULL, NULL),
@@ -868,7 +861,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (808, 38, 15, '1.3', NULL, NULL),
 (809, 38, 16, '1.0', NULL, NULL),
 (810, 38, 17, '0', NULL, NULL),
-(811, 38, 18, '16', NULL, NULL),
 (812, 38, 19, '0', NULL, NULL),
 (813, 38, 20, '6990000', NULL, NULL),
 (814, 38, 24, '8.0', NULL, NULL),
@@ -890,7 +882,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (830, 39, 15, '1.6', NULL, NULL),
 (831, 39, 16, '1.0', NULL, NULL),
 (832, 39, 17, '0', NULL, NULL),
-(833, 39, 18, '8', NULL, NULL),
 (834, 39, 19, '128', NULL, NULL),
 (835, 39, 20, '6990000', NULL, NULL),
 (836, 39, 24, '13.0', NULL, NULL),
@@ -912,7 +903,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (852, 40, 15, '1.2', NULL, NULL),
 (853, 40, 16, '1.0', NULL, NULL),
 (854, 40, 17, '1', NULL, NULL),
-(855, 40, 18, '8', NULL, NULL),
 (856, 40, 19, '32', NULL, NULL),
 (857, 40, 20, '6990000', NULL, NULL),
 (858, 40, 24, '8.0', NULL, NULL),
@@ -934,7 +924,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (874, 41, 15, '1.2', NULL, NULL),
 (875, 41, 16, '1.0', NULL, NULL),
 (876, 41, 17, '0', NULL, NULL),
-(877, 41, 18, '16', NULL, NULL),
 (878, 41, 19, '64', NULL, NULL),
 (879, 41, 20, '6990000', NULL, NULL),
 (880, 41, 24, '8.0', NULL, NULL),
@@ -956,7 +945,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (896, 42, 15, '1.2', NULL, NULL),
 (897, 42, 16, '2.0', NULL, NULL),
 (898, 42, 17, '0', NULL, NULL),
-(899, 42, 18, '16', NULL, NULL),
 (900, 42, 19, '64', NULL, NULL),
 (901, 42, 20, '6990000', NULL, NULL),
 (902, 42, 24, '13.0', NULL, NULL),
@@ -978,7 +966,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (918, 43, 15, '1.2', NULL, NULL),
 (919, 43, 16, '1.0', NULL, NULL),
 (920, 43, 17, '0', NULL, NULL),
-(921, 43, 18, '16', NULL, NULL),
 (922, 43, 19, '128', NULL, NULL),
 (923, 43, 20, '6890000', NULL, NULL),
 (924, 43, 24, '13.0', NULL, NULL),
@@ -1000,7 +987,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (940, 44, 15, '1.7', NULL, NULL),
 (941, 44, 16, '1.0', NULL, NULL),
 (942, 44, 17, '0', NULL, NULL),
-(943, 44, 18, '8', NULL, NULL),
 (944, 44, 19, '32', NULL, NULL),
 (945, 44, 20, '6490000', NULL, NULL),
 (946, 44, 24, '13.0', NULL, NULL),
@@ -1022,7 +1008,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (962, 45, 15, '1.2', NULL, NULL),
 (963, 45, 16, '1.0', NULL, NULL),
 (964, 45, 17, '1', NULL, NULL),
-(965, 45, 18, '8', NULL, NULL),
 (966, 45, 19, '32', NULL, NULL),
 (967, 45, 20, '5990000', NULL, NULL),
 (968, 45, 24, '8.0', NULL, NULL),
@@ -1044,7 +1029,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (984, 46, 15, '1.2', NULL, NULL),
 (985, 46, 16, '1.0', NULL, NULL),
 (986, 46, 17, '0', NULL, NULL),
-(987, 46, 18, '8', NULL, NULL),
 (988, 46, 19, '128', NULL, NULL),
 (989, 46, 20, '5690000', NULL, NULL),
 (990, 46, 24, '8.0', NULL, NULL),
@@ -1066,7 +1050,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1006, 47, 15, '1.3', NULL, NULL),
 (1007, 47, 16, '1.0', NULL, NULL),
 (1008, 47, 17, '0', NULL, NULL),
-(1009, 47, 18, '8', NULL, NULL),
 (1010, 47, 19, '32', NULL, NULL),
 (1011, 47, 20, '5490000', NULL, NULL),
 (1012, 47, 24, '13.0', NULL, NULL),
@@ -1088,7 +1071,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1028, 48, 15, '1.7', NULL, NULL),
 (1029, 48, 16, '2.0', NULL, NULL),
 (1030, 48, 17, '1', NULL, NULL),
-(1031, 48, 18, '32', NULL, NULL),
 (1032, 48, 19, '2', NULL, NULL),
 (1033, 48, 20, '5490000', NULL, NULL),
 (1034, 48, 24, '13.0', NULL, NULL),
@@ -1110,7 +1092,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1050, 49, 15, '1.2', NULL, NULL),
 (1051, 49, 16, '1.0', NULL, NULL),
 (1052, 49, 17, '0', NULL, NULL),
-(1053, 49, 18, '16', NULL, NULL),
 (1054, 49, 19, '64', NULL, NULL),
 (1055, 49, 20, '5490000', NULL, NULL),
 (1056, 49, 24, '8.0', NULL, NULL),
@@ -1132,7 +1113,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1072, 50, 15, '1.7', NULL, NULL),
 (1073, 50, 16, '2.0', NULL, NULL),
 (1074, 50, 17, '0', NULL, NULL),
-(1075, 50, 18, '16', NULL, NULL),
 (1076, 50, 19, '32', NULL, NULL),
 (1077, 50, 20, '5390000', NULL, NULL),
 (1078, 50, 24, '13.0', NULL, NULL),
@@ -1154,7 +1134,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1094, 51, 15, '1.7', NULL, NULL),
 (1095, 51, 16, '1.0', NULL, NULL),
 (1096, 51, 17, '0', NULL, NULL),
-(1097, 51, 18, '8', NULL, NULL),
 (1098, 51, 19, '32', NULL, NULL),
 (1099, 51, 20, '5190000', NULL, NULL),
 (1100, 51, 24, '8.0', NULL, NULL),
@@ -1176,7 +1155,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1116, 52, 15, '1.7', NULL, NULL),
 (1117, 52, 16, '1.0', NULL, NULL),
 (1118, 52, 17, '0', NULL, NULL),
-(1119, 52, 18, '8', NULL, NULL),
 (1120, 52, 19, '64', NULL, NULL),
 (1121, 52, 20, '4990000', NULL, NULL),
 (1122, 52, 24, '5.0', NULL, NULL),
@@ -1198,7 +1176,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1138, 53, 15, '1.3', NULL, NULL),
 (1139, 53, 16, '1.0', NULL, NULL),
 (1140, 53, 17, '0', NULL, NULL),
-(1141, 53, 18, '4', NULL, NULL),
 (1142, 53, 19, '32', NULL, NULL),
 (1143, 53, 20, '4990000', NULL, NULL),
 (1144, 53, 24, '8.0', NULL, NULL),
@@ -1220,7 +1197,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1160, 54, 15, '1.2', NULL, NULL),
 (1161, 54, 16, '1.0', NULL, NULL),
 (1162, 54, 17, '0', NULL, NULL),
-(1163, 54, 18, '8', NULL, NULL),
 (1164, 54, 19, '64', NULL, NULL),
 (1165, 54, 20, '4990000', NULL, NULL),
 (1166, 54, 24, '8.0', NULL, NULL),
@@ -1242,7 +1218,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1182, 55, 15, '1.2', NULL, NULL),
 (1183, 55, 16, '1.0', NULL, NULL),
 (1184, 55, 17, '1', NULL, NULL),
-(1185, 55, 18, '8', NULL, NULL),
 (1186, 55, 19, '128', NULL, NULL),
 (1187, 55, 20, '4690000', NULL, NULL),
 (1188, 55, 24, '6.7', NULL, NULL),
@@ -1264,7 +1239,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1204, 56, 15, '1.3', NULL, NULL),
 (1205, 56, 16, '1.0', NULL, NULL),
 (1206, 56, 17, '0', NULL, NULL),
-(1207, 56, 18, '4', NULL, NULL),
 (1208, 56, 19, '32', NULL, NULL),
 (1209, 56, 20, '4290000', NULL, NULL),
 (1210, 56, 24, '5.0', NULL, NULL),
@@ -1286,7 +1260,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1226, 57, 15, '1.4', NULL, NULL),
 (1227, 57, 16, '1.0', NULL, NULL),
 (1228, 57, 17, '0', NULL, NULL),
-(1229, 57, 18, '4', NULL, NULL),
 (1230, 57, 19, '32', NULL, NULL),
 (1231, 57, 20, '4290000', NULL, NULL),
 (1232, 57, 24, '8.0', NULL, NULL),
@@ -1308,7 +1281,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1248, 58, 15, '1.6', NULL, NULL),
 (1249, 58, 16, '2.0', NULL, NULL),
 (1250, 58, 17, '0', NULL, NULL),
-(1251, 58, 18, '8', NULL, NULL),
 (1252, 58, 19, '64', NULL, NULL),
 (1253, 58, 20, '3990000', NULL, NULL),
 (1254, 58, 24, '8.0', NULL, NULL),
@@ -1330,7 +1302,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1775, 83, 15, '2.5', NULL, NULL),
 (1776, 83, 16, '2.0', NULL, NULL),
 (1777, 83, 17, '1', NULL, NULL),
-(1778, 83, 18, '16', NULL, NULL),
 (1779, 83, 19, '64', NULL, NULL),
 (1780, 83, 20, '11990000', NULL, NULL),
 (1781, 83, 24, '20.7', NULL, NULL),
@@ -1353,7 +1324,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (2649, 111, 15, '2.3', NULL, NULL),
 (2650, 111, 16, '3.0', NULL, NULL),
 (2651, 111, 17, '0', NULL, NULL),
-(2652, 111, 18, '16', NULL, NULL),
 (2653, 111, 19, '64', NULL, NULL),
 (2654, 111, 20, '11990000', NULL, NULL),
 (2655, 111, 24, '20.7', NULL, NULL),
@@ -1375,7 +1345,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (2672, 110, 15, '2.26', NULL, NULL),
 (2673, 110, 16, '2.0', NULL, NULL),
 (2674, 110, 17, '0', NULL, NULL),
-(2675, 110, 18, '16', NULL, NULL),
 (2676, 110, 19, '128', NULL, NULL),
 (2677, 110, 20, '12490000', NULL, NULL),
 (2678, 110, 24, '13.0', NULL, NULL),
@@ -1400,7 +1369,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (2726, 59, 15, '1.2', NULL, NULL),
 (2727, 59, 16, '1.0', NULL, NULL),
 (2728, 59, 17, '0', NULL, NULL),
-(2729, 59, 18, '4', NULL, NULL),
 (2730, 59, 19, '32', NULL, NULL),
 (2731, 59, 20, '3790000', NULL, NULL),
 (2732, 59, 24, '5.0', NULL, NULL),
@@ -1467,6 +1435,120 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ValueRange`
+--
+
+CREATE TABLE IF NOT EXISTS `ValueRange` (
+`id` int(11) NOT NULL,
+  `attr_id` int(11) NOT NULL,
+  `value_range` float NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=133 ;
+
+--
+-- Dumping data for table `ValueRange`
+--
+
+INSERT INTO `ValueRange` (`id`, `attr_id`, `value_range`, `created_at`, `updated_at`) VALUES
+(15, 12, 1, '2015-05-25 03:37:34', '2015-05-25 03:37:34'),
+(16, 12, 2, '2015-05-25 03:37:34', '2015-05-25 03:37:34'),
+(17, 13, 1400, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(18, 13, 1600, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(19, 13, 1800, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(20, 13, 2000, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(21, 13, 2200, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(22, 13, 2400, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(23, 13, 2600, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(24, 13, 2800, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(25, 13, 3000, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(26, 13, 3200, '2015-05-25 03:39:36', '2015-05-25 03:39:36'),
+(28, 14, 3, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(29, 14, 3.5, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(30, 14, 4, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(31, 14, 4.5, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(32, 14, 5, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(33, 14, 5.5, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(34, 14, 6, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(35, 14, 6.5, '2015-05-25 03:44:10', '2015-05-25 03:44:10'),
+(36, 15, 1, '2015-05-25 03:45:39', '2015-05-25 03:45:39'),
+(37, 15, 1.5, '2015-05-25 03:45:39', '2015-05-25 03:45:39'),
+(38, 15, 2, '2015-05-25 03:45:39', '2015-05-25 03:45:39'),
+(39, 15, 2.5, '2015-05-25 03:45:39', '2015-05-25 03:45:39'),
+(40, 15, 3, '2015-05-25 03:45:39', '2015-05-25 03:45:39'),
+(41, 15, 3.5, '2015-05-25 03:45:39', '2015-05-25 03:45:39'),
+(47, 16, 0.5, '2015-05-25 03:52:37', '2015-05-25 03:52:37'),
+(48, 16, 1, '2015-05-25 03:52:37', '2015-05-25 03:52:37'),
+(49, 16, 2, '2015-05-25 03:52:37', '2015-05-25 03:52:37'),
+(50, 16, 3, '2015-05-25 03:52:37', '2015-05-25 03:52:37'),
+(51, 19, 0, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(52, 19, 8, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(53, 19, 16, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(54, 19, 32, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(55, 19, 64, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(56, 19, 128, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(57, 19, 256, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(58, 19, 512, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(59, 19, 1024, '2015-05-25 03:55:42', '2015-05-25 03:55:42'),
+(70, 20, 3000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(71, 20, 5000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(72, 20, 7000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(73, 20, 9000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(74, 20, 12000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(75, 20, 15000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(76, 20, 18000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(77, 20, 21000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(78, 20, 23000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(79, 20, 25000000, '2015-05-25 03:57:54', '2015-05-25 03:57:54'),
+(80, 24, 5, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(81, 24, 6, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(82, 24, 7, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(83, 24, 8, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(84, 24, 10, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(85, 24, 15, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(86, 24, 20, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(87, 24, 40, '2015-05-25 03:59:46', '2015-05-25 03:59:46'),
+(96, 25, 0.3, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(97, 25, 1, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(98, 25, 1.2, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(99, 25, 2, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(100, 25, 3, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(101, 25, 5, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(102, 25, 8, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(103, 25, 13, '2015-05-25 04:01:20', '2015-05-25 04:01:20'),
+(104, 26, 100, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(105, 26, 110, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(106, 26, 120, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(107, 26, 130, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(108, 26, 140, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(109, 26, 150, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(110, 26, 160, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(111, 26, 170, '2015-05-25 04:03:00', '2015-05-25 04:03:00'),
+(112, 27, 50, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(113, 27, 55, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(114, 27, 60, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(115, 27, 65, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(116, 27, 70, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(117, 27, 75, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(118, 27, 80, '2015-05-25 04:03:39', '2015-05-25 04:03:39'),
+(119, 28, 4, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(120, 28, 5, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(121, 28, 6, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(122, 28, 7, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(123, 28, 8, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(124, 28, 9, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(125, 28, 10, '2015-05-25 04:04:33', '2015-05-25 04:04:33'),
+(126, 29, 100, '2015-05-25 04:05:25', '2015-05-25 04:05:25'),
+(127, 29, 120, '2015-05-25 04:05:25', '2015-05-25 04:05:25'),
+(128, 29, 140, '2015-05-25 04:05:25', '2015-05-25 04:05:25'),
+(129, 29, 160, '2015-05-25 04:05:25', '2015-05-25 04:05:25'),
+(130, 29, 180, '2015-05-25 04:05:25', '2015-05-25 04:05:25'),
+(131, 29, 200, '2015-05-25 04:05:25', '2015-05-25 04:05:25'),
+(132, 29, 220, '2015-05-25 04:05:25', '2015-05-25 04:05:25');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Vote`
 --
 
@@ -1477,7 +1559,7 @@ CREATE TABLE IF NOT EXISTS `Vote` (
   `type` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `Vote`
@@ -1492,7 +1574,8 @@ INSERT INTO `Vote` (`id`, `user_id`, `item_id`, `type`, `created_at`, `updated_a
 (33, 1, 4, 2, '2015-05-21 16:11:17', '2015-05-22 17:02:37'),
 (34, 1, 13, 1, '2015-05-21 17:54:08', '2015-05-21 17:54:12'),
 (35, 1, 16, 1, '2015-05-21 18:28:03', '2015-05-21 18:28:03'),
-(36, 2, 4, 1, '2015-05-23 02:10:13', '2015-05-23 02:10:13');
+(36, 2, 4, 1, '2015-05-23 02:10:13', '2015-05-23 02:10:13'),
+(38, 8, 37, 2, '2015-05-25 01:05:51', '2015-05-25 01:05:52');
 
 --
 -- Indexes for dumped tables
@@ -1559,6 +1642,12 @@ ALTER TABLE `Value`
  ADD PRIMARY KEY (`id`), ADD KEY `value` (`value`(255));
 
 --
+-- Indexes for table `ValueRange`
+--
+ALTER TABLE `ValueRange`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `Vote`
 --
 ALTER TABLE `Vote`
@@ -1577,22 +1666,22 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 -- AUTO_INCREMENT for table `Bill`
 --
 ALTER TABLE `Bill`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `BillItem`
 --
 ALTER TABLE `BillItem`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `Comment`
 --
 ALTER TABLE `Comment`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `FavoriteItem`
 --
 ALTER TABLE `FavoriteItem`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `Item`
 --
@@ -1612,17 +1701,22 @@ MODIFY `id` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `User`
 --
 ALTER TABLE `User`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `Value`
 --
 ALTER TABLE `Value`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2797;
 --
+-- AUTO_INCREMENT for table `ValueRange`
+--
+ALTER TABLE `ValueRange`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
+--
 -- AUTO_INCREMENT for table `Vote`
 --
 ALTER TABLE `Vote`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

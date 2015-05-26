@@ -132,6 +132,9 @@ h1.page-header {
     height: 320px;
     position: relative;
 }
+.product-item-1{
+  height: 310px;
+}
 .product-item .pro-img {
     border: 0 none;
     bottom: 0;
@@ -432,6 +435,14 @@ h1.product-detail-title{
   z-index: 999;
 
 }
+._list-item1 > li ._favorite{
+  position: absolute;
+font-weight: bold;
+font-size: 10px;
+padding: 130px 12px;
+color: #46ff23;
+
+}
 ._list-item a{
   position: absolute;
   top: 5px;
@@ -446,7 +457,7 @@ h1.product-detail-title{
   height: 100%;
 }
 ._list-item ._content{
-  margin-left: 100px;
+  margin-left: 110px;
   position: relative;
   display: inline-block;
   min-height: 125px;
@@ -462,6 +473,67 @@ font-size: 14px;
   font-weight: bold;
 }
 ._list-item ._content p + p{
+  font-size: 12px;
+  color: #29A7D8;
+}
+
+._list-item1{
+  list-style: none;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+}
+._list-item1 > li{
+  display: inline-block;
+  padding: 5px;
+  position: relative;
+  margin:0;
+  background-color: white;
+  width: 32%;
+  border: 1px solid #f4f4f4;
+  margin: 5px;
+  height: 170px;
+}
+._list-item1 > li ._stt{
+  position: absolute;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px 12px;
+  color: #fff;
+  background-color: #DD3030;
+  z-index: 999;
+
+}
+._list-item1 a{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 100px;
+  height: 120px;
+  display: block;
+  overflow: hidden;
+}
+._list-item1 a img{
+  width: 100%;
+  height: 100%;
+}
+._list-item1 ._content{
+  margin-left: 110px;
+  position: relative;
+  display: inline-block;
+  min-height: 125px;
+}
+._list-item1 ._content span{
+  color: #c70101;
+  width: 100%;
+  font-size: 14px;
+}
+._list-item1 ._content p{
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+._list-item1 ._content p + p{
   font-size: 12px;
   color: #29A7D8;
 }
@@ -486,9 +558,16 @@ font-size: 14px;
   border-radius: 0;
   background-color: white;
   padding: 0;
+  padding-bottom: 30px;
 }
 
-._well h3{
+._well-1{
+  border: 1px solid #e3e3e3;;
+  background-color: white;
+  padding: 0;
+}
+
+._well h3, ._well-1 h3{
   font-weight: bold;
   background-color: #16B97F;
   color: white;
@@ -497,6 +576,24 @@ font-size: 14px;
   padding: 10px 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #e3e3e3;
+}
+.wrap{
+  padding: 0 15px;
+}
+.wrap .title{
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+  border-top: 1px solid #f4f4f4;
+
+}
+.wrap > form > input{
+  margin-left: 15px;
+}
+._btn-search{
+  margin-left: 0px !important;
+  margin-top: 20px;
+  width: 100%;
 }
 
 ._wrap-table{

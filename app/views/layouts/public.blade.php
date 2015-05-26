@@ -53,9 +53,9 @@
                             <li>{{HTML::linkAction('AdminController@showItem','Admin Manager')}}</li>
                             @endif
                             <li>{{HTML::linkaction('UserController@getFavorite','Favorite',Auth::user()->id)}}</li>
-                            <li>{{HTML::linkaction('UserController@getBill','Bill',Auth::user()->id)}}</li>
-                           
+                            <li>{{HTML::linkaction('UserController@getBill','Order',Auth::user()->id)}}</li>
                         @endif
+                        <li>{{HTML::linkAction('HomeController@advanceSearch','Advance Search')}}</li>
                     </ul>
 
                     <ul class="nav navbar-right _nav">
@@ -69,6 +69,7 @@
                                 </div>
                             {{ Form::close() }}
                         </li>
+
 
                         <li>
                             @if (Auth::check())

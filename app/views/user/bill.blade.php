@@ -8,7 +8,7 @@
 	    </center>
 	</div>
     <div class="col-md-9 well _well">  
-    	<h3> Make bill </h3>
+    	<h3> Order </h3>
 		<div class="_wrap-table">
 			<table id='favoriteTable' class="table table-bordered">
 				<tr>
@@ -52,7 +52,7 @@
 		  	</tr>
 			</table>   
 		</div>
-		<button id='saveBill' class='btn btn-primary'>Save Bill</button>       
+		<button id='saveBill' class='btn btn-primary'>Save Order</button>       
     </div>
 </div>
 <script type="text/javascript">

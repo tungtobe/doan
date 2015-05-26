@@ -144,7 +144,6 @@ class AdminController extends BaseController {
                         $new_value_range->value_range = $range;
                         $new_value_range->save();
                     }
-                    
                 }
                 return Redirect::to(URL::action('AdminController@editAttrRange', $id))->with('message', 'Success !!!');;
             }
