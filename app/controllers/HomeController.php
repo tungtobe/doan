@@ -45,7 +45,7 @@ class HomeController extends BaseController {
 		$manufacturer = $this->getOneAttributeOption(5);
 		$os = $this->getOneAttributeOption(7);
 		$cameras = $this->getOneAttributeOption(24);
-		$this->layout->content = View::make('user.advanceSearch')->with(array(
+		$this->layout->content = View::make('user.advancesearch')->with(array(
 																		"manufacturer" => $manufacturer,
 																		"cameras" =>  $cameras,
 																		"os" => $os,
