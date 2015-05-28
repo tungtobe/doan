@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 26, 2015 at 10:33 AM
+-- Generation Time: May 28, 2015 at 10:20 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -151,16 +151,6 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
---
--- Dumping data for table `Comment`
---
-
-INSERT INTO `Comment` (`id`, `user_id`, `item_id`, `content`, `created_at`, `updated_at`) VALUES
-(7, 2, 1, 'sản phẩm dùng tốt', '2015-05-20 13:41:23', '2015-05-20 13:41:23'),
-(8, 2, 1, 'Lấy được thiện cảm người dùng', '2015-05-20 13:42:34', '2015-05-20 13:42:34'),
-(9, 1, 4, 'Test comment', '2015-05-21 16:11:25', '2015-05-21 16:11:25'),
-(10, 8, 37, 'test', '2015-05-25 01:05:58', '2015-05-25 01:05:58');
-
 -- --------------------------------------------------------
 
 --
@@ -212,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `Item` (
   `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=119 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
 
 --
 -- Dumping data for table `Item`
@@ -267,9 +257,13 @@ INSERT INTO `Item` (`id`, `name`, `status`, `updated_at`, `created_at`, `deleted
 (60, 'LG L Fino (L70 Plus)', 1, '2015-05-25 17:00:34', '0000-00-00 00:00:00', '2015-05-25 10:00:34'),
 (83, 'Sony Xperia Z3 Compact', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL),
 (110, 'HTC Desire Eye.', 1, '2015-05-22 16:32:14', '0000-00-00 00:00:00', NULL),
-(111, 'Sony Xperia Z2 .', 1, '2015-05-22 16:30:25', '0000-00-00 00:00:00', NULL),
+(111, 'Sony Xperia Z2', 1, '2015-05-26 14:43:46', '0000-00-00 00:00:00', NULL),
 (117, 'Test Item', 1, '2015-05-24 15:44:24', '2015-05-24 14:30:46', '2015-05-24 08:44:24'),
-(118, 'test i', 1, '2015-05-24 15:44:22', '2015-05-24 15:23:34', '2015-05-24 08:44:22');
+(118, 'test i', 1, '2015-05-24 15:44:22', '2015-05-24 15:23:34', '2015-05-24 08:44:22'),
+(119, 'Bphone', 1, '2015-05-26 14:30:06', '2015-05-26 13:45:32', NULL),
+(120, 'Bphone', 1, '2015-05-26 13:45:59', '2015-05-26 13:45:32', '2015-05-26 06:45:59'),
+(121, '.kaldsfj', 1, '2015-05-26 14:45:30', '2015-05-26 14:45:18', '2015-05-26 07:45:30'),
+(122, 'adsfadsf', 1, '2015-05-26 14:49:04', '2015-05-26 14:46:56', '2015-05-26 07:49:04');
 
 -- --------------------------------------------------------
 
@@ -358,7 +352,7 @@ CREATE TABLE IF NOT EXISTS `Value` (
   `value` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2797 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2969 ;
 
 --
 -- Dumping data for table `Value`
@@ -1311,27 +1305,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (1785, 83, 28, '8.6', NULL, NULL),
 (1786, 83, 29, '129.0', NULL, NULL),
 (2521, 60, 6, 'https://www.thegioididong.com/images/42/69895/lg-l-fino.png', NULL, NULL),
-(2639, 111, 5, 'Sony', NULL, NULL),
-(2640, 111, 6, 'https://www.thegioididong.com/images/42/61386/sony-xperia-z2-png.png', NULL, NULL),
-(2641, 111, 7, 'Android', NULL, NULL),
-(2642, 111, 8, 'Qualcomm MSM8974AB', NULL, NULL),
-(2643, 111, 9, 'Adreno 330', NULL, NULL),
-(2644, 111, 10, 'IPS', NULL, NULL),
-(2645, 111, 11, '1080x1920', NULL, NULL),
-(2646, 111, 12, '1', NULL, NULL),
-(2647, 111, 13, '3200', NULL, NULL),
-(2648, 111, 14, '5.2', NULL, NULL),
-(2649, 111, 15, '2.3', NULL, NULL),
-(2650, 111, 16, '3.0', NULL, NULL),
-(2651, 111, 17, '0', NULL, NULL),
-(2653, 111, 19, '64', NULL, NULL),
-(2654, 111, 20, '11990000', NULL, NULL),
-(2655, 111, 24, '20.7', NULL, NULL),
-(2656, 111, 25, '2.2', NULL, NULL),
-(2657, 111, 26, '146.8', NULL, NULL),
-(2658, 111, 27, '73.3', NULL, NULL),
-(2659, 111, 28, '8.2', NULL, NULL),
-(2660, 111, 29, '163.0', NULL, NULL),
 (2662, 110, 5, 'Htc', NULL, NULL),
 (2663, 110, 6, 'https://www.thegioididong.com/images/42/70104/htc-desire-eye-icon.png', NULL, NULL),
 (2664, 110, 7, 'Android', NULL, NULL),
@@ -1353,9 +1326,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (2681, 110, 27, '73.8', NULL, NULL),
 (2682, 110, 28, '8.5', NULL, NULL),
 (2683, 110, 29, '154.0', NULL, NULL),
-(2712, 117, 6, 'dantri.com', NULL, NULL),
-(2713, 117, 17, '0', NULL, NULL),
-(2714, 117, 20, '300000', NULL, NULL),
 (2716, 59, 5, 'Lg', NULL, NULL),
 (2717, 59, 6, 'https://www.thegioididong.com/images/42/68635/lg-l80-dual.png', NULL, NULL),
 (2718, 59, 7, 'Android', NULL, NULL),
@@ -1379,8 +1349,6 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (2737, 59, 29, '133.0', NULL, NULL),
 (2738, 59, 1, 'LG L80 D380', '2015-05-24 15:01:18', '2015-05-24 15:01:18'),
 (2739, 110, 1, 'HTC Desire Eye.', '2015-05-24 15:01:18', '2015-05-24 15:01:18'),
-(2740, 111, 1, 'Sony Xperia Z2 .', '2015-05-24 15:01:18', '2015-05-24 15:01:18'),
-(2741, 117, 1, 'Test Item', '2015-05-24 15:01:18', '2015-05-24 15:01:18'),
 (2742, 1, 1, 'iPhone 6 Plus 128GB', '2015-05-24 15:03:54', '2015-05-24 15:03:54'),
 (2743, 4, 1, 'Samsung Galaxy Note Edge', '2015-05-24 15:03:54', '2015-05-24 15:03:54'),
 (2744, 8, 1, 'iPhone 6 128GB', '2015-05-24 15:03:54', '2015-05-24 15:03:54'),
@@ -1427,10 +1395,50 @@ INSERT INTO `Value` (`id`, `item_id`, `attr_id`, `value`, `created_at`, `updated
 (2785, 58, 1, 'Asus Zenfone 5', '2015-05-24 15:03:54', '2015-05-24 15:03:54'),
 (2786, 60, 1, 'LG L Fino (L70 Plus)', '2015-05-24 15:03:54', '2015-05-24 15:03:54'),
 (2787, 83, 1, 'Sony Xperia Z3 Compact', '2015-05-24 15:03:54', '2015-05-24 15:03:54'),
-(2792, 118, 1, 'test i', NULL, NULL),
-(2793, 118, 6, 'ladskf', NULL, NULL),
-(2794, 118, 17, '0', NULL, NULL),
-(2795, 118, 20, '300000', NULL, NULL);
+(2907, 119, 1, 'Bphone', NULL, NULL),
+(2908, 119, 5, 'BKAV', NULL, NULL),
+(2909, 119, 6, 'http://i275.photobucket.com/albums/jj288/tung_tobe/Screen%20Shot%202015-05-26%20at%2020.31.05_1.png', NULL, NULL),
+(2910, 119, 7, 'BOS', NULL, NULL),
+(2911, 119, 8, 'Snapdragon 801 (MSM8974AC)', NULL, NULL),
+(2912, 119, 9, 'Adreno 330', NULL, NULL),
+(2913, 119, 10, 'TFT', NULL, NULL),
+(2914, 119, 11, '1920x1080', NULL, NULL),
+(2915, 119, 12, '1', NULL, NULL),
+(2916, 119, 13, '3000', NULL, NULL),
+(2917, 119, 14, '5.0', NULL, NULL),
+(2918, 119, 15, '2.5', NULL, NULL),
+(2919, 119, 16, '3', NULL, NULL),
+(2920, 119, 17, '0', NULL, NULL),
+(2921, 119, 19, '0', NULL, NULL),
+(2922, 119, 20, '9990000', NULL, NULL),
+(2923, 119, 24, '13', NULL, NULL),
+(2924, 119, 25, '5', NULL, NULL),
+(2925, 119, 26, '141', NULL, NULL),
+(2926, 119, 27, '69', NULL, NULL),
+(2927, 119, 28, '7.5', NULL, NULL),
+(2928, 119, 29, '145', NULL, NULL),
+(2929, 111, 1, 'Sony Xperia Z2', NULL, NULL),
+(2930, 111, 5, 'Sony', NULL, NULL),
+(2931, 111, 6, 'https://www.thegioididong.com/images/42/61386/sony-xperia-z2-png.png', NULL, NULL),
+(2932, 111, 7, 'Android', NULL, NULL),
+(2933, 111, 8, 'Qualcomm MSM8974AB', NULL, NULL),
+(2934, 111, 9, 'Adreno 330', NULL, NULL),
+(2935, 111, 10, 'IPS', NULL, NULL),
+(2936, 111, 11, '1080x1920', NULL, NULL),
+(2937, 111, 12, '1', NULL, NULL),
+(2938, 111, 13, '3200', NULL, NULL),
+(2939, 111, 14, '5.2', NULL, NULL),
+(2940, 111, 15, '2.3', NULL, NULL),
+(2941, 111, 16, '3.0', NULL, NULL),
+(2942, 111, 17, '0', NULL, NULL),
+(2943, 111, 19, '64', NULL, NULL),
+(2944, 111, 20, '11990000', NULL, NULL),
+(2945, 111, 24, '20.7', NULL, NULL),
+(2946, 111, 25, '2.2', NULL, NULL),
+(2947, 111, 26, '146.8', NULL, NULL),
+(2948, 111, 27, '73.3', NULL, NULL),
+(2949, 111, 28, '8.2', NULL, NULL),
+(2950, 111, 29, '163.0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1559,7 +1567,7 @@ CREATE TABLE IF NOT EXISTS `Vote` (
   `type` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `Vote`
@@ -1575,7 +1583,8 @@ INSERT INTO `Vote` (`id`, `user_id`, `item_id`, `type`, `created_at`, `updated_a
 (34, 1, 13, 1, '2015-05-21 17:54:08', '2015-05-21 17:54:12'),
 (35, 1, 16, 1, '2015-05-21 18:28:03', '2015-05-21 18:28:03'),
 (36, 2, 4, 1, '2015-05-23 02:10:13', '2015-05-23 02:10:13'),
-(38, 8, 37, 2, '2015-05-25 01:05:51', '2015-05-25 01:05:52');
+(38, 8, 37, 2, '2015-05-25 01:05:51', '2015-05-25 01:05:52'),
+(39, 1, 119, 1, '2015-05-26 14:55:31', '2015-05-26 14:55:31');
 
 --
 -- Indexes for dumped tables
@@ -1686,7 +1695,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 -- AUTO_INCREMENT for table `Item`
 --
 ALTER TABLE `Item`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=119;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=123;
 --
 -- AUTO_INCREMENT for table `Relationship`
 --
@@ -1706,7 +1715,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 -- AUTO_INCREMENT for table `Value`
 --
 ALTER TABLE `Value`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2797;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2969;
 --
 -- AUTO_INCREMENT for table `ValueRange`
 --
@@ -1716,7 +1725,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
 -- AUTO_INCREMENT for table `Vote`
 --
 ALTER TABLE `Vote`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
